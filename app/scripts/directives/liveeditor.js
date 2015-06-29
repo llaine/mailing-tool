@@ -26,7 +26,7 @@ angular.module('newsletterEditorApp')
          * @param el
          */
         scope.editBlock = function(el) {
-          console.log(arguments);
+
         };
 
         /**
@@ -35,7 +35,8 @@ angular.module('newsletterEditorApp')
          * @param direction
          */
         scope.moveBlock = function(el, direction) {
-          scope.blocks = Blocks.move(el, direction);
+
+
         };
       }
     };

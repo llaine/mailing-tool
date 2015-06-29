@@ -1,16 +1,18 @@
 <div id="liveEditor">
     <table ng-sortable="{animation:150}" class="table">
-        <tr class="dropzone" ng-repeat="b in blocks track by $index | orderBy:'b.position'">
-            <td>{{ b }}</td>
-            <td>
-                <span ng-click="editBlock(b)"><i class="glyphicon glyphicon-pencil"></i></span>
-            </td>
-            <td>
-                <span ng-click="moveBlock(b, 'up')"><i class="glyphicon glyphicon-arrow-up"></i></span>
-            </td>
-            <td>
-                <span ng-click="moveBlock(b, 'down')"><i class="glyphicon glyphicon-arrow-down"></i></span>
-            </td>
-        </tr>
+        <tbody>
+            <tr class="dropzone" ng-repeat="b in [1, 2, 3, 4, 5] track by $index | orderBy:'b.position'" droppable>
+                <td>{{ b }}</td>
+                <td>
+                    <span ng-click="editBlock(b)"><i class="glyphicon glyphicon-pencil"></i></span>
+                </td>
+                <td>
+                    <span ng-click="moveBlock(b, 'up')"><i class="glyphicon glyphicon-arrow-up"></i></span>
+                </td>
+                <td>
+                    <span ng-click="moveBlock(b, 'down')"><i class="glyphicon glyphicon-arrow-down"></i></span>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </div>

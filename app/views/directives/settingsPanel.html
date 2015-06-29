@@ -1,5 +1,5 @@
 <ul class="settings-panel">
-    <li class="block" ng-repeat="block in availableBlock" ng-click="toggleToEditor(block.type)">
+    <li class="block" ng-repeat="block in availableBlock" draggable droppable>
         {{ block.text }}
    </li>
 </ul>
