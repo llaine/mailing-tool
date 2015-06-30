@@ -2,23 +2,24 @@
 
 /**
  * @ngdoc directive
- * @name newsletterEditorApp.directive:liveEditor
+ * @name newsletterEditorApp.directive:textEditor
  * @description
- * # liveEditor
+ * # textEditor
  */
 angular.module('newsletterEditorApp')
-  .directive('liveEditor', ['Blocks', function(Blocks) {
+  .directive('textEditor', function() {
+
     return {
-      templateUrl: '../views/directives/liveEditor.html',
+      template: '<textarea name="editor1" id="editor1" rows="10" cols="30"></textarea>',
       restrict: 'E',
       /**
-       * Fonction link
+       * Affiche l'éditeur.
        * @param scope
        * @param element
        * @param attrs
        */
       link: function postLink(scope, element, attrs) {
-        scope.blocks = Blocks.getAll();
+        CKEDITOR.replace('editor1');
       }
     };
-  }]);
+  });

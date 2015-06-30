@@ -17,8 +17,10 @@ angular.module('newsletterEditorApp')
        * @param attrs
        */
       link: function postLink(scope, element, attrs) {
-        var c = {};
-        element.draggable();
+
+        element.draggable({
+          helper:'clone'
+        });
       }
     };
   });

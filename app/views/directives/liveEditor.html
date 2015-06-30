@@ -1,17 +1,28 @@
 <div id="liveEditor">
-    <table ng-sortable="{animation:150}" class="table">
+    <table class="table">
+        <thead droppable>
+            <tr class="dropzone">
+                <td><span class="content">Header</span></td>
+            </tr>
+        </thead>
         <tbody>
-            <tr class="dropzone" ng-repeat="b in [1, 2, 3, 4, 5] track by $index | orderBy:'b.position'" droppable>
-                <td>{{ b }}</td>
+            <tr id="body">
                 <td>
-                    <span ng-click="editBlock(b)"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <table>
+                        <tbody sortable droppable>
+                            <tr class="dropzone dropzonebody" ng-repeat="b in [1, 2, 3, 4, 5] track by $index">
+                                <td>
+                                    <span class="content">Déposer du contenu ici !</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </td>
-                <td>
-                    <span ng-click="moveBlock(b, 'up')"><i class="glyphicon glyphicon-arrow-up"></i></span>
-                </td>
-                <td>
-                    <span ng-click="moveBlock(b, 'down')"><i class="glyphicon glyphicon-arrow-down"></i></span>
-                </td>
+            </tr>
+        </tbody>
+        <tbody droppable>
+            <tr class="dropzone">
+                <td><span class="content">Footer</span></td>
             </tr>
         </tbody>
     </table>
