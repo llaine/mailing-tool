@@ -7,7 +7,7 @@
  * # sortable
  */
 angular.module('newsletterEditorApp')
-  .directive('sortable',  ['Blocks', function() {
+  .directive('sortable',  ['BlocksManipulator', function(BlocksManipulator) {
     return {
       restrict: 'A',
       /**
@@ -20,19 +20,6 @@ angular.module('newsletterEditorApp')
 
         /* la directive transforme l'élement en sortable.  */
         element.sortable({
-          /**
-           * Petite fonction de helper pour que toute
-           * la ligne de la table soit sélectionnée.
-           * @param e
-           * @param ui
-           * @returns {*}
-           */
-          helper: function(e, ui) {
-            ui.children().each(function() {
-              $(this).width($(this).width());
-            });
-            return ui;
-          },
           placeholder:'active',
           /**
            * Evenement déclenché au moment ou le sorting a été déposé.
@@ -42,6 +29,7 @@ angular.module('newsletterEditorApp')
           stop: function(event, ui) {
             // TODO répliquer dans la pile, la position qui a été modifiée.
 
+            var currentRow = ui.item;
             //var src = ui.draggable[0];
             //var target = event.target;
             console.log('testouille');

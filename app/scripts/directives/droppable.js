@@ -7,7 +7,7 @@
  * # droppable
  */
 angular.module('newsletterEditorApp')
-  .directive('droppable', ['Blocks', function() {
+  .directive('droppable', ['BlocksManipulator', function(BlocksManipulator) {
     return {
       restrict: 'A',
       /**
@@ -27,9 +27,14 @@ angular.module('newsletterEditorApp')
             var src = ui.draggable[0];
             var target = document.elementFromPoint(event.clientX, event.clientY);
 
-            /* pour éviter que  */
+            /* Seul les élements de type Li peuvent être droppé sur une span ou un td  */
             if (src.tagName === 'LI' && (target.tagName === 'SPAN' || target.tagName === 'TD')) {
-              $(target).text(src.innerText);
+
+              /* Répercution de l'évenement sur la vue, dans le modèle. */
+              BlocksManipulator.moveBlockToEditor(src, target, function() {
+                $(target).text(src.innerText);
+              });
+
             }
 
           },

@@ -2,7 +2,7 @@
     <table class="table">
         <thead droppable>
             <tr class="dropzone">
-                <td><span class="content">Header</span></td>
+                <td data-position="header"><span class="content">Header</span></td>
             </tr>
         </thead>
         <tbody>
@@ -11,7 +11,7 @@
                     <table>
                         <tbody sortable droppable>
                             <tr class="dropzone dropzonebody" ng-repeat="b in [1, 2, 3, 4, 5] track by $index">
-                                <td>
+                                <td data-position="{{ b }}">
                                     <span class="content">Déposer du contenu ici !</span>
                                 </td>
                             </tr>
@@ -22,7 +22,7 @@
         </tbody>
         <tbody droppable>
             <tr class="dropzone">
-                <td><span class="content">Footer</span></td>
+                <td data-position="footer"><span class="content">Footer</span></td>
             </tr>
         </tbody>
     </table>

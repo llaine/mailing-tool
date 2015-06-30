@@ -1,5 +1,5 @@
 <ul class="settings-panel">
-    <li class="block" ng-repeat="block in availableBlock" draggable>
+    <li class="block" ng-repeat="block in availableBlock" data-type="{{ block.type }}" draggable>
         {{ block.text }}
    </li>
 </ul>

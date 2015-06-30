@@ -8,6 +8,6 @@
  * Controller of the newsletterEditorApp
  */
 angular.module('newsletterEditorApp')
-  .controller('MainCtrl', ['$scope', 'DnD', function($scope, Dnd) {
+  .controller('MainCtrl', ['$scope', function($scope) {
 
   }]);
