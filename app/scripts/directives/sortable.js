@@ -22,6 +22,15 @@ angular.module('newsletterEditorApp')
         element.sortable({
           placeholder:'active',
           /**
+           *
+           */
+          start: function(event, ui) {
+            var cell = ui.item[0].children[0];
+            ui.item.startPos = ui.item.index() + 1;
+
+            $(cell).attr('data-position-start', ui.item.startPos);
+          },
+          /**
            * Evenement déclenché au moment ou le sorting a été déposé.
            * @param event
            * @param ui
@@ -29,10 +38,14 @@ angular.module('newsletterEditorApp')
           stop: function(event, ui) {
             // TODO répliquer dans la pile, la position qui a été modifiée.
 
-            var currentRow = ui.item;
-            //var src = ui.draggable[0];
-            //var target = event.target;
-            console.log('testouille');
+            var cell = ui.item[0].children[0];
+            var newPosition = ui.item.index() + 1; // Nous donne la position dans la liste
+            var oldCell = $('#body').children().eq(ui.item.startPos - 1)[0].children[0];
+
+            BlocksManipulator.changeBlockPos(ui.item.startPos, newPosition);
+
+            console.log(cell);
+            console.log(oldCell);
           }
         });
 

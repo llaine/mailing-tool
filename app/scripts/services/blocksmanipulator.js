@@ -6,6 +6,7 @@
  * @description
  * # BlocksManipulator
  * Service in the newsletterEditorApp.
+ * Permet d'avoir le modèle et la vue dans un état similaire et cohérent.
  */
 angular.module('newsletterEditorApp')
   .service('BlocksManipulator', ['Blocks', function(Blocks) {
@@ -37,12 +38,22 @@ angular.module('newsletterEditorApp')
      * @param target
      * @param cb
      */
-    function moveBlockToEditor(src, target, cb) {
+    function createBlockToEditor(src, target, cb) {
       var type = getTypeOfBlock(src);
       var position = getPositionOfBlock(target);
 
-      cb(true);
-      // TODO
+      /* retourne l'objet nouvelement créer */
+      return Blocks.push({type:type, position:position});
+    }
+
+    /**
+     * Mets à jour le contenu de l'object el
+     */
+    function updateContentFromBlock(el) {
+      $('tr')
+        .find('[data-position="' + el.position + '"]')
+        .children('span')
+        .html(el.content.html);
     }
 
     /**
@@ -50,10 +61,14 @@ angular.module('newsletterEditorApp')
      * dans le modèle
      * @param src
      * @param target
-     * @param cb
      */
-    function changeBlockPos(src, target, cb) {
+    function changeBlockPos(src, target) {
       // TODO
+      try {
+        Blocks.update(src, target);
+      } catch(e) {
+        console.log(e);
+      }
     }
 
     /**
@@ -74,11 +89,22 @@ angular.module('newsletterEditorApp')
       // TODO
     }
 
+    /**
+     * Récupère un block spécifique.
+     * @param position
+     * @returns {*}
+     */
+    function getBlock(position) {
+      return Blocks.get(position);
+    }
     return {
-      moveBlockToEditor:moveBlockToEditor,
+      getPosition:getPositionOfBlock,
+      getBlock:getBlock,
+      createBlockToEditor:createBlockToEditor,
       changeBlockPos:changeBlockPos,
       editBlock:editBlock,
-      deleteBlock:deleteBlock
+      deleteBlock:deleteBlock,
+      updateContent:updateContentFromBlock
     };
 
   }]);

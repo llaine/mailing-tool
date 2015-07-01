@@ -6,13 +6,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr id="body">
+            <tr>
                 <td>
                     <table>
-                        <tbody sortable droppable>
+                        <tbody id="body" sortable droppable>
                             <tr class="dropzone dropzonebody" ng-repeat="b in [1, 2, 3, 4, 5] track by $index">
                                 <td data-position="{{ b }}">
                                     <span class="content">Déposer du contenu ici !</span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-link" ng-click="update(b)">Mettre à jour</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -26,4 +29,5 @@
             </tr>
         </tbody>
     </table>
+    <button ng-click="export()">Exporter le HTML</button>
 </div>
