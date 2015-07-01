@@ -18,18 +18,7 @@ angular.module('newsletterEditorApp')
        * @param attrs
        */
       link: function postLink(scope, element, attrs) {
-        /**
-         * Mets à jour un élement sur l'éditeur live.
-         * @param position
-         */
-        scope.update = function(position) {
-          var block = BlocksManipulator.getBlock(position);
 
-          if (block) {
-            CurrentObject.set('text', block);
-            scope.$emit('blockTxtCreated', true);
-          }
-        };
       },
       /**
        * gre
@@ -37,6 +26,18 @@ angular.module('newsletterEditorApp')
        */
       controller: function($scope) {
         $scope.show = false;
+
+        function hideTextEditor() {
+          $scope.safeApply(function() {
+            $scope.show = false;
+          });
+        }
+
+        function showTextEditor() {
+          $scope.safeApply(function() {
+            $scope.show = true;
+          });
+        }
 
         /**
          * Fonction d'apply avec des garde fou pour éviter
@@ -57,20 +58,17 @@ angular.module('newsletterEditorApp')
 
         $scope.$on('blockTxtSaved', function() {
           BlocksManipulator.updateContent(CurrentObject.get('text'));
+          hideTextEditor();
         });
 
         /* lorsqu'on créer un block de type texte, on affiche l'éditeur */
-        $scope.$on('blockTxtCreated', function(e, msg) {
-          $scope.safeApply(function() {
-            $scope.show = true;
-          });
+        $scope.$on('blockTxtCreated', function() {
+          showTextEditor();
         });
 
         /* lorsqu'on le supprime, on ne l'affiche plus. */
         $scope.$on('blockTxtDestroyed', function() {
-          $scope.safeApply(function() {
-            $scope.show = false;
-          });
+          hideTextEditor();
         });
 
         /**

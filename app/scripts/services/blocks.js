@@ -9,7 +9,13 @@
  */
 angular.module('newsletterEditorApp')
   .service('Blocks', function() {
-    var blockStack = [];
+    var blockStack = [
+      {position:1, content:{}},
+      {position:2, content:{}},
+      {position:3, content:{}},
+      {position:4, content:{}},
+      {position:5, content:{}}
+    ];
 
     /**
      * Assigne une position d'un block dans la pile.
@@ -18,6 +24,8 @@ angular.module('newsletterEditorApp')
      */
     function push(el) {
       if (el) {
+
+        var index = el.position - 1;
 
         /* le modèle est constitué d'objet contenant les attributs suivants */
         var newElement = {
@@ -29,7 +37,7 @@ angular.module('newsletterEditorApp')
           }
         };
 
-        blockStack.push(newElement);
+        blockStack[index] = newElement;
 
         return newElement;
       }
@@ -37,16 +45,11 @@ angular.module('newsletterEditorApp')
 
     /**
      * Renvoie un élement spécifique de la pile.
-     * @param position
+     * @param index
      * @returns {*}
      */
-    function get(position) {
-
-      var indexOf = blockStack.map(function(b) {
-        return b.position;
-      }).indexOf(position);
-
-      return blockStack[indexOf];
+    function get(index) {
+      return blockStack[index];
     }
 
     /**
@@ -63,7 +66,7 @@ angular.module('newsletterEditorApp')
      * @param position
      * @param newPosition
      */
-    function update(position, newPosition) {
+    function updatePosition(position, newPosition) {
       if (blockStack.length <= 0) {
         throw new Error('Impossible de mettre à jours sur une pile vide.');
       }
@@ -83,19 +86,40 @@ angular.module('newsletterEditorApp')
       });
 
       /* swap basique des deux élements du tableau. */
-      var temp = blockStack[newIndex];
-      temp.position = newPosition;
-
-      blockStack[newIndex] = blockStack[oldIndex];
-      blockStack[newIndex].position = position;
-
-      blockStack[oldIndex] = temp;
+      swapItems(oldIndex, newIndex);
     }
 
+    /**
+     *
+     * @param firstIndex
+     * @param secondIndex
+     */
+    function swapItems(firstIndex, secondIndex) {
+      var firstPosition = firstIndex + 1;
+      var secondPosition = secondIndex + 1;
+
+      var temp = blockStack[firstIndex];
+      temp.position = secondPosition;
+
+      blockStack[firstIndex] = blockStack[secondIndex];
+      blockStack[firstIndex].position = firstPosition;
+
+      blockStack[secondIndex] = temp;
+    }
+
+    /**
+     * Mets à jour le contenu d'un élement à une position
+     * @param position
+     */
+    function updateContent(position, content) {
+      var index = position - 1;
+      blockStack[index].content = content;
+    }
     return {
       getAll:getAll,
       push:push,
       get:get,
-      update:update
+      update:updatePosition,
+      updateContent:updateContent
     };
   });

@@ -11,11 +11,8 @@
                     <table>
                         <tbody id="body" sortable droppable>
                             <tr class="dropzone dropzonebody" ng-repeat="b in [1, 2, 3, 4, 5] track by $index">
-                                <td data-position="{{ b }}">
+                                <td id="cell-{{b}}" data-position="{{ b }}" ng-dblclick="update()">
                                     <span class="content">Déposer du contenu ici !</span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-link" ng-click="update(b)">Mettre à jour</button>
                                 </td>
                             </tr>
                         </tbody>

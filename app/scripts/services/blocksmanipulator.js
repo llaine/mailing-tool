@@ -50,6 +50,7 @@ angular.module('newsletterEditorApp')
      * Mets à jour le contenu de l'object el
      */
     function updateContentFromBlock(el) {
+      Blocks.updateContent(el.position, el.content);
       $('tr')
         .find('[data-position="' + el.position + '"]')
         .children('span')
@@ -63,12 +64,7 @@ angular.module('newsletterEditorApp')
      * @param target
      */
     function changeBlockPos(src, target) {
-      // TODO
-      try {
-        Blocks.update(src, target);
-      } catch(e) {
-        console.log(e);
-      }
+      Blocks.update(src, target);
     }
 
     /**
@@ -91,12 +87,14 @@ angular.module('newsletterEditorApp')
 
     /**
      * Récupère un block spécifique.
-     * @param position
+     * @param index
      * @returns {*}
      */
-    function getBlock(position) {
-      return Blocks.get(position);
+    function getBlock(index) {
+      return Blocks.get(index);
     }
+
+
     return {
       getPosition:getPositionOfBlock,
       getBlock:getBlock,

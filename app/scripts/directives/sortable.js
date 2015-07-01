@@ -7,7 +7,7 @@
  * # sortable
  */
 angular.module('newsletterEditorApp')
-  .directive('sortable',  ['BlocksManipulator', function(BlocksManipulator) {
+  .directive('sortable', function(BlocksManipulator, CurrentObject) {
     return {
       restrict: 'A',
       /**
@@ -17,6 +17,21 @@ angular.module('newsletterEditorApp')
        * @param attrs
        */
       link: function postLink(scope, element, attrs) {
+
+        /**
+         * Mets à jour un élement sur l'éditeur live.
+         * @param position
+         */
+        scope.update = function() {
+          /* récupère l'index sur lequel on viens de cliquer.  */
+          var index = element.sortable('instance').currentItem[0].rowIndex;
+
+          CurrentObject.destroy('text');
+          var block = BlocksManipulator.getBlock(index);
+          CurrentObject.set('text', block);
+          scope.$emit('blockTxtCreated', true);
+
+        };
 
         /* la directive transforme l'élement en sortable.  */
         element.sortable({
@@ -36,19 +51,15 @@ angular.module('newsletterEditorApp')
            * @param ui
            */
           stop: function(event, ui) {
-            // TODO répliquer dans la pile, la position qui a été modifiée.
-
             var cell = ui.item[0].children[0];
             var newPosition = ui.item.index() + 1; // Nous donne la position dans la liste
             var oldCell = $('#body').children().eq(ui.item.startPos - 1)[0].children[0];
 
-            BlocksManipulator.changeBlockPos(ui.item.startPos, newPosition);
+            BlocksManipulator.changeBlockPos(ui.item.startPos , newPosition);
 
-            console.log(cell);
-            console.log(oldCell);
           }
-        });
+        }).disableSelection();
 
       }
     };
-  }]);
+  });
