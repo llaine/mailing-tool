@@ -14,12 +14,24 @@ angular.module('newsletterEditorApp')
       };
 
       /**
-       *
+       * Le style n'est pas two-way databinding sur les élements générés
+       * automatiquement donc impossible d'utiliser ng-style.
+       * Par conséquent, je dois obligatoirement appliquer le style aux élements
+       * moi même.
+       * Les styles sont stocké dans le model dans un attribut <b>contentStyle</b>
+       * pour chaque noeud html les styles correspondants.
+       * Ex :
+       * style:{
+         *  p:{// ici du style},
+         *  a:{// ici du style},
+         *  img: {//ici du style}
+         *  etc
+         * }
+       * @param block
        */
       function applyStyle(block) {
         var index = BlocksManager.getAll().indexOf(block);
-        var tr = angular
-            .element(document.querySelectorAll('table.emailCompo'))
+        var tr = angular.element(document.querySelectorAll('table.emailCompo'))
             .find('tr.dropzone:eq(' + index + ')');
 
         // Application du layout sur les cells

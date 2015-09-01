@@ -7,7 +7,7 @@
  * # BlockNode
  */
 angular.module('newsletterEditorApp')
-  .directive('renderStyleOnBound', function() {
+  .directive('renderStyleOnBound', function(StyleHelper) {
     /**
      * Directive assez spéciale, car elle sert uniquement à réappliquer des styles inlines
      * sur le html qui est automatiquement généré par la directive ng-bind-html.
@@ -26,9 +26,7 @@ angular.module('newsletterEditorApp')
          * on réapplique le style contenu dans model à la vue.
          */
         scope.$watch(attrs.ngBindHtml, function() {
-          // Appel de la fonction applyStyle contenu dans le
-          // scope (parent) du liveEditor, situé deux niveaux au dessus
-          scope.$parent.$parent.applyStyle(scope.block);
+          StyleHelper.applyStyleToDom(scope.block);
         });
       }
     };

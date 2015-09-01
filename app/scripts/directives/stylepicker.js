@@ -80,7 +80,6 @@ angular.module('newsletterEditorApp')
             // Le two way data-bindings ne se fait pas pour le ng-style.
             // Obligé de forcer le reload du style inline.
             StyleHelper.applyStyleToDom(scope.$parent.block);
-            //$scope.applyStyle(vm.block);
           });
         }
 
@@ -216,7 +215,6 @@ angular.module('newsletterEditorApp')
 
           selector.removeAttr('style');
         };
-
       }
     };
   });

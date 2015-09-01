@@ -45,8 +45,8 @@ angular.module('newsletterEditorApp')
               targetBlock.type = droppedBlock.type;
 
 
-              if(droppedBlock.columns === 1) {
-                switch(droppedBlock.type) {
+              if (droppedBlock.columns === 1) {
+                switch (droppedBlock.type) {
                   case 'divider':
                     displayOnEditor('');
                     break;

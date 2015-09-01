@@ -9,7 +9,7 @@
  */
 angular.module('newsletterEditorApp')
   .factory('Block', function() {
-    return function Block(content, type) {
+    return function Block(content, type, columns) {
       this.content = {
         html:content
       };
@@ -77,7 +77,7 @@ angular.module('newsletterEditorApp')
         var self = this;
         var div = document.createElement('div');
 
-        if (self.type === "divider") {
+        if (self.type === 'divider') {
           if (self.attributes.metaStyle) {
             angular.element(div).css(self.attributes.metaStyle);
           }
@@ -144,29 +144,12 @@ angular.module('newsletterEditorApp')
 
     /**
      * Même que chose que pour le toString() des block simples,
-     * seulemeent les styles des block doubles sont stockés dans l'objet parent
-     * et non dans chaque cellule, ainsi je suis obligé de boucler
-     * les styles parents en plus de toutes les cells.
+     * seulemeent
      * @returns {*[]}
      */
-    BlockDouble.prototype.toStringDouble = function () {
+    BlockDouble.prototype.toStringDouble = function() {
       var self = this;
-      var strings = [];
 
-      for (var i = 0; i < this.cells.length; i++) {
-        var obj = this.cells[i];
-        var div = document.createElement('div');
-        div.innerHTML = obj.content.html;
-
-        for(var tag in self.style) {
-          if (self.style.hasOwnProperty(tag)) {
-            var item = angular.element(div).find(tag);
-            item.css(self.style[tag]);
-          }
-        }
-        strings.push({html:div.innerHTML, width: obj.style.td ? obj.style.td.width : '50%'});
-      }
-      return [strings];
     };
 
     /**
@@ -215,12 +198,12 @@ angular.module('newsletterEditorApp')
         return type;
       }
 
-      if (content[0] === "footer") {
-        this.cells.push(new Block(getHtml("text"), getType("text")));
-        this.cells.push(new Block(getHtml("social"), "social"));
+      if (content[0] === 'footer') {
+        this.cells.push(new Block(getHtml('text'), getType('text')));
+        this.cells.push(new Block(getHtml('social'), 'social'));
       } else {
         this.cells.push(new Block(getHtml(content[0]), getType(content[0])));
-        this.cells.push( new Block(getHtml(content[1]), getType(content[1])));
+        this.cells.push(new Block(getHtml(content[1]), getType(content[1])));
       }
 
     };
@@ -247,3 +230,123 @@ angular.module('newsletterEditorApp')
 
     return BlockDouble;
   });
+
+/**
+ * Le principal model de l'application
+ * @param content
+ * @param type
+ * @param nbColumns
+ */
+function block(content, type, nbColumns) {
+  this.content = {
+    html:content
+  };
+
+  this.attributes = {
+    // Le style sur le block en lui même
+    metaStyle:{}
+  };
+  // Le style pour le contenu du block
+  this.contentStyle = {};
+  this.type = type;
+  this.id = Math.random().toString(36).slice(2);
+
+  /**
+   * Setter de l'attribut style.
+   * Si un attribut style existe déjà,
+   * on append les nouveaux style à celui-ci.
+   * @param style
+   * @param node
+   */
+  this.setStyle = function(style, node) {
+    node = node.toLowerCase();
+
+    if (this.contentStyle[node]) {
+      for (var props in style) {
+        if (style.hasOwnProperty(props)) {
+          this.contentStyle[node][props] = style[props];
+        }
+      }
+    } else {
+      this.contentStyle[node] = style;
+    }
+  };
+
+  /**
+   * Mets à jour le html
+   * @param html
+   */
+  this.setHtml = function(html) {
+    this.content.html = html;
+  };
+
+  /**
+   * Mets à jour le type
+   * @param type
+   */
+  this.setType = function(type) {
+    this.type = type;
+  };
+
+  /**
+   * A partir d'un autre objet block
+   * Modifie les attributs de celui passé en paramètre.
+   * @param html
+   * @param type
+   */
+  this.update = function(html, type) {
+    this.setHtml(html);
+    this.setType(type);
+  };
+
+  /**
+   * Retourne, le contenu html avec le style attraché.
+   * Fonction utile pour l'export!
+   * Les styles des block doubles sont stockés dans l'objet parent
+   * et non dans chaque cellule, ainsi je suis obligé de boucler
+   * les styles parents en plus de toutes les cells.
+   * @returns {mixed}
+   */
+  this.toString = function() {
+    var self = this;
+    var div = document.createElement('div');
+
+    /**
+     * Applique le style au contenu du block
+     */
+    function cssToStyle() {
+      for (var tag in self.style) {
+        if (self.contentStyle.hasOwnProperty(tag)) {
+          var item = angular.element(div).find(tag);
+          item.css(self.contentStyle[tag]);
+        }
+      }
+    }
+
+    if (this.cells.length > 1) {
+      var strings = [];
+
+      for (var i = 0; i < this.cells.length; i++) {
+        var obj = this.cells[i];
+        div.innerHTML = obj.content.html;
+        cssToStyle();
+        strings.push({html:div.innerHTML, width: obj.style.td ? obj.style.td.width : '50%'});
+      }
+      return [strings];
+
+    } else {
+      if (self.type === 'divider') {
+        if (self.attributes.metaStyle) {
+          angular.element(div).css(self.attributes.metaStyle);
+        }
+      } else {
+        // Crée un container dans lequel on va pouvoir rechercher nos tags
+        div.innerHTML = self.content.html;
+        cssToStyle();
+      }
+      return div.innerHTML;
+    }
+  };
+
+
+}

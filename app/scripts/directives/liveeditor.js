@@ -20,46 +20,6 @@ angular.module('newsletterEditorApp')
       link: function postLink($scope, element, attrs) {
         $scope.previewMode = true;
         $('#mailCadre').mCustomScrollbar();
-
-        /**
-         * Le style n'est pas two-way databinding
-         * donc impossible d'utiliser ng-style.
-         * Par conséquent, je dois obligatoirement appliquer le style aux élements
-         * moi même.
-         * Les styles sont stocké dans le model dans un attribut <b>style</b>
-         * Pour chaque noeud html les styles correspondants.
-         * Ex :
-         * style:{
-         *  p:{// ici du style},
-         *  a:{// ici du style},
-         *  img: {//ici du style}
-         *  etc
-         * }
-         * @param block
-         */
-        $scope.applyStyle = function(block) {
-          var idx = $scope.blocks.indexOf(block);
-          var tr = element.find('tr.dropzone:eq(' + idx + ')');
-
-          // Application du layout sur les cells
-          if (block.type === 'double') {
-            for (var i = 0; i < block.cells.length ; ++i) {
-              if (block.cells[i].style.td) {
-                tr.find('td.cell-' + i).css(block.cells[i].style.td);
-              }
-            }
-
-          }
-
-          for (var tag in block.style) {
-            if (block.style.hasOwnProperty(tag)) {
-              // On sélectionne la span correspondante au model
-              // et on applique le css à l'intérieur
-              tr.find('span.node')
-                .find(tag).css(block.style[tag]);
-            }
-          }
-        };
       },
       /**
        * gre
