@@ -7,7 +7,7 @@
  * # linkEditor
  */
 angular.module('newsletterEditorApp')
-  .directive('linkEditor', function () {
+  .directive('linkEditor', function() {
     return {
       templateUrl: '../../views/directives/link-editor.html',
       restrict: 'E',

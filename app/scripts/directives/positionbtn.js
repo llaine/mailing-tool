@@ -20,7 +20,7 @@ angular.module('newsletterEditorApp')
         onChange:'='
       },
       controller:positionBtnCtrl,
-      link: function (scope, element, attrs) {
+      link: function(scope, element, attrs) {
         element.find('span').bind('dragstop', function () {
           // On appelle la fonction passée à la directive, qui va s'occuper de mettre à jour le model. .
           scope.onChange(this);

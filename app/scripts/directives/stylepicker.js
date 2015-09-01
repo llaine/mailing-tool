@@ -7,7 +7,7 @@
  * # stylePicker
  */
 angular.module('newsletterEditorApp')
-  .directive('stylePicker', function(EventEmiter, DraggableHelper) {
+  .directive('stylePicker', function(EventEmiter, DraggableHelper, GlobalStyles, StyleHelper) {
     return {
       templateUrl: 'views/directives/stylePicker.html',
       restrict: 'E',
@@ -15,111 +15,47 @@ angular.module('newsletterEditorApp')
         block:'=',
         modeEdition:'='
       },
+      controllerAs:'vm',
+      bindToController:true,
       /**
        * Controller
        * @param $scope
        * @param $element
        */
       controller: function($scope, $element) {
-        $scope.fonts = [
-          {text:'Times New Roman'},
-          {text:'Arial'},
-          {text:'Helvetica'},
-          {text:'Lucida'},
-          {text:'Gill Sans Extrabold'},
-          {text:'Courier'},
-          {text:'Times'},
-          {text:'Verdana'},
-          {text:'Lucida Console'}
-        ];
-        $scope.sizeTitle = [
-          {size:'30px'},
-          {size:'32px'},
-          {size:'34px'},
-          {size:'36px'}
-        ];
-        $scope.size = [
-          {size:'10px'},
-          {size:'12px'},
-          {size:'14px'},
-          {size:'16px'}
-        ];
-        $scope.layoutDouble = [
-          {layout:'One thrid', value:'37.5-75'},
-          {layout:'Two Third', value:'75-50'},
-          {layout:'Half', value:'50-50'},
-          {layout:'One half', value:'25-75'},
-          {layout:'Three half', value:'75-25'}
-        ];
-        $scope.params = {
-          title: {
-            color:'#00000',
-            fontSize:30 + 'px',
-            fontFamily:'Arial',
-            fontWeight:'normal',
-            lineHeight:'1'
-          },
-          paragraph: {
-            color:'#00000',
-            fontSize:12 + 'px',
-            fontFamily:'Arial'
-          },
-          link: {
-            color:'#00000',
-            fontSize:12 + 'px',
-            fontFamily:'Arial'
-          },
-          background: {
-            // La couleur de fond de l'email
-            bgColor:'#FFFFF',
-            // La bordure autour de l'email
-            borderSize:'1px',
-            borderType:'solid',
-            borderColor:'black'
-          },
-          layout: {
-            blockDouble:{layout:'Half', value:'400-400'},
-            images: {
-              margin: {
-                left:1,
-                top:1,
-                right:1,
-                bottom:1
-              },
-              width:20
-            }
-          }
-        };
+        var vm = this;
 
-        $scope.setToTransparent = function() {
-          if ($scope.block.attributes.metaStyle.background) {
-            delete $scope.block.attributes.metaStyle.background
+        vm.params = GlobalStyles.getDefaultParams();
+
+        vm.fonts = GlobalStyles.getFonts();
+        vm.sizeTitle = GlobalStyles.getTitleSize();
+        vm.size = GlobalStyles.getParagraphSize();
+        vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble();
+
+        /**
+         *
+         */
+        vm.setToTransparent = function() {
+          if (vm.block.attributes.metaStyle.background) {
+            delete vm.block.attributes.metaStyle.background
           } else {
-            $scope.block.attributes.metaStyle.background = 'transparent';
+            vm.block.attributes.metaStyle.background = 'transparent';
           }
         };
 
-      },
-      /**
-       * Post link
-       * @param scope
-       * @param element
-       * @param attrs
-       */
-      link: function postLink(scope, element, attrs) {
-        scope.isBlockDouble = false;
-        scope.currentRowEdited = false;
-        scope.displayGlobalStyles = false;
+        vm.isBlockDouble = false;
+        vm.currentRowEdited = false;
+        vm.displayGlobalStyles = false;
 
         EventEmiter.on('edition:toggled', function(event, opts) {
           var row = $(opts.tr).parents('tr:first');
-          scope.currentRowEdited = row;
-          scope.displayGlobalStyles = true;
+          vm.currentRowEdited = row;
+          vm.displayGlobalStyles = true;
         });
 
         EventEmiter.on('panel:closed', function() {
-          scope.currentRowEdited = false;
-          scope.displayGlobalStyles = false;
+          vm.currentRowEdited = false;
+          vm.displayGlobalStyles = false;
         });
 
         /**
@@ -128,7 +64,7 @@ angular.module('newsletterEditorApp')
          * @returns {*}
          */
         function getSelector() {
-          return scope.currentRowEdited ? angular.element(scope.currentRowEdited) : angular.element('#emailTemplate1');
+          return vm.currentRowEdited ? angular.element(vm.currentRowEdited) : angular.element('#emailTemplate1');
         }
 
         /**
@@ -139,27 +75,28 @@ angular.module('newsletterEditorApp')
          */
         function applyStyle(elements, style) {
           elements.map(function() {
-            var $scope = angular.element(this).scope();
-            $scope.block.setStyle(style, this.tagName);
+            var scope = angular.element(this).scope();
+            scope.$parent.block.setStyle(style, this.tagName);
             // Le two way data-bindings ne se fait pas pour le ng-style.
             // Obligé de forcer le reload du style inline.
-            scope.applyStyle($scope.block);
+            StyleHelper.applyStyleToDom(scope.$parent.block);
+            //$scope.applyStyle(vm.block);
           });
         }
 
         /**
          * Change le style des titles
          */
-        scope.changeTitle = function() {
+        vm.changeTitle = function() {
           var selector = getSelector();
           var titles = selector.find('h1, h2, h3, h4, h5, h6');
 
           applyStyle(titles, {
-            'font-size': scope.params.title.fontSize,
-            'font-family': scope.params.title.fontFamily,
-            color: scope.params.title.color,
-            'font-weight': scope.params.title.fontWeight,
-            'line-height': scope.params.title.lineHeight
+            'font-size': vm.params.title.fontSize,
+            'font-family': vm.params.title.fontFamily,
+            color: vm.params.title.color,
+            'font-weight': vm.params.title.fontWeight,
+            'line-height': vm.params.title.lineHeight
           });
 
         };
@@ -167,53 +104,55 @@ angular.module('newsletterEditorApp')
         /**
          * Change le style du background de l'editeur mail et ajoute des potentiels contour.
          */
-        scope.changeBackground = function() {
+        vm.changeBackground = function() {
           var selector = getSelector();
           var background = angular.element('#mailCadre');
 
-          if (scope.currentRowEdited) {
+          if (vm.currentRowEdited) {
 
             applyStyle(selector, {
-              'background': scope.params.background.bgColor
+              'background': vm.params.background.bgColor
             });
 
           } else {
             background.css({
-              'background': scope.params.background.bgColor
+              'background': vm.params.background.bgColor
             });
 
             selector.css('border',
-              scope.params.background.borderSize + ' ' +
-              scope.params.background.borderType + ' ' +
-              scope.params.background.borderColor
+                vm.params.background.borderSize + ' ' +
+                vm.params.background.borderType + ' ' +
+                vm.params.background.borderColor
             );
           }
-
-
         };
 
         /**
          * Change le style des <p> et <a>
          */
-        scope.changeParagraph = function() {
+        vm.changeParagraph = function() {
           var selector = getSelector();
           var paragraphs = selector.find('p');
           var links = selector.find('a:not(.no-style)');
 
           applyStyle(paragraphs, {
-            'font-size': scope.params.paragraph.fontSize,
-            'font-family': scope.params.paragraph.fontFamily,
-            color: scope.params.paragraph.color
+            'font-size': vm.params.paragraph.fontSize,
+            'font-family': vm.params.paragraph.fontFamily,
+            color: vm.params.paragraph.color
           });
 
           applyStyle(links, {
-            'font-size': scope.params.link.fontSize,
-            'font-family': scope.params.link.fontFamily,
-            color: scope.params.link.color
+            'font-size': vm.params.link.fontSize,
+            'font-family': vm.params.link.fontFamily,
+            color: vm.params.link.color
           });
         };
 
-        scope.onImgPosChanged = function (span) {
+        /**
+         * ge
+         * @param span
+         */
+        vm.onImgPosChanged = function(span) {
           var position = DraggableHelper.getPositionOfElement(span);
 
           var selector = getSelector();
@@ -226,41 +165,40 @@ angular.module('newsletterEditorApp')
           applyStyle(images, {
             'margin-top': position.top + '%',
             'margin-left': position.left + '%'
-          })
-
+          });
         };
 
         /**
          * Change le layout des block double
          * et des images.
          */
-        scope.changeLayout = function() {
+        vm.changeLayout = function() {
           var selector = getSelector();
 
           var images = selector.find('img');
 
           applyStyle(images, {
-            width:scope.params.layout.images.width  + '%'
+            width:vm.params.layout.images.width  + '%'
           });
 
           selector.find('.table-block-double').map(function() {
             var table = $(this);
             var cells = table.find('td');
-            var newRule = scope.params.layout.blockDouble.value.split('-');
+            var newRule = vm.params.layout.blockDouble.value.split('-');
             var blockDouble = angular.element(cells).scope().block;
 
             for (var i = 0 ; i < blockDouble.cells.length ; ++i) {
               blockDouble.cells[i].setStyle({width:newRule[i] + '%'}, cells[i].tagName)
             }
 
-            scope.applyStyle(blockDouble);
+            vm.applyStyle(blockDouble);
           });
         };
 
         /**
          * Enlève tout les styles inline.
          */
-        scope.reset = function() {
+        vm.reset = function() {
           var selector = getSelector();
 
           /**
@@ -278,6 +216,7 @@ angular.module('newsletterEditorApp')
 
           selector.removeAttr('style');
         };
+
       }
     };
   });

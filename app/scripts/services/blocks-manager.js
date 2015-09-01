@@ -18,7 +18,7 @@ angular.module('newsletterEditorApp')
      */
     this.get = function(index) {
       return blockStack[index];
-    }
+    };
 
     /**
      * Retourne toute la stack.
@@ -26,7 +26,7 @@ angular.module('newsletterEditorApp')
      */
     this.getAll = function() {
       return blockStack;
-    }
+    };
 
     /**
      * Mets à jour le contenu d'un élement à l'index donné.
@@ -35,7 +35,7 @@ angular.module('newsletterEditorApp')
      */
     this.updateContent = function(index, content) {
       blockStack[index].content = content;
-    }
+    };
 
     /**
      * Set model
@@ -43,7 +43,7 @@ angular.module('newsletterEditorApp')
      */
     this.setModel = function(stack) {
       blockStack = stack;
-    }
+    };
 
     /**
      * Renvoie les icones pour le type de block
@@ -51,7 +51,7 @@ angular.module('newsletterEditorApp')
      * @returns {*}
      */
     this.getIconsForType = function(type) {
-      switch(type) {
+      switch (type) {
         case 'text':
           return ['align-justify'];
         case 'file':
@@ -71,7 +71,7 @@ angular.module('newsletterEditorApp')
         default:
           return ['question-sign'];
       }
-    }
+    };
 
     Restangular.one('template', 0).get().then(function(data) {
       angular.forEach(data.blocks, function(item) {

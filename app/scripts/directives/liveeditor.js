@@ -59,8 +59,6 @@ angular.module('newsletterEditorApp')
                 .find(tag).css(block.style[tag]);
             }
           }
-
-
         };
       },
       /**
