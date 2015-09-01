@@ -401,3 +401,7 @@ vertical-align: middle;
     height:3rem;
     padding: 3px 5px;
 }
+
+.modal-dialog {
+    width: 85%;
+}
