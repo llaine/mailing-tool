@@ -1,0 +1,134 @@
+<accordion>
+    <accordion-group heading="Page et Fond" >
+        <form id="background">
+            <h5>Fond</h5>
+            <div class="form-group">
+                Transparent
+                <input type="checkbox" ng-click="setToTransparent()"/>
+
+                <label for="backgroundColor" ng-if="!displayGlobalStyles">Couleur de fond</label>
+                <input type="color" class="form-control" ng-if="!displayGlobalStyles" ng-change="changeBackground()" ng-model="params.background.bgColor" id="backgroundColor">
+            </div>
+            <div ng-if="!displayGlobalStyles">
+                <h5>Page</h5>
+                <div class="form-group" id="border">
+                    <label for="marginBorder" >Bordure email</label>
+                    <div class="form-inline">
+                        <select class="form-control form-small" id="marginBorder" ng-change="changeBackground()" ng-model="params.background.borderType">
+                            <option value="solid">Solid</option>
+                            <option value="dashed">Dashed</option>
+                            <option value="dotted">Dotted</option>
+                            <option value="default">default</option>
+                        </select>
+                        <input type="text" class="form-control form-small" ng-change="changeBackground()" ng-model="params.background.borderSize" placeholder="Epaisseur">
+                        <input type="text" class="form-control form-small" ng-change="changeBackground()" ng-model="params.background.borderColor" placeholder="Couleur">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </accordion-group>
+    <accordion-group heading="Titres">
+        <form>
+            <div class="form-group">
+                <div class="form-inline">
+                    <label for="textColorTitle">Couleur du texte</label>
+                    <input id="textColorTitle" class="form-control form-small title"  ng-change="changeTitle()" ng-model="params.title.color" type="color" />
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-inline">
+                    <label for="fontFamilyTitle">Police</label>
+                    <select id="fontFamilyTitle" class="form-control form-sm" ng-change="changeTitle()" ng-model="params.title.fontFamily" >
+                        <option ng-repeat="f in fonts" value="{{f.text}}">{{f.text}}</option>
+                    </select>
+                    <label>Taille</label>
+                    <select class="form-control form-sm" ng-change="changeTitle()" ng-model="params.title.fontSize" >
+                        <option ng-repeat="f in sizeTitle" value="{{f.size}}">{{f.size}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-inline">
+                    <label>Epaisseur</label>
+                    <select class="form-control form-sm" ng-change="changeTitle()" ng-model="params.title.fontWeight">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Gras</option>
+                    </select>
+                    <label>Interligne</label>
+                    <select class="form-control form-sm" ng-change="changeTitle()" ng-model="params.title.lineHeight">
+                        <option value="0.85">Petit</option>
+                        <option value="1">Normal</option>
+                        <option value="2">Grand</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </accordion-group>
+    <accordion-group heading="Textes">
+        <form id="paragraphs">
+            <div class="form-group" >
+                <label for="textColor">Couleur de texte</label>
+                <input type="color" class="form-control" ng-change="changeParagraph()" id="textColor"
+                       ng-model="params.paragraph.color">
+            </div>
+            <div class="form-group">
+                <div class="form-inline">
+                    <label>Police</label>
+                    <select class="form-control form-sm" ng-change="changeParagraph()"
+                            ng-model="params.paragraph.fontFamily" >
+                        <option ng-repeat="f in fonts" value="{{f.text}}">{{f.text}}</option>
+                    </select>
+                    <label>Taille</label>
+                    <select class="form-control form-sm" ng-change="changeParagraph()"
+                            ng-model="params.paragraph.fontSize" >
+                        <option ng-repeat="f in size" value="{{f.size}}">{{f.size}}</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <h5>Liens</h5>
+            <div class="form-group" >
+                <label for="linkColor">Couleur des liens</label>
+                <input type="color" class="form-control" ng-change="changeParagraph()" id="linkColor"
+                       ng-model="params.link.color">
+            </div>
+            <div class="form-group">
+                <div class="form-inline">
+                    <label>Police</label>
+                    <select class="form-control form-sm" ng-change="changeParagraph()"
+                            ng-model="params.link.fontFamily" >
+                        <option ng-repeat="f in fonts" value="{{f.text}}">{{f.text}}</option>
+                    </select>
+                    <label>Taille</label>
+                    <select class="form-control form-sm"
+                            ng-change="changeParagraph()"
+                            ng-model="params.link.fontSize">
+                        <option ng-repeat="f in size" value="{{f.size}}">{{f.size}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </accordion-group>
+    <accordion-group heading="Layout">
+        <h5>Block doubles</h5>
+        <div class="form-group">
+            <label for="layoutDouble">Layout</label>
+            <select id="layoutDouble" class="form-control form-sm"
+                    ng-change="changeLayout()"
+                    ng-model="params.layout.blockDouble"
+                    ng-options="c.layout for c in layoutDouble track by c.value"></select>
+        </div>
+        <h5>Images</h5>
+        <div class="form-group">
+            <label>Marges (exprimé en %)</label>
+            <position-btn on-change="onImgPosChanged"></position-btn>
+        </div>
+        <div class="from-group">
+            <label for="taille">Taille</label>
+            <input type="number"
+                   ng-change="changeLayout()"
+                   class="form-control form-sm" id="taille" ng-model="params.layout.images.width" />
+        </div>
+    </accordion-group>
+</accordion>

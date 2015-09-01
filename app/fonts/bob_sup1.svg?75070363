@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2015 by original authors @ fontello.com</metadata>
+<defs>
+<font id="bob_sup1" horiz-adv-x="1000" >
+<font-face font-family="bob_sup1" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="ico-header" unicode="&#xe800;" d="m748 656v-60h-61v60h61z m-426 0v-60h61v60h-61z m122 0v-60h61v60h-61z m243 0v61h-61v-61h61z m122-60h60v60h-60v-60z m0 60v61h-61v-61h61z m-244 0v-60h61v60h-61z m-121 0v61h-61v-61h61z m121 0v61h-60v-61h60z m426 183v-973h-973v973h973z m-61-365h-851v-547h851v547z m0 304h-61v-61h-60v61h-61v-61h-61v61h-61v-61h-61v61h-60v-61h-61v61h-61v-61h-61v61h-61v-61h-61v61h-60v-61h-61v-61h61v-60h-61v-61h61v61h60v-61h61v61h61v-61h61v61h61v-61h61v61h60v-61h61v61h61v-61h61v61h61v-61h60v61h61v60h-61v61h61v61z m-730-61h-60v-61h60v61z m0-61v-60h61v60h-61z m122 0v61h-61v-61h61z" horiz-adv-x="1007" />
+<glyph glyph-name="ico-footer" unicode="&#xe801;" d="m261 48v61h61v-61h-61z m426 0v61h-61v-61h61z m-122 0v61h-60v-61h60z m-243 0v-61h61v61h-61z m-122 61h-60v-61h60v61z m0-61v-61h61v61h-61z m244 0v61h-61v-61h61z m121 0v-61h61v61h-61z m-121 0v-61h61v61h-61z m-426-182v973h973v-973h-973z m61 365h851v547h-851v-547z m0-304h61v60h60v-60h61v60h61v-60h61v60h61v-60h61v60h60v-60h61v60h61v-60h61v60h61v-60h60v60h61v61h-61v61h61v61h-61v-61h-60v61h-61v-61h-61v61h-61v-61h-61v61h-60v-61h-61v61h-61v-61h-61v61h-61v-61h-61v61h-60v-61h-61v-61h61v-61h-61v-60z m730 60h60v61h-60v-61z m0 61v61h-61v-61h61z m-122 0v-61h61v61h-61z" horiz-adv-x="1007" />
+<glyph glyph-name="ico-social" unicode="&#xe802;" d="m421 324l17 131h-130v83c0 38 11 64 65 64l69 0v117c-11 1-53 5-100 5-100 0-169-61-169-173v-96h-113v-131h113v-336h135v336h113z m333 385v-183h171v-113h-171v-185c0-42 2-68 6-80 5-12 13-22 25-29 16-9 34-14 55-14 36 0 73 12 109 35v-113c-31-15-59-25-84-31s-52-9-81-9c-33 0-62 5-87 13s-47 20-65 36c-18 15-30 31-37 49-7 17-11 42-11 75v253h-79v102c28 9 52 23 72 40 21 17 37 38 49 62 12 24 21 54 25 92h103z" horiz-adv-x="1007" />
+</font>
+</defs>
+</svg>

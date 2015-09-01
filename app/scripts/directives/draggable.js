@@ -10,17 +10,30 @@ angular.module('newsletterEditorApp')
   .directive('draggable', function() {
     return {
       restrict: 'A',
+      scope: {
+        containment:'@'
+      },
       /**
-       * link
+       * Post link
        * @param scope
        * @param element
        * @param attrs
        */
       link: function postLink(scope, element, attrs) {
+        var opts = {};
 
-        element.draggable({
-          helper:'clone'
-        });
+        if (scope.containment) {
+          opts = {
+            containment:scope.containment
+          };
+        } else {
+          opts = {
+            helper:'clone',
+            zIndex:10000
+          };
+        }
+
+        element.draggable(opts);
       }
     };
   });

@@ -1,0 +1,96 @@
+<div id="imagePick">
+    <button type="button" class="btn btn-primary btn-lg" ng-click="open()">
+        Choisir une image
+    </button>
+
+    <div>
+        Image sélectionnée :
+        <img ng-src="{{ currentImageUrl }}" />
+        <input type="text" ng-model="linkForImage" placeholder="Ajouter un lien à l'image"/>
+    </div>
+</div>
+
+<script type="text/ng-template" id="fileManager.html">
+    <div id="fileManager">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">File Manager</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h3>Upload de fichiers</h3>
+                        <div class="col-md-4">
+                            <form>
+                                <div class="form-group">
+                                    <input type="file" id="exampleInputFile">
+                                    <p class="help-block">Cliquez sur "Parcourir..." pour charger une image depuis votre ordinateur</p>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="dropFileZone" class="col-md-7 col-md-offset-1">
+                            <span class="glyphicon glyphicon-upload"></span><br>
+                            Ou déposez votre image dans cette zone
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container-fluid">
+                    <div class="row">
+                        <h3>Images existantes</h3>
+
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <form class="form-inline">
+                                    <div class="form-group" id="searchUploadedForm">
+                                        <div class="input-group">
+                                            <input type="text" ng-model="searchInputImage.name" class="form-control" placeholder="Rechercher une image">
+                                            <div class="input-group-addon "><span class="glyphicon glyphicon-search"></span></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-md-6 ">
+                                <div class="dropdown pull-right">
+                                    classer par :
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        + Récent
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                        <li><a ng-click="setOrder('date')">+ vieux</a></li>
+                                        <li><a ng-click="setOrder('name')">A-Z</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul>
+                        <li class="col-lg-2 col-md-4 col-sm-6 uploadGrid"
+                            ng-repeat="image in images | filter:searchInputImage | orderBy:order">
+                            <div class="uploadImg" style="background-image: url({{ image.url }}) !important">
+                                <div class="imgEdit">
+                                    <img style="display: none;" id="{{image.id}}" ng-src="{{ image.url }}" alt=""/>
+                                    <button class="btn btn-default" type="submit" ng-click="modify(image)">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="uploadFileTitle"><b>{{ image.name }}</b><br>PNG · 20.72 KB<br>458 × 296</p>
+                            <p><button class="btn btn-bob" type="submit" ng-click="select(image)">Choisir celle-ci</button></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>-->
+        </div>
+    </div>
+</script>

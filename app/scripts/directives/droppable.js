@@ -7,56 +7,87 @@
  * # droppable
  */
 angular.module('newsletterEditorApp')
-  .directive('droppable', ['BlocksManipulator', 'CurrentObject', function(BlocksManipulator, CurrentObject) {
+  .directive('droppable', function($rootScope, EventEmiter, BlockDouble) {
     return {
       restrict: 'A',
       /**
-       * Mink
+       * Link
        * @param scope
        * @param element
        * @param attrs
        */
       link: function postLink(scope, element, attrs) {
         element.droppable({
+          hoverClass:'state-hover',
+          activeClass:'active',
           /**
-           * Evenement lorsqu'on élement est droppé sur la grille
+           * Drop
            * @param event
            * @param ui
            */
           drop: function(event, ui) {
+            var self = this;
             var src = ui.draggable[0];
-            var target = document.elementFromPoint(event.clientX, event.clientY);
+            var targetBlock = angular.element(self).scope().block;
+            var droppedBlock = angular.element(src).scope().block;
 
-            /* Seul les élements de type Li peuvent être droppé sur une span ou un td  */
-            if (src.tagName === 'LI' && (target.tagName === 'SPAN' || target.tagName === 'TD')) {
-
-              // TODO Montrer qu'on est en train de mettre à jour le modèle.
-
-              /* On ajoute un block dans le pile des blocks */
-              var blockCreated = BlocksManipulator.createBlockToEditor(src, target);
-
-              /* en fonction du type de block, on fait des actions */
-              switch (blockCreated.content.type) {
-                case 'text':
-                  scope.$emit('blockTxtCreated', true);
-                  CurrentObject.set('text', blockCreated);
-                  break;
-                case 'file':
-                  // TODO Faire image
-                  break;
-              }
+            /**
+             * Affiche sur l'éditeur le html sans
+             * faire apparaitre le panneau d'édition
+             * @param html
+             */
+            function displayOnEditor(html) {
+              targetBlock.content.html = html;
+              $rootScope.safeApply();
             }
 
-          },
-          /**
-           * Evenement déclenché au over sur le droppable.
-           * @param event
-           * @param ui
-           */
-          over: function(event, ui) {
-            //console.log('over');
+            if (src.tagName === 'LI') {
+              targetBlock.type = droppedBlock.type;
+
+
+              if(droppedBlock.columns === 1) {
+                switch(droppedBlock.type) {
+                  case 'divider':
+                    displayOnEditor('');
+                    break;
+                  case 'unsub':
+                    displayOnEditor('<a rel="unsubscribe">Lien de désinscription</a>');
+                    break;
+                  case 'online':
+                    displayOnEditor('<a rel="online">Voir la version en ligne</a>');
+                    break;
+                  case 'button':
+                    displayOnEditor('<button class="btn btn-default"><a href="#">Cliquez ici !</a></button>');
+                    break;
+                  default:
+                    break;
+                }
+              } else {
+                /* On remplace le block courant par un block double */
+                var newBlockDouble = new BlockDouble(droppedBlock.type);
+
+                if (droppedBlock.type === 'footer') {
+                  // Réassignation du type, sinon les block de type footer sont considérés comme double
+                  // et le design pète.
+                  newBlockDouble.type = droppedBlock.type;
+                }
+                // scope.blocks, correspond aux block sur le liveEditor, définit dans liveEditor.js
+                var index = scope.blocks.indexOf(targetBlock);
+                scope.blocks[index] = newBlockDouble;
+                targetBlock = scope.blocks[index];
+              }
+
+              // On passe comme params, le block sur lequel on vient de dropper
+              // et l'élement du dom correspondant.
+              var opts = {
+                block:targetBlock,
+                tr:$(self).find('td')
+              };
+              // Le mode edition est toggled, avec les paramètres correspondants.
+              EventEmiter.emit('edition:toggled', opts);
+            }
           }
         });
       }
     };
-  }]);
+  });

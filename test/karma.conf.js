@@ -16,7 +16,7 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     // as well as any additional frameworks (requirejs/chai/sinon/...)
     frameworks: [
-      "jasmine"
+      'jasmine'
     ],
 
     // list of files / patterns to load in the browser
@@ -33,11 +33,23 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/jquery-ui/jquery-ui.js',
       'bower_components/ckeditor/ckeditor.js',
+      'bower_components/angular-ui-sortable/sortable.js',
+      'bower_components/angular-ckeditor/angular-ckeditor.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/jquery-mousewheel/jquery.mousewheel.js',
+      'bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',
+      'bower_components/lodash/lodash.js',
+      'bower_components/restangular/dist/restangular.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
       // endbower
-      "app/scripts/**/*.js",
-      "test/mock/**/*.js",
-      "test/spec/**/*.js"
+      'app/scripts/**/*.js',
+      'test/spec/**/*.js',
+
+      // Les tesmplates
+      'app/views/**/*.html'
+
+      //'test/mock/**/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -45,7 +57,7 @@ module.exports = function(config) {
     ],
 
     // web server port
-    port: 8080,
+    port: 8081,
 
     // Start these browsers, currently available:
     // - Chrome
@@ -56,14 +68,24 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      "PhantomJS"
+      'PhantomJS'
     ],
 
     // Which plugins to enable
     plugins: [
-      "karma-phantomjs-launcher",
-      "karma-jasmine"
+      'karma-ng-html2js-preprocessor',
+      'karma-phantomjs-launcher',
+      'karma-jasmine'
     ],
+
+    preprocessors: {
+      'app/views/**/*.html': ['ng-html2js']
+    },
+
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'app/',
+      moduleName: 'my.templates'
+    },
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit

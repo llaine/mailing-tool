@@ -63,13 +63,20 @@ module.exports = function (grunt) {
       }
     },
 
+    compass: {
+      options: {
+        sassDir: 'app/styles/sass/',
+        cssDir: 'app/styles/css'
+      },
+      dist: {}
+    },
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 8000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
+        livereload: 35730
       },
       livereload: {
         options: {
@@ -133,7 +140,6 @@ module.exports = function (grunt) {
         src: ['test/spec/{,*/}*.js']
       }
     },
-
     // Empties folders to start fresh
     clean: {
       dist: {

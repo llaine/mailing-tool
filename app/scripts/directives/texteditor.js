@@ -7,16 +7,12 @@
  * # textEditor
  */
 angular.module('newsletterEditorApp')
-  .directive('textEditor', function(CurrentObject) {
-    var CKEDITOR = window.CKEDITOR || {};
-
+  .directive('textEditor', function() {
     return {
-      template: '<textarea id="editor" rows="10" cols="30">{{ text }}</textarea>' +
-                '<button class="btn btn-success btn-sm" ng-click="submit(text)" type="submit">Enregistrer</button>' +
-                '<button class="btn btn-warning btn-sm" ng-click="reset()" type="reset">Quitter</button>',
+      template: '<div ng-model="block.content.html" ckeditor="options"></div>',
       restrict: 'E',
       scope: {
-        text:'='
+        block:'='
       },
       /**
        * Affiche l'éditeur.
@@ -25,31 +21,12 @@ angular.module('newsletterEditorApp')
        * @param attrs
        */
       link: function postLink(scope, element, attrs) {
-        scope.text = 'Entrez le texte ici';
-        CKEDITOR.replace('editor');
-
-        /**
-         * Fonction appelé au moment ou l'on valide le texte dans l'éditeur.
-         * @param txt
-         */
-        scope.submit = function(txt) {
-          /* modification du modèle dans l'objet */
-          var modifiedObject = CurrentObject.get('text');
-          var htmlFromEditor = CKEDITOR.instances.editor.getData();
-
-          modifiedObject.content.html = htmlFromEditor;
-
-          CurrentObject.set('text', modifiedObject);
-
-          scope.$emit('blockTxtSaved', true);
-        };
-
-        /**
-         * Fonction qui est appelé lorsque l'utilisateur quitte l'éditeur de texte.
-         */
-        scope.reset = function() {
-          scope.$emit('blockTxtDestroyed', true);
-          CurrentObject.destroy('text');
+        /* par défaut l'éditeur est masqué. */
+        scope.editionMode = false;
+        scope.options = {
+          language: 'fr',
+          allowedContent: true,
+          entities: false
         };
       }
     };

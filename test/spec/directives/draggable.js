@@ -4,17 +4,22 @@ describe('Directive: draggable', function () {
 
   // load the directive's module
   beforeEach(module('newsletterEditorApp'));
+  beforeEach(module('my.templates'));
 
   var element,
     scope;
 
-  beforeEach(inject(function ($rootScope) {
+  beforeEach(inject(function($rootScope) {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<draggable></draggable>');
+  it('doit contenir une class appartenant aux élement draggable. ', inject(function($compile) {
+    element = angular.element('<div draggable></div>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the draggable directive');
+    scope.$apply();
+
+    /* on test que la class draggable soit bien activé aka ce qui signifie que
+     * jQuery UI a bien considéré notre DOM element comme draggable. */
+    expect(element[0].className.includes('ui-draggable')).toBeTruthy();
   }));
 });

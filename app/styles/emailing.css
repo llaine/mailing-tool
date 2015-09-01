@@ -1,0 +1,403 @@
+/* habillage vignettes template */
+#createNews .createNewsTemp {
+    background-color:#EEE;
+    transition:all 0.3s ease;
+
+}
+#createNews .createNewsTemp:hover{
+    background-color: #CCC ;
+}
+#createNews div .marginBottom {
+    margin-bottom: 20px;
+}
+
+.createNewsTemp {
+    padding:5px;
+    background-color: #EEE;
+    width:100%;
+    height:100%;
+    border-radius: 5px;
+}
+/* */
+.mailBorder div {
+    border-right: 1px solid #FFF;
+    padding:0 ;
+}
+.mailBorder div.mailNoBorder {
+    border-right: 0px solid #FFF;
+}
+.breadcrumb.mailBorder {
+    padding:0 15px 0 15px;
+    line-height: 35px;
+}
+.breadcrumb.mailBorder li{
+    padding:0 15px 0 15px;
+    line-height: 35px;
+}
+.mailBorder li.active {
+    font-weight: 700;
+}
+.mailBorder input{
+    width: auto;
+}
+.mailInput input {
+    width:50%;
+}
+.mailInput select {
+    width:50%;
+}
+
+/* mail recap */
+
+ul.mailRecap li {
+    background-color: #FBFBFB;
+}
+div.mailRecap{
+    background-color: #555;
+    border-radius: 6px;
+}
+/* table résultat*/
+table.mailResult {
+    font-size: larger;
+}
+.mailActionEnd td {
+    width:33%;
+}
+.mailActionEnd button{
+    height:80px;
+}
+.mailActionEnd span.glyphicon{
+    font-size:20px;
+}
+
+/* navigation onglets template *********************************/
+.nav-tabs.navTemplate {
+    border-bottom: 1px solid #DDD;
+}
+
+.nav-tabs.navTemplate > li > a {
+    padding: 10px 15px;
+}
+
+/* cadre outils de création ********************************/
+#mailOutils1{
+    background:#DDD;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+#mailOutils1 .btn {
+    margin-bottom: 5px;
+}
+/* cadre outils de création 2 ********************************/
+#mailOutils2{
+    padding:15px;
+    background:#DDD;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+#mailOutils2 .btn {
+    margin-bottom: 5px;
+}
+/* formulaire design email */
+.form-small {
+    width:30%!important;
+}
+.scrollable {
+    margin-bottom: 15px;
+
+}
+.scrollable h3 {
+    margin-top:0;
+}
+.scrollable .tooltip {
+    position: fixed;
+}
+/* accordéon design email */
+#mailOutils2 .panel-default > .panel-heading {
+    color: #FFF;
+    background-color: #334348;
+    border-color: #DDD;
+}
+#mailOutils2 h5 {
+    color:#EE7F64;
+    text-decoration: underline;
+}
+
+
+
+/* cadre composition *********************************/
+#mailCadre {
+    min-width: 660px;
+    background:#555;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-right: 9px;
+}
+table.emailCompo {
+    width:600px;
+    max-width: 600px;
+    margin:0px auto;
+}
+
+.emailCompo th, .emailCompo tr{
+    height:60px;
+}
+.emailCompo td {
+    background-color: #FFF;
+    width:50%;
+}
+.emailCompo td, .emailCompo th{
+    padding:15px;
+}
+.emailCompo td.emailImg{
+    padding:0px;
+}
+.emailCompo h4 {
+    margin:0;
+}
+/* colonnes edition/preview */
+.col-pb-1 {
+    min-width: 300px;
+}
+.col-pb-2 {
+    min-width: 650px;
+}
+#mailCadre .mCSB_inside > .mCSB_container {
+    margin-right: 14px!important;
+}
+
+/* email roll-overs pour interaction sous-blocs ****************************/
+.emailCompo tr .btnAction {
+    right:auto;
+    text-align: center;
+    margin-top: 10px;
+    margin-left:10px;
+}
+.emailCompo tr.mailHr .btnAction  {
+    right:auto;
+    text-align: center;
+    margin-top: -10px;
+    margin-left:10px;
+}
+
+.emailCompo tr .active {
+    opacity: 0.9;
+}
+
+.emailCompo .state-hover {
+    opacity: 0.9;
+}
+
+.emailCompo tr:hover .btnAction{
+    display:block;
+}
+.emailCompo tr {
+    border:0px;
+    width:600px;
+}
+.emailCompo tr:hover {
+    border: dashed 1px rgba(109, 63, 92,0.5);
+    width:590px;
+    cursor: pointer;
+}
+.emailCompo .mailEditIco {
+    width:25px;
+    height:25px;
+    border-radius: 5px;
+    background-color: #333;
+    color:#FFF;
+    float:left;
+    margin-right:2px;
+}
+.emailCompo .mailEditIco a:link, .emailCompo .mailEditIco a:active, .emailCompo .mailEditIco a:visited{
+    color:#FFF;
+    margin-left:4px;
+    line-height:25px;
+}
+.emailCompo .mailEditIco a:hover{
+    color:#AAA;
+}
+
+
+
+/* personalisation Template 1 ***************************/
+#emailTemplate1 thead {
+    background-color: #FFDD94;
+}
+#emailTemplate1 p {
+    color:#666;
+}
+#emailTemplate1 .mailTitre {
+    background-color: #FF9A51;
+    color:#FFF;
+}
+#emailTemplate1 .mailTitre p {
+    color:#FFF;
+}
+#emailTemplate1 .mailDate {
+    color:#954002;
+}
+#emailTemplate1 .mailLogo h2 {
+    margin:10px 0 10px 0;
+}
+#emailTemplate1 .mailTransfer {
+    color:#954002;
+    text-align: right;
+}
+#emailTemplate1 .mailOnline {
+    color:#111;
+    text-align: right;
+}
+#emailTemplate1.emailCompo tr.mailHr  {
+    height:15px;
+}
+#emailTemplate1.emailCompo tr.mailHr td {
+    background-color: #555;
+    padding:0px;
+}
+#emailTemplate1 tr.mailFooter td {
+    background-color: #555;
+    color:#FFF;
+}
+#emailTemplate1 tr.mailFooter td p{
+    color:#AAA;
+}
+#emailTemplate1 td.mailSocial {
+    text-align: right;
+}
+
+/* dashboard emailing */
+td.campagne_stats {
+    width:100px;
+}
+td.campagne_stats div.progress{
+    margin-top:-2px;
+    margin-bottom:0;
+}
+td.sm-ellips { width:50%!important;}
+
+.themCol1 a{
+    color:#FFF;
+}
+#mesCamp table{
+    height:290px;
+}
+.themCol3 {
+    color:#FFF;
+    background: #5B8D9B;
+}
+
+/* mail list */
+td.mail-list-stats {
+    width:30%;
+}
+td.mail-list-date {
+    width:120px;
+}
+td.mail-list-stats .progress {
+    margin-bottom: 0;
+}
+
+/* */
+#segment-new {
+    display:none;
+}
+.segmentModal {
+    /*height:auto;*/
+    overflow-y:auto;
+}
+/* liste des destinataires, display des zones pas affichées au début */
+#show2, #show22, #show23, #show232 {
+    display:none;
+}
+
+
+
+/* crédit emailing */
+.creditEmail {
+    color:#5B8D9B;
+}
+
+
+
+#mailOutils2 li.draggable {
+    margin-left: 5px;   
+    min-width:12rem;
+    min-height:11rem;
+    
+}
+#mailOutils2 li.draggable .glyphicon{
+    font-size: 3rem;
+}
+#mailOutils2 li.draggable .small {
+    font-size:1.5rem;
+}
+
+
+
+
+/* Modal Upload images */
+#fileManager .modal-dialog { width: 85%;}
+#fileManager #dropFileZone {
+    text-align: center;
+    border:2px dashed grey;
+    height:200px;
+    padding-top:80px;
+}
+#fileManager #dropFileZone .glyphicon {
+    font-size: 3rem;
+}
+/*#uploadedFilesTable {
+    margin-top:45px;
+}
+#uploadedFilesTable td{
+vertical-align: middle;
+}*/
+
+/* grille images de la bibli */ 
+#fileManager #searchUploadedForm  {
+    width:100%;
+}
+#fileManager #searchUploadedForm .input-group {
+    width:100%;
+}
+
+#fileManager ul {
+    padding:0px;
+}
+#fileManager li.uploadGrid{
+    height: auto;
+    list-style:none;
+    margin:0;
+    padding:8px;
+}
+#fileManager .uploadGrid .uploadImg{
+    height: auto;
+    width: auto;
+    background-position: 50% 50%;
+    margin-top: 12px;
+    background-size: contain;
+    background-color: #F2F2F2;
+    border: 1px solid #E0E0E0;
+    background-image: url(http://bobelweb.eu/boutique/img/p/6/7/67-large_default.jpg);
+    padding-bottom: 66.67%;
+
+}
+#fileManager .uploadGrid .uploadFileTitle {
+    overflow: hidden;
+}
+#fileManager .imgEdit {
+    padding-bottom: 0px;
+    position: absolute;
+    top: 32px;
+    left: 18px;
+}
+#fileManager .uploadGrid .btn {
+    width:100%;
+}
+#fileManager .imgEdit .btn {
+    font-size: 2rem;
+    width:3rem;
+    height:3rem;
+    padding: 3px 5px;
+}

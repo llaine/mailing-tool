@@ -1,0 +1,1347 @@
+/*
+ * Base structure
+ */
+
+#alertSP {
+    display: none;
+}
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    /*
+    margin-top: 105px;
+    */
+    padding-right:0!important;
+    overflow-x:hidden;
+}
+
+body, html,a, button   {
+    transition : all 0.3s ease;
+}
+
+@media (max-width: 767px) {
+    #visible{
+        display:none;
+    }
+    #alertSP {
+        display: block;
+        margin-top:-120px;
+    }
+
+}
+
+
+
+/* REGLAGES MIN tablettes ***************************************/
+@media screen and (max-width: 991px) {
+    #moreSearch {
+        display:none;
+    }
+    body {
+        margin-top: 145px;
+    }
+    .onglets {
+        margin-top: -54px;/*99px;*/
+    }
+    .sidebar {
+        margin-top:50px;
+    }
+    /* centre le logo */
+    .navbar-brand {
+        float:none;
+        line-height: 50px;
+
+    }
+    .navbar-header {
+        float: none;
+        text-align: center;
+        height: 50px;
+    }
+
+
+
+}
+/* REGLAGES MOYEN ptit ordi ***************************************/
+@media screen and (min-width: 992px) {
+    #moreSearch {
+        display:none;
+    }/*
+    body {
+        margin-top: 105px;
+    }*/
+    .onglets {
+        margin-top: -64px;/*49px;*/
+    }
+    .sidebar {
+        margin-top:0px;
+    }
+}
+
+
+
+
+
+/* ***************************************/
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* * Top navigation * Hide default border to remove 1px line. */
+.navbar-fixed-top {
+    /* border: 0;*/
+}
+.navbar-inverse {
+    background:#273438;
+}
+
+
+
+
+.glyphicon-collapse-down {
+    vertical-align: baseline;
+    font-size: 14px;
+}
+.glyphicon-purple {
+    color:#7A4768;
+}
+/* * Sidebar */
+
+.sidebar {
+    width:180px;
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 0 20px 20px 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #334348;
+    /*border-right: 1px solid #eee;*/
+    color:#FFF;
+}
+.sidebarSmall {
+    width:54px;
+}
+
+
+/* Sidebar navigation */
+.nav-sidebar {
+    margin-right: -21px; /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-left: -20px;
+}
+.nav-sidebar > li {
+    border-bottom: 1px solid #3A5056;
+
+}
+.nav-sidebar > li > a {
+    padding-right: 20px;
+    padding-left: 20px;
+    color:#FFF;
+}
+.nav-sidebar.user {
+    padding: 20px;
+    margin-bottom: 0;
+    background:#273438;
+}
+.nav-sidebar.user > li{
+    border:0px;
+}
+.sidebar .glyphicon {
+    color:#9DBBC4;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+    color: #fff;
+    background-color: #5B8D9B;
+}
+.glyphicon {
+    padding-right: 5px;
+}
+.btn-bob .glyphicon, .badge .glyphicon {
+    padding-right: 0px;
+}
+
+/* style de la vignette photo USER */
+#avatar {
+    width:40px;
+    height: 40px;
+    border-radius: 20px;
+    background:  url(../images/jeanluc02.jpg)  no-repeat center center ;
+    background-size: cover;
+    float:left;
+    margin:-9px 6px 0 0;
+    line-height: 0px;
+}
+
+
+
+/*
+ * Main content
+ */
+
+#mainCont {
+    transition : margin 0.3s ease;
+    margin-bottom:40px;
+    margin-left: 180px;
+}
+#mainContReduit {
+    transition : margin 0.3s ease;
+    margin-bottom:40px;
+    margin-left: 54px;
+}
+
+
+.main {
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+.main .page-header {
+    margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.placeholders h4 {
+    margin-bottom: 0;
+}
+.placeholder {
+    margin-bottom: 20px;
+}
+.placeholder img {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+/* menu connexion dropdown */
+.navbar-nav .dropdown-menu > li > a {
+    text-align:right;
+}
+/* couleur hover dropdown */
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #262626;
+    text-decoration: none;
+    background-color: #BEC8C8;
+}
+/* couleur fond dropdown */
+.dropdown button {
+    background-color:#EEE;
+    margin-right:5px;
+}
+
+/* **************************  ONGLETS **********************************/
+
+.onglets {
+    position: fixed;
+    min-height: 53px;
+    height:53px;
+    background:#6D3F5C;
+    color:#FFF;
+    z-index: 2;
+}
+
+#bob {
+    background:#6D3F5C;
+    position: fixed;
+    margin:10px 0 0 0px;
+    width:100%;
+    overflow: hidden;
+}
+
+.nav-tabs {
+    border-bottom: 0px solid #ddd;
+}
+.nav-tabs > li > a {
+    padding-top:7px;
+    background:#7a4768;
+    line-height: 0.8;
+    height:33px;
+    color:#FFF;
+}
+.nav-tabs > li > a:hover {
+    border-color: #eee #eee #ddd ;
+    border-color: transparent;
+    background:#8E6880;
+}
+
+.nav-tabs .close {
+    color: #FFF;
+    text-shadow: 0px 1px 0px #000;
+    opacity: 0.6;
+    margin:-2px 0 0 5px;
+}
+
+.nav-tabs .close:hover{
+    color: #FFF;
+    text-shadow: 0px 1px 0px #000;
+    opacity: 1;
+
+}
+/* /****** bouton close sur onglets */
+.divCl {
+    /*position:absolute;*/
+    margin: 0px 0px 0px 5px;
+    padding:0px;
+    display: inline-block;
+    background-color: rgba(0,0,0,0.1);
+    border-radius:15px;
+    width:17px;
+    height:17px;
+    color:rgba(255,255,255,0.5);
+}
+.divCl span {
+    padding-left: 4px;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.divCl:hover{
+    color:rgba(255,255,255,1);
+    background-color: rgba(0,0,0,0.4);
+}
+.nav > li > a {
+    padding-right:8px ;
+}
+.nav-tabs > li.active > a .divCl {
+    color:#FFF;
+}
+.nav-tabs > li.active > a .divCl:hover {
+    color:#FFF;
+    cursor: Pointer;
+}
+
+/* ************** COntent dashboard *******************************/
+.dashHead {
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    height:33px;
+    width:auto;
+    background: #384D50;
+    display: inline-block;
+    margin:20px 0 0px 0;
+    padding-right:15px;
+
+}
+.dashHead h3 {
+    /*font-family: 'din_blackregular';*/
+    color: rgba(255,255,255,0.8);
+    padding:4px 0 0 15px;
+    margin-top:0px;
+}
+
+.dashContacts .dashHead h3 {
+    /*font-family: 'din_blackregular';*/
+    color: rgba(255,255,255,0.8);
+    padding:4px 0 0 15px;
+    margin-top:0px;
+    font-size: 20px;
+    line-height: 26px;
+}
+@media screen and (max-width: 1100px) {
+    .dashHead h3 {
+        font-size: 15px;
+        padding:8px 0 0 15px;
+    }
+}
+.dashHead .bloc-reduc {
+    font-size:14px;
+    margin-left:10px;
+    vertical-align: 30%;
+    color:#FFF;
+    transform:rotate(-90deg);
+}
+.dashHead a {
+}
+.dashHead a:hover .bloc-reduc  {
+    transition:all 0.5s ease;
+    color:#EE7F64;
+}
+
+.dashDivCont {
+    /*border-bottom-left-radius:5px;*/
+    border-top-right-radius:5px;
+    max-height:230px;
+    height:230px;
+    background: #B7C2C2;
+    overflow:hidden ;
+}
+.dashDivCont a:hover, .dashDivCont a:focus {
+    color: #cd6a52;/*2a6496  */
+    text-decoration: underline;
+}
+.dashNoBut.dashDivCont {
+    max-height:290px;
+    height:290px;
+    border-bottom-right-radius:5px;
+    border-bottom-left-radius:5px;
+}
+.dashDivCont table {
+    height: 230px;
+    background: none repeat scroll 0% 0% rgba(255, 255, 255, 0.1);
+}
+.dashNoBut.dashDivCont table {
+    /*height: 290px;*/
+}
+.dashDivCont td.ellips, .dashDivCont td div.ellips{
+    overflow: hidden;
+    text-overflow : ellipsis;
+    white-space:nowrap;
+    width:100%;
+}
+
+.dashDivCont td.lc-time {
+    text-align: right;
+    width: 70px;
+}
+/*.dashNoBut td.lc-time {
+  width:70px;
+}*/
+.dashDivCont td.userCol {
+    width:30px;
+}
+
+.dashDivCont .table-condensed > thead > tr > th, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td {
+    padding:0px 10px;
+    vertical-align: middle;
+}
+.table-condensed.vert-top > tbody > tr > td {
+    vertical-align: top!important;
+}
+.dashDivCont .table-striped > tbody > tr:nth-child(odd) > td,
+.dashDivCont .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: rgba(255,255,255,0.2);
+}
+.dashDivCont .table-hover > tbody > tr:hover > td,
+.dashDivCont .table-hover > tbody > tr:hover > th {
+    background-color: rgba(100,125,125,0.2);
+}
+/* .noContraint pour tableaux complets - liste des sélections - liste des taches */
+.dashDivCont.noContraint table{
+    height: 100%;
+}
+.dashDivCont.noContraint {
+    height:100%;
+    max-height:100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.dashDivCont.noContraint .glyphicon {
+    /*font-size: 20px;*/
+    color:#FFF;
+}
+.dashDivCont.noContraint .glyphicon:hover{
+    transition:all 0.3s ease;
+    color:#6D3F5C;
+}
+.dashDivCont.noContraint table td {
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.dashDivCont.noContraint table td.lc-time {
+    padding-left:6px;
+    padding-right:6px;
+    width:1%;
+}
+.dashDivCont.noContraint table td .ico-edit {
+    margin-left:0px;
+}
+/* tableaux avec ellipsis */
+#lastCreatedCont table, #lastConsultCont table, #mySelection table, #lastSearches table, #dashTaskEllips, #draftMail table, #sendedMail table{
+    table-layout:fixed;
+}
+#dashTaskEllips .lc-time {
+    padding:0 5px;
+}
+
+/* exception pour taches sur fiche contact */
+.dashDivFull table{
+    height:auto;
+}
+.dashDivFull tr {
+    height:40px;
+}
+.dashDivFull tr.tableStruct {
+    height:0px;
+}
+.dashDivCont .table-striped > tbody > tr.tableStruct:nth-child(1) > td{
+    background: #B7C2C2;
+}
+
+/* tweak scrollingbar */
+.mCSB_inside > .mCSB_container {
+    margin-right: 26px;
+}
+
+/* footer */
+.dashDivFoot {
+    height:60px;
+    width:100%;
+    background:#B7C2C2;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    clear:both;
+    padding:10px 8px 0 8px;
+}
+.dashDivFoot button {
+    /*margin: 13px 8px;*/
+}
+
+
+#taches {
+    display:block;
+}
+/*#taches td {
+  text-overflow: ellipsis;
+  max-height: 20px;
+}*/
+
+/**************** BOUTONS *********************/
+/* largeurs */
+.btn-demi {
+    width:48%;
+    height:40px;
+    margin-right:2%;
+}
+
+.btn-full {
+    width:100%;
+    height:40px;
+}
+.btn-bb.btn-full {
+    height:100px;
+}
+
+/* bouton importer résultats LiveData */
+.btn-liveData {
+    background-color: #ffc92f;
+    color:#FFF;
+}
+.btn-liveData:hover, .btn-liveData:active  {
+    background-color: #ecb20c;
+    color:#FFF;
+}
+.btn-liveData[disabled] {
+    background-color: #ffe291;
+}
+
+.btn-bob[disabled], .btn-bob[disabled]:hover {
+    background-color: #eead9e;
+}
+.btn-bob {
+    color: #fff;
+    background-color: #ee7f64;
+    border-color: #eea236;
+}
+.btn-bob:hover,
+.btn-bob:focus,
+.btn-bob:active,
+.btn-bob.active,
+.open > .dropdown-toggle.btn-bob {
+    color: #fff;
+    background-color: #7A4768;
+    border-color: #d58512;
+}
+.btn-bob:active,
+.btn-bob.active,
+.open > .dropdown-toggle.btn-bob {
+    background-image: none;
+}
+.btn-bob.disabled,
+.btn-bob[disabled],
+fieldset[disabled] .btn-bob,
+.btn-bob.disabled:hover,
+.btn-bob[disabled]:hover,
+fieldset[disabled] .btn-bob:hover,
+.btn-bob.disabled:focus,
+.btn-bob[disabled]:focus,
+fieldset[disabled] .btn-bob:focus,
+.btn-bob.disabled:active,
+.btn-bob[disabled]:active,
+fieldset[disabled] .btn-bob:active,
+.btn-bob.disabled.active,
+.btn-bob[disabled].active,
+fieldset[disabled] .btn-bob.active {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.btn-bob .badge {
+    color: #f0ad4e;
+    background-color: #fff;
+}
+
+/* button ancre navigation */
+.btn-ancre {
+    color: #fff;
+    background-color: #314045;
+    border-color: #d43f3a;
+}
+.btn-ancre:hover,
+.btn-ancre:focus,
+.btn-ancre:active,
+.btn-ancre.active,
+.open > .dropdown-toggle.btn-ancre {
+    color: #fff;
+    background-color: #5B8D9B;
+    border-color: #ac2925;
+}
+.btn-ancre:active,
+.btn-ancre.active,
+.open > .dropdown-toggle.btn-ancre {
+    background-image: none;
+}
+.btn-ancre.disabled,
+.btn-ancre[disabled],
+fieldset[disabled] .btn-ancre,
+.btn-ancre.disabled:hover,
+.btn-ancre[disabled]:hover,
+fieldset[disabled] .btn-ancre:hover,
+.btn-ancre.disabled:focus,
+.btn-ancre[disabled]:focus,
+fieldset[disabled] .btn-ancre:focus,
+.btn-ancre.disabled:active,
+.btn-ancre[disabled]:active,
+fieldset[disabled] .btn-ancre:active,
+.btn-ancre.disabled.active,
+.btn-ancre[disabled].active,
+fieldset[disabled] .btn-ancre.active {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.btn-ancre .badge {
+    color: #d9534f;
+    background-color: #fff;
+}
+
+/* bouton pour scroll up */
+#btn_up {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    cursor: pointer;
+    display:none;
+    z-index: 2000;
+    font-size:80px;
+    color:#FFF;
+}
+#btn_up:hover{
+    color:#ee7f64;
+}
+
+#btnReduc, #btnReducReduit{
+    transition : all 0.3s ease;
+    position: fixed;
+    z-index: 5000;
+    margin: 25% 0px 0px 180px;
+    background: none repeat scroll 0% 0% #CCC;
+    border-radius: 0 40px 40px 0;
+    width: 25px;
+    height: 50px;
+    font-size:20px;
+    padding:12px 0 0 0px;
+}
+#btnReduc:hover {
+    background-color: #6D3F5C;
+    cursor: pointer;
+    color:#EE7F64;
+}
+#btnReducReduit:hover {
+    background-color: #6D3F5C;
+    cursor: pointer;
+    color:#EE7F64;
+}
+#btnReducReduit, #btnReducReduit:hover {
+    margin: 25% 0px 0px 54px;
+}
+
+
+.btn.disabled {
+    cursor:Default!important;
+}
+
+.btn-default {
+    background-color: #F2F2F2;
+}
+/***************************************************/
+td.tdCheck {width:1px;}
+
+
+.bigTitle {
+    font-size: 30px;
+    font-family: 'din_blackregular';
+}
+
+.themCol1 {
+    background: #57315a;
+    color:#FFF;
+}
+.themCol2 {
+    color:#FFF;
+    background: #7a4768;
+}
+
+#news {padding: 10px 5px 0 10px;}
+#news h4 {
+    color:#FFF;
+}
+#news .mCSB_inside > .mCSB_container {
+    margin-right: 20px;
+}
+
+
+/* Réduction MENU de gauche */
+
+.sidebar {
+    transition:all 0.3s ease;
+}
+.sidebar li {
+    max-height: 41px;
+    overflow: hidden;
+    white-space:nowrap;
+}
+#mySidebarReduit .nav-hid, #mySidebarReduit .badge {
+    display: none;
+}
+@-moz-document url-prefix(){
+    .sidebar .badge {
+        margin: -20px 0px 0px 0px;
+    }
+}
+#mySidebarReduit .sidebar {
+    width:54px;
+}
+#mySidebarReduit #avatar {
+    margin: 0 0 0 -13px;
+}
+
+
+
+/* alignement iradio */
+.icheckbox_flat-purple, .iradio_flat-purple {
+    vertical-align: -25%!important;
+}
+
+
+/* Bandeau supérieur d'une  fiche CONTACTS **************************************/
+
+
+#contactsBtn button {
+    width:92px;
+    height: 60px;
+    line-height:15px;
+}
+#contactsBtn button span{
+    padding-right: 0;
+}
+@media screen and (min-width: 992px) {
+    #contactsBtn {
+        text-align:right;
+        margin-top:10px;
+        margin-bottom:30px;
+    }
+}
+@media screen and (max-width: 991px) {
+    #contactsBtn {
+        text-align:left;
+        margin-top:10px;
+        margin-bottom:30px;
+    }
+}
+/* photo de la fiche contact */
+#contactThumb {
+    width:100px;
+    float:left;
+}
+#contactThumb img{
+    width:80px;
+    border-radius:5px;
+}
+/* icone pour type user */
+#user-type {
+    margin-top: 20px;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    float:left;
+    font-size:30px;
+    padding:3px 0 0 4px;
+}
+
+
+.user-liveData {
+    border-radius: 5px;
+    background-color: #ECB20C;
+}
+.user-liveData:after {
+    content:"LD";
+    color:#FFF;
+    position: absolute;
+    margin:-16px 0 0 -12px;
+    font-size: 8px;
+}
+
+/* titre fiche contact */
+#cont-title.h1 {
+    margin-left:146px;
+    padding-top:0;
+}
+#cont-title3.h1 {
+    margin-left:50px;
+    padding-top:0;
+}
+
+.tagBadge {
+    margin:0 0 0 5px;
+    padding:0 0 0 5px;
+    color:#FFF;
+}
+.badge-plus  {
+    background:#B7C2C2;/*#ee7f64;*/
+}
+.badge-plus a {
+    color:#FFF;
+    text-decoration: none;
+}
+.badge-plus:hover {
+
+    background:#384D50;/*#57315a;*/
+    color:#FFF;
+}
+h1 .glyphicon {
+    font-size: 20px;
+    vertical-align: 20%;
+}
+.badge-bleu {
+    background:#5b8d9b;
+}
+.badge-jaune {
+    background:#ffcc4f;
+}
+.badge-violet {
+    background:#7a4768;
+}
+.badge-saumon {
+    background:#e49586;
+}
+
+
+
+/* ********* content contacts */
+
+.contactDivCont {
+    background: #B7C2C2;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-right-radius:5px;
+    padding-top:15px;
+}
+
+.contactDivCont table {
+    height:250px;
+    background: rgba(255,255,255,0.1);
+}
+td.lc-time {
+    text-align: right;
+    width: 1%;
+}
+
+
+
+
+
+/* ******** Blocs des contacts */
+.contactCont {
+    /*margin-top:15px; */
+    padding:5px;
+}
+.contactCont img{
+    margin-left:-8px;
+
+    height:50px;
+}
+.cont2div:hover{
+    background:rgba(255,255,255,0.5);
+    /*cursor:pointer;*/
+}
+/* css pour apparition boutons edit delete */
+.btnAction{
+    display:none;
+    position:absolute;
+    right:15px;
+    z-index: 20;
+    margin:0;
+    transition : all 0.3s ease;
+    text-align: right;
+}
+.cont2div:hover .btnAction{
+    display: block;
+}
+
+.ico-edit {
+    border-radius: 5px;
+    background: #ee7f64;
+    width:25px;
+    height:25px;
+    font-size:16px;
+    padding:2px 0 0 5px;
+    display:inline-block;
+    margin-left:10px;
+
+}
+.ico-edit a {
+    color:#cbd3d3;
+}
+.ico-edit a:hover {
+    color:#FFF;
+}
+
+/* pour bloc td dans taches */
+tr .btnAction {
+    margin-top: -32px;
+}
+
+tr:hover  .btnAction {
+    /*
+    display: block;
+    */
+    /* margin-top: -23px;*/
+}
+
+.profilTaches {
+    overflow:auto;
+    padding:10px 10px 0 10px ;
+}
+/* fin bloc taches */
+
+.cont2div {
+    padding:5px;
+    background:#cbd3d3;
+    min-height:100px;
+    border-radius: 5px;
+    overflow:hidden;
+}
+
+/*.cont2div .h5 {
+  font-family: 'din_blackregular';
+}*/
+#comments {
+    height:auto;
+}
+
+/* icone social sur contacts d'1 fiche contact*/
+.ico-social {
+    margin-top:44px;
+    right:15px;
+
+}
+.social-cnt img{
+    width:20px;
+    height:20px;
+    margin:0;
+}
+.social-cnt img:hover {
+    opacity:0.5;
+}
+
+
+
+
+/* gestion de marges pour les blocs des dashboards */
+@media screen and (min-width: 992px) {
+    .no-padding {
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .no-padding-l {
+        padding-left:0px;
+    }
+    .no-padding-r {
+        padding-right:0px;
+    }
+    .margin20 {
+        margin-left:20px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .no-padding-l {
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .no-padding-r {
+        padding-right:0px;
+        padding-left:0px;
+    }
+}
+
+
+
+
+/* pour gérer décallage des liens ancres */
+.section {
+    position: relative;
+}
+.section span.target {
+    position: absolute;
+    top: -140px;
+}
+
+
+
+
+
+
+/* ***** MODAL ***************/
+
+.modal-open {
+    overflow: auto;
+}
+
+.modal-header{
+    background:#7a4768;
+    color:#FFF;
+}
+.modal-header .close{
+    color:#FFF;
+}
+
+
+/* modal LiveData-crédit */
+#LD-credit .modal-body {
+    padding-top:35px;
+}
+#LD-credit .modal-footer, .LD-credit {
+    text-align: left;
+    background-color: #ecb20c;
+    height: 50px;
+    color:#FFF;
+    font-weight:bolder;
+}
+
+/* modal dédoublonnage */
+#doublonModal .modal-body{
+    padding-top:35px;
+}
+#doublonModal .modal-footer {
+    text-align: left;
+    background-color: #6D3F5C;
+    height: 50px;
+    color:#FFF;
+    font-weight:bolder;
+}
+
+/* Réusltats LIVE DATA ds tableau de recherche */
+.table > tbody > tr.liveData-list > td  {
+    background-color: #ffc92f;
+}
+.table-striped > tbody > tr:nth-child(2n+1).liveData-list > td {
+    background-color: #ecb20c;
+}
+
+.liveDataUnderUser {
+    border-radius: 4px;
+    background-color: #FFC92F;
+    width:20px;
+    text-align: center;
+}
+.liveDataUnderUser span.glyphicon-user {
+    padding-right: 0px;
+}
+.liveDataUnderUser span.glyphicon-home {
+    padding-right: 1px;
+}
+
+/* avertissement import liveData */
+
+.alert-info {
+    margin-top: 10px;
+    background-color: #ffc92f;
+    border-color: #ecb20c;
+    color:#333;
+}
+.alert-info .close {
+
+    opacity:0.5;
+}
+.alert-info .close:hover {
+    opacity:1;
+}
+
+/* réglage affichage résultats  icones  */
+.userIco .glyphicon-user,
+.userIco .glyphicon-home
+{
+    margin-left: 3px;
+}
+.userIco .liveDataUnderUser .glyphicon-user {
+    margin-left: 0px;
+}
+.userIco .liveDataUnderUser .glyphicon-home {
+    margin-left: 0px;
+}
+.userIco .glyphicon-exclamation-sign {
+    color:#6D3F5C;
+}
+.userIco .glyphicon-chevron-down {
+    font-size:10px;
+}
+.userIco th a {
+    text-decoration: none;
+}
+/* réglage colonnes */
+table.table-striped tr.tableStruct, table tr.tableStruct td {
+    height:0px!important;
+    margin:0;
+    padding:0!important;
+    border-top:0px;
+}
+/*.table .table-striped > tbody > tr > td{
+border-top:0px;
+}*/
+/* panel pour la recherche contact */
+.panel-search .panel-body {
+    padding-left:0;
+    padding-right: 0;
+}
+
+
+/* table pour la recherche contact */
+/* 1ère colonne */
+.table-striped.table-search > tbody > tr > td:nth-child(1) {
+    text-align:right;
+    width:1%;
+}
+.table-striped.table-search > tbody > tr > td:nth-child(2) {
+    width:160px;
+}
+
+/* champs + condensés */
+.table-search .form-control{
+    height: 24px;
+    padding: 0px 12px;
+}
+
+.table-condensed.table-search  > tbody > tr > td {
+    padding: 1px 10px;
+}
+
+/* couleur stripped table */
+.table-striped > tbody > tr:nth-child(2n+1) > td {
+    background-color: #EFF1F2;
+}
+
+/* taille calendriers dans recherche */
+.table-search .input-group-addon {
+    padding:1px 10px;
+}
+
+/* header des accordéons */
+.panel-search > .panel-default > .panel-heading  {
+    background-color:#384D50;
+    color:#FFF;
+}
+
+/* listes scrollables dans recherches */
+.search-listing{
+    margin-top:5px;
+    height:200px;
+}
+.search-listing li {
+    padding:2px;
+    list-style-type: none;
+}
+.search-listing li:nth-child(2n+1) {
+    background-color: #EFF1F2;
+}
+.search-listing span {
+    color:#384D50;
+    padding-left:5px;
+}
+
+/* panel critères sélectionnés */
+
+.panel-criter .panel-heading  {
+    background-color:#6D3F5C;/*EE7F64;*/
+    color:#FFF;
+}
+
+.panel-criter li:nth-child(2n+1) {
+    background-color: #EFF1F2;
+}
+
+/* panel critères sélectionnés */
+
+.panel-save-search .panel-heading  {
+    background-color:#6D3F5C;
+    color:#FFF;
+}
+.panel-footer {
+    background-color: #D9DFE0;
+}
+.ld-text {
+    color:#EA8E0E;
+}
+.ld-text .badge, .ldBadge  {
+    background-color: #EA8E0E;
+}
+
+
+
+#filler { position: absolute; top: 0; left: 0; width: 3900px; height: 100%; display: none;}
+#contNav { width: 3900px; height:41px; position: relative; padding:9px 0 0 20px; }
+
+.sectionz {
+    display: block;
+    width: 300px;
+    height: 20px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 5px;
+
+}
+
+.clear { clear: both; }
+
+.blue { background-color: #06F; }
+.green { background-color: #0f9d00; }
+.red { background-color: #F00; }
+.yellow { background-color: #ffea00; }
+
+
+
+
+
+
+@media screen and (max-width: 991px) {
+    /* COmportement de la sidebar gauche sur tablette */
+    #mainCont, #mainContReduit {
+
+        margin-left: 0px;
+    }
+
+    #mySidebarReduit .sidebar  {
+        left:-180px;
+    }
+    #btnReduc  {
+        margin-left:180px;
+        box-shadow: 3px 0px 8px #000;
+
+        /*border-right:solid 4px white;
+        border-top:solid 4px white;
+        border-bottom:solid 4px white;*/
+
+    }
+    #btnReducReduit, #btnReducReduit:hover{
+        margin-left:0px;
+    }
+    .sidebar {
+        /*border-right:solid 4px white;*/
+        box-shadow: 1px 0px 6px #000;
+
+    }
+
+    /* flèche scroll up */
+    #btn_up {
+        font-size:40px;
+        color:#384D50;
+        left:95%;
+    }
+}
+
+/* EDITION */
+.edition {
+    background-color: #DCFC97;
+}
+.edition b {
+    background-color: #FFF;
+}
+
+/* DOUBLON */
+.doublonSub {
+    background-color: #EA7775;
+}
+
+/* supprimer outline: */
+a {   outline: none!important; }
+
+
+
+/* CSS pour la règle km de géoloc */
+input[type="range"] {
+    position: relative;
+    margin-left: 1em;
+}
+input[type="range"]:after,
+input[type="range"]:before {
+    position: absolute;
+    top: 1em;
+    color: #aaa;
+}
+/* cadre de la carte google Maps */
+#gmap {
+    width:98%;
+    height:98%;
+    margin: 0 auto;
+}
+#gmap img{
+    border-radius: 6px;
+    border:1px solid #BBB;
+}
+
+
+
+
+/* .breadcrumb */
+.breadcrumb {
+    background-color:#CCC;
+    color:#999;
+    height: 36px;
+}
+.breadcrumb .active{
+    color:#6D3F5C;
+}
+
+
+
+.navbar-menu-toggle {
+    width: 30px;
+    float: left;
+    display: inline-block;
+    margin: 12px 0px 0px -16px;
+    font-size: 20px;
+}
+
+
+
+
+/* cellule table 2 lignes max*/
+td.twoLinesCell div{
+    max-height:29px;
+    overflow:hidden;
+    line-height: 14px;
+}
+
+
+
+/* gestion formulaire add User */
+#addUserStep2 label {
+    float:left;
+    width:20%;
+    text-align: right;
+    margin-right:10px;
+    line-height: 35px;
+}
+#addUserStep2 input {
+    width:70%;
+}
+
+

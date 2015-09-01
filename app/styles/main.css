@@ -3,7 +3,49 @@
     cursor: pointer;
 }
 
-
 .dropzonebody:active {
     background: #e3e3e3;
+}
+
+.dropzone {
+    height: 50px;
+}
+
+.dropZoneActive {
+    background: #e1edf7;
+}
+
+td .middle {
+    width: 400px;
+}
+
+td .oneThird {
+    width: 200px;
+}
+
+td .twoThird {
+    width: 600px;
+}
+
+.toTheLeft {
+    padding-left: 100%;
+}
+
+
+.modal-content img {
+    width: 120px;
+    height: 120px;
+}
+
+.modal-content img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.cell-on-editor {
+    height: 30px;
+}
+
+.tab-pane {
+    margin-bottom: 5px;
 }

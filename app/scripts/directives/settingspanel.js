@@ -7,20 +7,10 @@
  * # settingsPanel
  */
 angular.module('newsletterEditorApp')
-  .directive('settingsPanel', ['Blocks', function(Blocks) {
+  .directive('settingsPanel', function($rootScope, BlocksManager, EventEmiter, Block, Restangular) {
     return {
-      templateUrl: '../views/directives/settingsPanel.html',
+      templateUrl: 'views/directives/settingsPanel.html',
       restrict: 'E',
-      /**
-       * Ctrl
-       * @param $scope
-       * @param $element
-       */
-      controller: function($scope, $element) {
-        $scope.availableBlock = [
-          {type:'file', text:'Image'},
-          {type:'text', text:'Texte'}
-        ];
-      }
+      controller: 'SettingsPanelCtrl'
     };
-  }]);
+  });

@@ -1,0 +1,23 @@
+<form>
+    <h5>Taille</h5>
+    <div class="form-group">
+        <select name="taille"
+                class="form-control"
+                ng-model="dividerCtrl.block.attributes.metaStyle.height"
+                ng-options="o as o for o in dividerCtrl.taille">
+        </select>
+    </div>
+    <h5>Couleur</h5>
+    <div class="form-group">
+        <input type="color"
+               class="form-control"
+               ng-model="dividerCtrl.block.attributes.metaStyle.background"/>
+    </div>
+    <h5>Bords</h5>
+    <div class="form-group">
+        <select class="form-control"
+                ng-options="o as o for o in dividerCtrl.bords"
+                ng-model="dividerCtrl.block.attributes.metaStyle.borderRadius">
+        </select>
+    </div>
+</form>

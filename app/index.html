@@ -5,14 +5,23 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
+      <!-- build:css(.tmp) styles/main.css -->
+      <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+      <!-- endbuild -->
+<!--
       <link rel="stylesheet" href="styles/main.css"/>
+-->
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
     <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+
+      <link rel="stylesheet" href="styles/bootstrap.css"/>
+      <link rel="stylesheet" href="styles/dashboard.css"/>
+      <link rel="stylesheet" href="styles/emailing.css"/>
+      <link rel="stylesheet" href="styles/dinFont.css"/>
     <!-- endbuild -->
   </head>
   <body ng-app="newsletterEditorApp">
@@ -20,55 +29,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#/">newsletterEditor</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav">
-              <li><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div ng-view=""></div>
-    </div>
-<!--
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
--->
-
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+    <div ng-view=""></div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -83,25 +44,47 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/ckeditor/ckeditor.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+    <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
     <!-- endbower -->
 
+    <script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="http://feather.aviary.com/imaging/v2/editor.js" charset="utf-8"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
     <script src="scripts/directives/settingspanel.js"></script>
     <script src="scripts/directives/liveeditor.js"></script>
     <script src="scripts/services/aviaryeditor.js"></script>
-    <script src="scripts/services/blocks.js"></script>
+    <script src="scripts/services/blocks-manager.js"></script>
+    <script src="scripts/directives/texteditor.js"></script>
+    <script src="scripts/filters/sanitize.js"></script>
     <script src="scripts/directives/draggable.js"></script>
     <script src="scripts/directives/droppable.js"></script>
-    <script src="scripts/directives/sortable.js"></script>
-    <script src="scripts/directives/texteditor.js"></script>
-    <script src="scripts/services/blocksmanipulator.js"></script>
-    <script src="scripts/filters/sanitize.js"></script>
-    <script src="scripts/services/currentobject.js"></script>
+    <script src="scripts/directives/imagepicker.js"></script>
+    <script src="scripts/services/event-emiter.js"></script>
+    <script src="scripts/directives/stylepicker.js"></script>
+    <script src="scripts/services/block.js"></script>
+    <script src="scripts/directives/render-style.js"></script>
+    <script src="scripts/controllers/modalPreviewController.js"></script>
+    <script src="scripts/controllers/modalFileManagerCtrl.js"></script>
+    <script src="scripts/directives/dividereditor.js"></script>
+    <script src="scripts/services/stylehelper.js"></script>
+    <script src="scripts/directives/positionbtn.js"></script>
+    <script src="scripts/services/draggablehelper.js"></script>
+    <script src="scripts/controllers/settingsPanelController.js"></script>
+    <script src="scripts/services/dommanipulator.js"></script>
+    <script src="scripts/services/filemanager.js"></script>
+    <script src="scripts/directives/buttoneditor.js"></script>
+    <script src="scripts/directives/linkeditor.js"></script>
+    <script src="scripts/directives/blocksocialeditor.js"></script>
     <!-- endbuild -->
 </body>
 </html>

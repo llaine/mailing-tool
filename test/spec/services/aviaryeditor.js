@@ -11,7 +11,7 @@ describe('Service: AviaryEditor', function () {
     AviaryEditor = _AviaryEditor_;
   }));
 
-  it('should do something', function () {
+  xit('should do something', function () {
     expect(!!AviaryEditor).toBe(true);
   });
 

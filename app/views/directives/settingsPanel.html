@@ -1,5 +1,97 @@
-<ul class="settings-panel">
-    <li class="block" ng-repeat="block in availableBlock" data-type="{{ block.type }}" draggable>
-        {{ block.text }}
-   </li>
-</ul>
+<div id="mailOutils2">
+    <h2 ng-show="modeEdition" class="text-center">Modification du block {{ currentBlock.type }}</h2>
+    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+        <a ng-hide="currentBlock.type == 'divider'" href="#list" class="btn btn-default active" role="button" data-toggle="tab">
+            Content
+        </a>
+        <a ng-hide="currentBlock.type == 'divider'" href="#settings" class="btn btn-default" role="button" data-toggle="tab">
+            <span ng-show="modeEdition">Style</span>
+            <span ng-show="!modeEdition">Design</span>
+        </a>
+    </div>
+
+    <div class="tab-content" id="mailOutils3">
+        <div id="list" role="tabpanel" class="tab-pane scrollable active">
+            <br/>
+            <div ng-include="modeEdition ? 'editionMode.html' : 'chooseBlock.html'"></div>
+        </div>
+        <div id="settings" role="tabpanel" class="tab-pane scrollable">
+            <br/>
+            <style-picker block="currentBlock"></style-picker>
+        </div>
+    </div>
+
+    <div>
+        <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="saveAndClose()">Valider et fermer</button>
+        <button type="button" ng-click="preview()" class="btn btn-default">
+            <span class="glyphicon glyphicon-export"></span>
+            Prévisualiser
+        </button>
+        <button ng-show="!modeEdition" type="button" ng-click="send()" class="btn btn-default">
+            <span class="glyphicon glyphicon-send"></span>
+            Programmer
+        </button>
+        <button ng-show="!modeEdition" ng-click="addBlock()" class="btn btn-default btn-lg pull-right">
+            <span class="glyphicon glyphicon-plus"></span>
+            Ajouter un block
+        </button>
+    </div>
+</div>
+
+<script type="text/ng-template" id="editionMode.html">
+    <divider-editor  ng-if="currentBlock.type === 'divider'" block="currentBlock"></divider-editor>
+    <text-editor ng-if="currentBlock.type == 'text'" block="currentBlock"></text-editor>
+    <image-picker ng-if="currentBlock.type == 'file'"  block="currentBlock"></image-picker>
+    <button-editor ng-if="currentBlock.type == 'button'" block="currentBlock"></button-editor>
+    <link-editor ng-if="currentBlock.type == 'unsub' || currentBlock.type == 'online'" block="currentBlock"></link-editor>
+    <div ng-if="currentBlock.type == 'double' || currentBlock.type == 'footer'">
+        <accordion>
+            <accordion-group ng-repeat="cell in currentBlock.cells track by $index"
+                    ng-switch on="cell.type"
+                    heading="Section #{{$index + 1}}">
+                <text-editor ng-switch-when="txt" block="cell"></text-editor>
+                <image-picker ng-switch-when="file" block="cell"></image-picker>
+                <block-social-editor ng-switch-when="social" block="cell"></block-social-editor>
+            </accordion-group>
+        </accordion>
+    </div>
+</script>
+<script type="text/ng-template" id="chooseBlock.html">
+    <br/>
+    <ul class="settings-panel list-inline">
+        <li ng-repeat="block in ::availableBlocks"
+            draggable
+            data-type="{{ block.type }}"
+            class="draggable btn btn-default btn-lg">
+              <span>
+                <span class="glyphicon glyphicon-{{block.icons[0]}}"></span>
+                <span ng-if="block.icons.length > 1" class="glyphicon glyphicon-{{block.icons[1]}}"></span>
+              </span>
+            <br/>
+            <span class="small">{{block.text}}</span>
+        </li>
+    </ul>
+</script>
+<script type="text/ng-template" id="modalPreview.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Prévisualisation du template</h3>
+    </div>
+    <div class="modal-body" ng-style="style.background" id="preview">
+        <table ng-style="style.table" class="emailCompo" id="emailTemplate1">
+            <tr ng-repeat="block in preview track by $index"
+                ng-class="{'mailFooter': block.type === 'footer', 'mailHr': block.type === 'divider'}"
+                ng-style="block.attributes.dividerStyle">
+                <td ng-class="{'emailImg': block.type === 'file',
+                    'mailSocial': block.type === 'social',
+                    'mailLogo': block.type === 'text'}"
+                    ng-style="block.attributes.dividerStyle">
+                    <div ng-bind-html="block.content | sanitize"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="exit()">Revenir</button>
+    </div>
+</script>
+

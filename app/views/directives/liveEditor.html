@@ -1,30 +1,50 @@
-<div id="liveEditor">
-    <table class="table">
-        <thead droppable>
-            <tr class="dropzone">
-                <td data-position="header"><span class="content">Header</span></td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <table>
-                        <tbody id="body" sortable droppable>
-                            <tr class="dropzone dropzonebody" ng-repeat="b in [1, 2, 3, 4, 5] track by $index">
-                                <td id="cell-{{b}}" data-position="{{ b }}" ng-dblclick="update()">
-                                    <span class="content">Déposer du contenu ici !</span>
+<div id="mailCadre">
+    <table class="emailCompo" id="emailTemplate1">
+        <thead></thead>
+        <tbody ui-sortable="sortableOptions" ng-model="blocks">
+            <tr droppable
+                class="dropzone"
+                ng-repeat="block in blocks track by $index"
+                ng-class="{'mailFooter': block.type === 'footer', 'mailHr': block.type === 'divider'}"
+                ng-click="update($event, block)"
+                ng-style="block.attributes.metaStyle">
+                <td ng-class="{'emailImg': block.type === 'file',
+                        'mailSocial': block.type === 'social',
+                        'mailLogo': block.type === 'text'}"
+                    ng-style="block.attributes.metaStyle">
+                    <div class="btnAction">
+                        <div class="mailEditIco" >
+                            <a href class="handleDrag no-style">
+                                <span class="glyphicon glyphicon-move"></span>
+                            </a>
+                        </div>
+                        <div class="mailEditIco">
+                            <a class="no-style" href ><span class="glyphicon glyphicon-pencil"></span></a>
+                        </div>
+                        <div class="mailEditIco" ng-click="duplicate($event, block);">
+                            <a class="no-style" href ><span class="glyphicon glyphicon-duplicate"></span></a>
+                        </div>
+                        <div class="mailEditIco" ng-click="delete($event, block);">
+                            <a class="no-style" href ><span class="glyphicon glyphicon-trash"></span></a>
+                        </div>
+                    </div>
+                    <div ng-if="block.type != 'divider'
+                                || block.type != 'double'
+                                || block.type != 'footer'" class="html">
+                        <span class="node" render-style-on-bound ng-bind-html="block.content.html | sanitize"></span>
+                    </div>
+                    <div ng-if="block.type == 'double' || block.type == 'footer'">
+                        <table class="table-block-double" style="table-layout: fixed; width: 540px" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td ng-repeat="cell in block.cells track by $index" class="cell-{{$index}}" style="word-wrap: break-word">
+                                    <span class="node" render-style-on-bound ng-bind-html="cell.content.html"></span>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
+                        </table>
+                    </div>
                 </td>
             </tr>
         </tbody>
-        <tbody droppable>
-            <tr class="dropzone">
-                <td data-position="footer"><span class="content">Footer</span></td>
-            </tr>
-        </tbody>
     </table>
-    <button ng-click="export()">Exporter le HTML</button>
 </div>
+
