@@ -35,7 +35,7 @@ angular
   //la configuration de Restangular
   .config(function(RestangularProvider) {
     // TODO tester si location = localhost --> setup localhost sinon l'api de l'url en préprod.
-    RestangularProvider.setBaseUrl('http://api.localhost');
+    RestangularProvider.setBaseUrl('http://api.preprod.bobelweb.eu/');
   })
 
   //configuration du provider $http
