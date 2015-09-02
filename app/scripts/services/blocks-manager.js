@@ -8,7 +8,7 @@
  * Service in the newsletterEditorApp.
  */
 angular.module('newsletterEditorApp')
-  .service('BlocksManager', function($routeParams, Block, Restangular) {
+  .service('BlocksManager', function($routeParams, Restangular, Block) {
     var blockStack = [];
 
     loadTemplate();
@@ -82,12 +82,14 @@ angular.module('newsletterEditorApp')
       if ($routeParams.fromTemplate) {
         Restangular.one('template', $routeParams.fromTemplate).get().then(function(data) {
           angular.forEach(data.blocks, function(item) {
-            blockStack.push(new Block(item.content, item.type, item.columns));
+            blockStack.push(
+                new Block(item.content, item.type, item.columns)
+            );
           });
         });
       } else {
         [1, 2, 3].forEach(function() {
-          blockStack.push(new Block('Déposer votre contenu ici', 'text', 1));
+          blockStack.push(new Block('Déposer votre contenu ici', 'text-text', 2));
         });
       }
     }

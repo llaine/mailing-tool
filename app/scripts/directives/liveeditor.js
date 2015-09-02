@@ -28,6 +28,7 @@ angular.module('newsletterEditorApp')
        */
       controller: function($scope) {
         $scope.blocks = BlocksManager.getAll();
+        console.log($scope.blocks);
 
         $scope.sortableOptions = {
           handle: 'a.handleDrag'
