@@ -24,7 +24,7 @@ angular
 
   .config(function($routeProvider) {
     $routeProvider
-      .when('/editor/:tplId?', {
+      .when('/editor', {
         templateUrl: 'views/main.html'
       })
       .when('/templates', {

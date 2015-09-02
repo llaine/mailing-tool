@@ -8,8 +8,10 @@
  * Service in the newsletterEditorApp.
  */
 angular.module('newsletterEditorApp')
-  .service('BlocksManager', function(Block, Restangular) {
+  .service('BlocksManager', function($routeParams, Block, Restangular) {
     var blockStack = [];
+
+    loadTemplate();
 
     /**
      * Renvoie un élement spécifique de la pile.
@@ -73,9 +75,20 @@ angular.module('newsletterEditorApp')
       }
     };
 
-    Restangular.one('template', 0).get().then(function(data) {
-      angular.forEach(data.blocks, function(item) {
-        blockStack.push(new Block(item.type, item.content, item.columns));
-      });
-    });
+    /**
+     * Charge le template en fonction du paramètrs dans l'url.
+     */
+    function loadTemplate() {
+      if ($routeParams.fromTemplate) {
+        Restangular.one('template', $routeParams.fromTemplate).get().then(function(data) {
+          angular.forEach(data.blocks, function(item) {
+            blockStack.push(new Block(item.content, item.type, item.columns));
+          });
+        });
+      } else {
+        [1, 2, 3].forEach(function() {
+          blockStack.push(new Block('Déposer votre contenu ici', 'text', 1));
+        });
+      }
+    }
   });

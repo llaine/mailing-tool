@@ -8,14 +8,13 @@
  * Controller of the newsletterEditorApp
  */
 angular.module('newsletterEditorApp')
-  .controller('TemplatesCtrl', function(availableTemplates) {
+  .controller('TemplatesCtrl', function($location, availableTemplates) {
     this.availableTemplates = availableTemplates;
     /**
-     * Fonction s'executant, lorsqu'on sélectionne un template.
+     * Attribut le template selectionné à celui qui vient d'être cliqué
      * @param selectedTpl
      */
     this.select = function(selectedTpl) {
-      console.log(selectedTpl);
       this.selected = selectedTpl;
     };
 
@@ -24,6 +23,7 @@ angular.module('newsletterEditorApp')
      * ou non.
      */
     this.launchEditor = function() {
-
+      var path = this.selected ? '/editor?fromTemplate=' + this.selected.id : '/editor';
+      $location.url(path);
     };
   });
