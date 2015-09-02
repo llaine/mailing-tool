@@ -238,6 +238,8 @@ angular.module('newsletterEditorApp')
  * @param nbColumns
  */
 function block(content, type, nbColumns) {
+  this.cells = [];
+
   this.content = {
     html:content
   };

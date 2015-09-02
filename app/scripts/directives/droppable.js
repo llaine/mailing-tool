@@ -75,6 +75,7 @@ angular.module('newsletterEditorApp')
                 var index = scope.blocks.indexOf(targetBlock);
                 scope.blocks[index] = newBlockDouble;
                 targetBlock = scope.blocks[index];
+
               }
 
               // On passe comme params, le block sur lequel on vient de dropper

@@ -19,6 +19,7 @@ angular.module('newsletterEditorApp')
        */
       link: function postLink($scope, element, attrs) {
         $scope.previewMode = true;
+
         $('#mailCadre').mCustomScrollbar();
       },
       /**

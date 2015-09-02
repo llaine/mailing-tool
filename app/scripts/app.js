@@ -24,11 +24,31 @@ angular
 
   .config(function($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/editor/:tplId?', {
         templateUrl: 'views/main.html'
       })
+      .when('/templates', {
+        templateUrl: 'views/templates.html',
+        controller: 'TemplatesCtrl',
+        controllerAs: 'templates',
+        resolve: {
+          /**
+           * Renvoie tous les templates.
+           * @param Restangular
+           * @returns {*}
+           */
+          availableTemplates: function(Restangular) {
+            return [
+                {id:0, name:'toto', image:'http://graphikarbre.com/temp/purpleBase/images/template1.jpg'},
+                {id:1, name:'tata', image:'http://graphikarbre.com/temp/purpleBase/images/template2.jpg'},
+                {id:2, name:'titi', image:'http://graphikarbre.com/temp/purpleBase/images/template3.jpg'},
+                {id:3, name:'tutu', image:'http://graphikarbre.com/temp/purpleBase/images/template4.jpg'}
+            ];
+          }
+        }
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/templates'
       });
   })
 
