@@ -56,7 +56,7 @@ angular.module('newsletterEditorApp')
                         '</button>';
 
           this.block.setStyle(style, 'button');
-          this.block.content.html = content;
+          this.block.content = content;
           // Stocke les méta données du bouton, pour les récupérer + facilement par la suite
           this.block.attributes.btn = this.options;
         };

@@ -9,7 +9,7 @@
 angular.module('newsletterEditorApp')
   .directive('textEditor', function() {
     return {
-      template: '<div ng-model="block.content.html" ckeditor="options"></div>',
+      template: '<div ng-model="block.content" ckeditor="options"></div>',
       restrict: 'E',
       scope: {
         block:'='

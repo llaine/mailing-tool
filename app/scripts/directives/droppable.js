@@ -7,7 +7,7 @@
  * # droppable
  */
 angular.module('newsletterEditorApp')
-  .directive('droppable', function($rootScope, EventEmiter, Block) {
+  .directive('droppable', function($rootScope, EventEmiter, BlockFactory) {
     return {
       restrict: 'A',
       /**
@@ -32,9 +32,12 @@ angular.module('newsletterEditorApp')
             var droppedBlock = angular.element(src).scope().block;
 
             if (src.tagName === 'LI') {
-              targetBlock = new Block(undefined, droppedBlock.type, droppedBlock.columns);
+              var bf = new BlockFactory();
+              targetBlock = bf.create({
+                type:droppedBlock.type,
+                nbColumns: droppedBlock.columns
+              });
 
-              $rootScope.safeApply();
               // On passe comme params, le block sur lequel on vient de dropper
               // et l'élement du dom correspondant.
               var opts = {
@@ -43,6 +46,8 @@ angular.module('newsletterEditorApp')
               };
               // Le mode edition est toggled, avec les paramètres correspondants.
               EventEmiter.emit('edition:toggled', opts);
+
+              $rootScope.safeApply();
             }
           }
         });

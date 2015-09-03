@@ -37,24 +37,7 @@ angular.module('newsletterEditorApp')
         return Block;
         ////////////////// Définition des fonctions /////////////////
 
-        /**
-         * Setup le style du block
-         * @param style
-         * @param node
-         */
-        function setStyle(style, node) {
-          node = node.toLowerCase();
 
-          if (this.contentStyle[node]) {
-            for (var props in style) {
-              if (style.hasOwnProperty(props)) {
-                this.contentStyle[node][props] = style[props];
-              }
-            }
-          } else {
-            this.contentStyle[node] = style;
-          }
-        }
 
         /**
          * Setup le contenu html du block
@@ -162,51 +145,4 @@ function createCells(nbColumns, type, Block) {
   }
 
   return cells;
-}
-
-/**
- * fzef
- * @param type
- * @param content
- * @param FileManager
- * @returns {{html: *}}
- */
-function createContent(type, content, FileManager) {
-  var html;
-  if (!content) {
-    switch (type) {
-      case 'text':
-        html = '<p>Déposer votre contenu ici</p>';
-        break;
-      case 'file':
-        html = '<p>Sélectionner un fichier</p>';
-        break;
-      case 'divider':
-        html = '';
-        break;
-      case 'unsub':
-        html = '<a rel="unsubscribe">Lien de désinscription</a>';
-        break;
-      case 'online':
-        html = '<a rel="online">Voir la version en ligne</a>';
-        break;
-      case 'button':
-        html = '<button class="btn btn-default"><a href="#">Cliquez ici !</a></button>';
-        break;
-      case 'social':
-        html = FileManager.getSocialImages().map(function(social) {
-          return social.img;
-        }).join('');
-        break;
-      default:
-        html = undefined;
-        break;
-    }
-  } else {
-    html = content;
-  }
-
-  return {
-    html:html
-  };
 }
