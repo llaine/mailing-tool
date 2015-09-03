@@ -7,14 +7,14 @@
  * # buttonEditor
  */
 angular.module('newsletterEditorApp')
-  .directive('buttonEditor', function () {
+  .directive('buttonEditor', function() {
     return {
       templateUrl: 'views/directives/button-editor.html',
       restrict: 'E',
       scope: {
         block: '='
       },
-      controller: function ($scope) {
+      controller: function($scope) {
         // Les options de style par défaut qu'on peut appliquer sur le bouton.
         this.options = {
           height:this.block.attributes.btn ? this.block.attributes.btn.height : 32,
@@ -30,7 +30,7 @@ angular.module('newsletterEditorApp')
          * Lorsqu'on change le contenu du bouton,
          * mets à jour celui dans le model.
          */
-        this.changes = function () {
+        this.changes = function() {
           var style = {
             height:this.options.height + 'px',
             width:this.options.width + 'px',
@@ -52,11 +52,11 @@ angular.module('newsletterEditorApp')
           }
 
           var content = '<button class="btn btn-default ' + align + '" ng-style="' + JSON.stringify(style) +'">' +
-                        '<a href="' + this.options.link +'">' + this.options.txt + '</a>' +
+                        '<a href="' + this.options.link + '">' + this.options.txt + '</a>' +
                         '</button>';
 
           this.block.setStyle(style, 'button');
-          this.block.content.html = content;
+          this.block.content = content;
           // Stocke les méta données du bouton, pour les récupérer + facilement par la suite
           this.block.attributes.btn = this.options;
         };
@@ -64,10 +64,10 @@ angular.module('newsletterEditorApp')
         // Je veux que la width du bouton, soit toujours plus grande que le texte
         // donc j'augmente la width au fur et a mesure que le texte grandit.
         $scope.$watch(angular.bind(this,
-            function(){
-              return this.options.txt
+            function() {
+              return this.options.txt;
             }),
-            function (newVal, oldVal) {
+            function(newVal, oldVal) {
               if (oldVal.length < newVal.length && newVal.length > 12) {
                 this.options.width += 10;
               } else {

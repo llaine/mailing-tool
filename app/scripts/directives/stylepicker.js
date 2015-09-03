@@ -30,7 +30,10 @@ angular.module('newsletterEditorApp')
         vm.fonts = GlobalStyles.getFonts();
         vm.sizeTitle = GlobalStyles.getTitleSize();
         vm.size = GlobalStyles.getParagraphSize();
-        vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble();
+
+        if (!vm.layoutDouble) {
+          vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble();
+        }
 
         /**
          *
@@ -42,7 +45,6 @@ angular.module('newsletterEditorApp')
             vm.block.attributes.metaStyle.background = 'transparent';
           }
         };
-
         vm.isBlockDouble = false;
         vm.currentRowEdited = false;
         vm.displayGlobalStyles = false;

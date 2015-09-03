@@ -7,7 +7,7 @@
  * # settingsPanel
  */
 angular.module('newsletterEditorApp')
-  .directive('settingsPanel', function($rootScope, BlocksManager, EventEmiter, Block, Restangular) {
+  .directive('settingsPanel', function() {
     return {
       templateUrl: 'views/directives/settingsPanel.html',
       restrict: 'E',

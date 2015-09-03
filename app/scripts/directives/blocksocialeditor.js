@@ -21,7 +21,7 @@ angular.module('newsletterEditorApp')
 
         this.updateSocialNetworkOnBlock = function() {
           // Je récupère l'img des blocks qui ont un lien
-          this.block.content.html = this.socialImages
+          this.block.content = this.socialImages
             .filter(function(social) {
               return social.link;
             })

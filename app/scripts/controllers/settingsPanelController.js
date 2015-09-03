@@ -1,7 +1,8 @@
 angular.module('newsletterEditorApp')
-  .controller('SettingsPanelCtrl', function($rootScope, $scope, EventEmiter, BlocksManager, Block, Restangular) {
+  .controller('SettingsPanelCtrl', function($rootScope, $scope, EventEmiter, BlocksManager, BlockFactory, Restangular) {
     var currentBlock;
     $scope.modeEdition = false;
+    var bf = new BlockFactory();
 
     /**
      * Affiche le contenu de la tab "choose content"
@@ -24,7 +25,7 @@ angular.module('newsletterEditorApp')
      * Ajoute un block au model.
      */
     $scope.addBlock = function() {
-      $scope.blocks.push(new Block('<p>Déposer votre contenu ici</p>', 'text'));
+      $scope.blocks.push(bf.create({type:'text'}));
     };
 
     /* toggle des tabs. */

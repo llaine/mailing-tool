@@ -19,6 +19,7 @@ angular.module('newsletterEditorApp')
        */
       link: function postLink($scope, element, attrs) {
         $scope.previewMode = true;
+
         $('#mailCadre').mCustomScrollbar();
       },
       /**
@@ -27,6 +28,7 @@ angular.module('newsletterEditorApp')
        */
       controller: function($scope) {
         $scope.blocks = BlocksManager.getAll();
+        console.log($scope.blocks);
 
         $scope.sortableOptions = {
           handle: 'a.handleDrag'

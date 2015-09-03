@@ -50,7 +50,7 @@ angular.module('newsletterEditorApp')
               break;
           }
 
-          this.block.content.html = '<a rel="' + type +'" class="' + align + '">' + this.options.txt + '</a>';
+          this.block.content = '<a rel="' + type +'" class="' + align + '">' + this.options.txt + '</a>';
           this.block.attributes.link = this.options;
         };
 

@@ -28,7 +28,7 @@ angular.module('newsletterEditorApp')
         link: CurrentLink
       };
 
-      CurrentBlock.content.html = imgWithLink;
+      CurrentBlock.content = imgWithLink;
 
     };
 

@@ -22,8 +22,8 @@ angular.module('newsletterEditorApp')
 
     BlocksModel.map(function(block, index) {
       var previewBlock;
-      if (block.type === "double" || block.type === "footer") {
-        var table = DomManipulator.createTable(block.toStringDouble());
+      if (block.type === 'double') {
+        var table = DomManipulator.createTable(block.toString());
         previewBlock = {
           content:table.outerHTML,
           type:block.type,

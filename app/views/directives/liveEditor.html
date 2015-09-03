@@ -31,13 +31,13 @@
                     <div ng-if="block.type != 'divider'
                                 || block.type != 'double'
                                 || block.type != 'footer'" class="html">
-                        <span class="node" render-style-on-bound ng-bind-html="block.content.html | sanitize"></span>
+                        <span class="node" render-style-on-bound ng-bind-html="block.content | sanitize"></span>
                     </div>
                     <div ng-if="block.type == 'double' || block.type == 'footer'">
                         <table class="table-block-double" style="table-layout: fixed; width: 540px" cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 <td ng-repeat="cell in block.cells track by $index" class="cell-{{$index}}" style="word-wrap: break-word">
-                                    <span class="node" render-style-on-bound ng-bind-html="cell.content.html"></span>
+                                    <span class="node" render-style-on-bound ng-bind-html="cell.content"></span>
                                 </td>
                             </tr>
                         </table>
