@@ -1,23 +1,32 @@
 'use strict';
 
-describe('Controller: TemplatesCtrl', function () {
+describe('Controller: TemplatesCtrl', function() {
 
   // load the controller's module
   beforeEach(module('newsletterEditorApp'));
 
   var TemplatesCtrl,
-    scope;
+      scope,
+      location;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function($controller, $location, $rootScope) {
     scope = $rootScope.$new();
+    location = $location;
     TemplatesCtrl = $controller('TemplatesCtrl', {
-      $scope: scope
-      // place here mocked dependencies
+      $location:$location,
+      availableTemplates:availablesTemplates
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(TemplatesCtrl.awesomeThings.length).toBe(3);
+  it('doit avoir une fonction permettant de sélectionner le template courant', function() {
+    TemplatesCtrl.select(availablesTemplates[0]);
+    expect(TemplatesCtrl.selected).toBe(availablesTemplates[0]);
   });
+
+  it('doit avoir une fonction permettant de changer de location', function() {
+    var tpl = availablesTemplates[0];
+    TemplatesCtrl.select(tpl);
+    });
+
 });
