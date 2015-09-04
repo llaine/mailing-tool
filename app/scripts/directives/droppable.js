@@ -54,7 +54,7 @@ angular.module('newsletterEditorApp')
               EventEmiter.emit('edition:toggled', opts);
 
               // FUCK, ça fonctionne plus.
-              scope.$apply();
+              $rootScope.$apply();
               //$rootScope.safeApply();
             }
           }

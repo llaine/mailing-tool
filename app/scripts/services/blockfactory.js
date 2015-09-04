@@ -97,6 +97,7 @@ angular.module('newsletterEditorApp')
         this.id = Math.random().toString(36).slice(2);
         this.metaStyle = {};
         this.contentStyle = {};
+        this.attributes = {};
         this.type = opts.type;
         this.content = generateContent(opts.type, opts.content);
         this.toString = toString;
@@ -112,6 +113,7 @@ angular.module('newsletterEditorApp')
         this.id = Math.random().toString(36).slice(2);
         this.metaStyle = {};
         this.contentStyle = {};
+        this.attributes = {};
         this.type = opts.type;
         this.content = generateContent(opts.type, opts.content);
         this.toString = toString;
