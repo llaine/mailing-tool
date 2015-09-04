@@ -36,15 +36,19 @@ angular.module('newsletterEditorApp')
         }
 
         /**
-         *
+         * Mets en transparent, le background de la row sélectionné.
          */
         vm.setToTransparent = function() {
-          if (vm.block.attributes.metaStyle.background) {
-            delete vm.block.attributes.metaStyle.background
+          if (vm.block.metaStyle.background) {
+            delete vm.block.metaStyle.background;
           } else {
-            vm.block.attributes.metaStyle.background = 'transparent';
+            if (vm.block.order === 'text-social') {
+              vm.block.metaStyle.color = 'white';
+            }
+            vm.block.metaStyle.background = 'transparent';
           }
         };
+
         vm.isBlockDouble = false;
         vm.currentRowEdited = false;
         vm.displayGlobalStyles = false;

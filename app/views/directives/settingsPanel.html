@@ -49,7 +49,7 @@
             <accordion-group ng-repeat="cell in currentBlock.cells track by $index"
                     ng-switch on="cell.type"
                     heading="Section #{{$index + 1}}">
-                <text-editor ng-switch-when="txt" block="cell"></text-editor>
+                <text-editor ng-switch-when="text" block="cell"></text-editor>
                 <image-picker ng-switch-when="file" block="cell"></image-picker>
                 <block-social-editor ng-switch-when="social" block="cell"></block-social-editor>
             </accordion-group>
@@ -80,11 +80,11 @@
         <table ng-style="style.table" class="emailCompo" id="emailTemplate1">
             <tr ng-repeat="block in preview track by $index"
                 ng-class="{'mailFooter': block.type === 'footer', 'mailHr': block.type === 'divider'}"
-                ng-style="block.attributes.dividerStyle">
+                ng-style="block.attributes">
                 <td ng-class="{'emailImg': block.type === 'file',
                     'mailSocial': block.type === 'social',
                     'mailLogo': block.type === 'text'}"
-                    ng-style="block.attributes.dividerStyle">
+                    ng-style="block.attributes">
                     <div ng-bind-html="block.content | sanitize"></div>
                 </td>
             </tr>

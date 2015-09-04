@@ -3,7 +3,7 @@
     <div class="form-group">
         <select name="taille"
                 class="form-control"
-                ng-model="dividerCtrl.block.attributes.metaStyle.height"
+                ng-model="dividerCtrl.block.metaStyle.height"
                 ng-options="o as o for o in dividerCtrl.taille">
         </select>
     </div>
@@ -11,13 +11,13 @@
     <div class="form-group">
         <input type="color"
                class="form-control"
-               ng-model="dividerCtrl.block.attributes.metaStyle.background"/>
+               ng-model="dividerCtrl.block.metaStyle.background"/>
     </div>
     <h5>Bords</h5>
     <div class="form-group">
         <select class="form-control"
                 ng-options="o as o for o in dividerCtrl.bords"
-                ng-model="dividerCtrl.block.attributes.metaStyle.borderRadius">
+                ng-model="dividerCtrl.block.metaStyle.borderRadius">
         </select>
     </div>
 </form>

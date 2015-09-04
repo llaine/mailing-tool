@@ -27,13 +27,13 @@ angular.module('newsletterEditorApp')
         previewBlock = {
           content:table.outerHTML,
           type:block.type,
-          attributes: block.attributes
+          attributes: block.metaStyle
         };
       } else {
         previewBlock = {
           content:block.toString(),
           type:block.type,
-          attributes: block.attributes
+          attributes: block.metaStyle
         };
       }
       previewBlocksArray.push(previewBlock);

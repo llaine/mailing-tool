@@ -81,6 +81,7 @@ angular.module('newsletterEditorApp')
         this.id = Math.random().toString(36).slice(2);
         this.metaStyle = {};
         this.contentStyle = {};
+        this.order = opts.order;
         this.type = opts.type;
         this.toString = toStringDouble;
         this.setStyle = setStyle;
