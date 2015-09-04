@@ -30,8 +30,23 @@ angular.module('newsletterEditorApp')
             var src = ui.draggable[0];
             var targetBlock = angular.element(self).scope().block;
             var droppedBlock = angular.element(src).scope().block;
+            var indexOnArray = scope.blocks.indexOf(targetBlock);
+
+            /**
+             * Mets à jour la pile de block à la main.
+             *
+             */
+            function applyChanges() {
+              if (indexOnArray !== -1) {
+                scope.blocks[indexOnArray] = targetBlock;
+                $rootScope.safeApply();
+              } else {
+                throw 'Position non connue dans la stack au moment d\'ajouter ' + targetBlock.type;
+              }
+            }
 
             if (src.tagName === 'LI') {
+
               var bf = new BlockFactory();
               var blockAttrs = {
                 type:droppedBlock.type,
@@ -44,6 +59,8 @@ angular.module('newsletterEditorApp')
 
               targetBlock = bf.create(blockAttrs);
 
+              applyChanges();
+
               // On passe comme params, le block sur lequel on vient de dropper
               // et l'élement du dom correspondant.
               var opts = {
@@ -52,10 +69,6 @@ angular.module('newsletterEditorApp')
               };
               // Le mode edition est toggled, avec les paramètres correspondants.
               EventEmiter.emit('edition:toggled', opts);
-
-              // FUCK, ça fonctionne plus.
-              $rootScope.$apply();
-              //$rootScope.safeApply();
             }
           }
         });
