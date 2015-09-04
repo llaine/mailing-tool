@@ -4,6 +4,8 @@ angular.module('newsletterEditorApp')
     $scope.modeEdition = false;
     var bf = new BlockFactory();
 
+    getIconsForBlocks();
+
     /**
      * Affiche le contenu de la tab "choose content"
      */
@@ -26,6 +28,14 @@ angular.module('newsletterEditorApp')
      */
     $scope.addBlock = function() {
       $scope.blocks.push(bf.create({type:'text'}));
+    };
+
+
+    /**
+     * Exporte les données.
+     */
+    $scope.send = function() {
+      console.log($scope.blocks);
     };
 
     /* toggle des tabs. */
@@ -58,10 +68,17 @@ angular.module('newsletterEditorApp')
       $scope.saveAndClose();
     });
 
-    Restangular.all('block-type').getList().then(function(data) {
-      $scope.availableBlocks = data.map(function(item) {
-        item.icons = BlocksManager.getIconsForType(item.type);
-        return item;
+    /**
+     * Appel l'api pour récupérer les types de block
+     */
+    function getIconsForBlocks() {
+      Restangular.all('block-type').getList().then(function(data) {
+        $scope.availableBlocks = data.map(function(item) {
+          item.icons = BlocksManager.getIconsForType(item.type === 'double' ? item.order : item.type);
+          return item;
+        });
+        console.log($scope.availableBlocks);
+
       });
-    })
+    }
   });

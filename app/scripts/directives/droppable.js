@@ -33,10 +33,16 @@ angular.module('newsletterEditorApp')
 
             if (src.tagName === 'LI') {
               var bf = new BlockFactory();
-              targetBlock = bf.create({
+              var blockAttrs = {
                 type:droppedBlock.type,
                 nbColumns: droppedBlock.columns
-              });
+              };
+
+              if (droppedBlock.type === 'double') {
+                blockAttrs.order = droppedBlock.order;
+              }
+
+              targetBlock = bf.create(blockAttrs);
 
               // On passe comme params, le block sur lequel on vient de dropper
               // et l'élement du dom correspondant.
@@ -47,7 +53,9 @@ angular.module('newsletterEditorApp')
               // Le mode edition est toggled, avec les paramètres correspondants.
               EventEmiter.emit('edition:toggled', opts);
 
-              $rootScope.safeApply();
+              // FUCK, ça fonctionne plus.
+              scope.$apply();
+              //$rootScope.safeApply();
             }
           }
         });

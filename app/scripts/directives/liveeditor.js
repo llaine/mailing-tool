@@ -83,13 +83,6 @@ angular.module('newsletterEditorApp')
         };
 
         /**
-         * Exporte les données.
-         */
-        $scope.export = function() {
-          console.log($scope.blocks);
-        };
-
-        /**
          * Affiche la preview du mail
          */
         $scope.preview = function() {
