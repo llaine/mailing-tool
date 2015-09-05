@@ -14,6 +14,10 @@ angular.module('newsletterEditorApp')
       scope: {
         block: '='
       },
+      /**
+       * Le controller de la directive.
+       * @param $scope
+       */
       controller: function($scope) {
         // Les options de style par défaut qu'on peut appliquer sur le bouton.
         this.options = {

@@ -11,6 +11,12 @@ angular.module('newsletterEditorApp')
   .service('FileManager', function() {
     var img = [];
 
+    return {
+      getAll:getAll,
+      updateImage:updateImage,
+      getSocialImages:getSocialImages
+    };
+
     if (img.length === 0) {
       // TODO Brancher l'API
       for (var i = 0 ; i < 4 ; ++i) {
@@ -55,14 +61,18 @@ angular.module('newsletterEditorApp')
      * @param url
      */
     function updateImage(id, url) {
-      for(var i = 0; i < img.length ; ++i) {
-        if (img[i].id === id) {
-          img[i].url = url;
+      for (var j = 0; j < img.length ; ++j) {
+        if (img[j].id === id) {
+          img[j].url = url;
           break;
         }
       }
     }
 
+    /**
+     *
+     * @returns {*[]}
+     */
     function getSocialImages() {
       return [
         {name:'facebook', img: '<img src="images/social_icons/32/02_facebook.png"/>', link:''},
@@ -73,9 +83,4 @@ angular.module('newsletterEditorApp')
       ];
     }
 
-    return {
-      getAll:getAll,
-      updateImage:updateImage,
-      getSocialImages:getSocialImages
-    };
   });

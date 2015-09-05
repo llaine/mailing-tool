@@ -13,7 +13,7 @@ describe('Directive: blockSocialEditor', function() {
   var controller;
 
   /**
-   *
+   * Créer la directive.
    * @param block
    * @returns {*}
    */
@@ -49,11 +49,14 @@ describe('Directive: blockSocialEditor', function() {
 
   describe('doit avoir une fonction permettant de mettre à jour les liens sociaux', function() {
     beforeEach(function() {
-
+      // On change les images, pour
+      // celles ayant des liens associés.
+      controller.socialImages = SocialImagesMock;
     });
 
-    it('', function() {
-
+    it('doit contenir les réseaux sociaux ayant un lien', function() {
+      controller.updateSocialNetworkOnBlock();
+      expect(angular.element(controller.block.content).length).toBe(5);
     });
   });
 });
