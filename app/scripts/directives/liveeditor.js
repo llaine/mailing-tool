@@ -98,11 +98,19 @@ angular.module('newsletterEditorApp')
                 BlocksModel: function() {
                   return $scope.blocks;
                 },
-                backgroundColor: function () {
+                /**
+                 * fezfze
+                 * @returns {string}
+                 */
+                backgroundColor: function() {
                   var editorFrame = document.getElementById('mailCadre');
                   return DomManipulator.getStyleAttribute(editorFrame, 'background-color');
                 },
-                borderType: function () {
+                /**
+                 * fezf
+                 * @returns {string}
+                 */
+                borderType: function() {
                   var emailTemplate = document.getElementById('emailTemplate1');
                   return DomManipulator.getStyleAttribute(emailTemplate, 'border');
                 }

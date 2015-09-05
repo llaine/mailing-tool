@@ -27,6 +27,6 @@ describe('Controller: TemplatesCtrl', function() {
   it('doit avoir une fonction permettant de changer de location', function() {
     var tpl = availablesTemplates[0];
     TemplatesCtrl.select(tpl);
-    });
+  });
 
 });

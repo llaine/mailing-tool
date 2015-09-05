@@ -201,11 +201,11 @@ angular.module('newsletterEditorApp')
         if (content) { return content; }
         switch (type) {
           case 'text':
-            return '<p>Déposer votre contenu ici</p>';
+            return '<p>Contenu</p>';
           case 'file':
-            return '<p>Sélectionner un fichier</p>';
+            return '<p>Fichier</p>';
           case 'unsub':
-            return '<a rel="unsubscribe">Lien de désinscription</a>';
+            return '<a rel="unsubscribe">Unsubscribe</a>';
           case 'online':
             return '<a rel="online">Voir la version en ligne</a>';
           case 'button':

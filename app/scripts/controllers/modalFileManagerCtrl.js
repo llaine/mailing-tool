@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('newsletterEditorApp')
   .controller('ModalFileManagerCtrl', function($scope, $modalInstance, CurrentBlock, CurrentLink, AviaryEditor, FileManager) {
     $scope.images = FileManager.getAll();

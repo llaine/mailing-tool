@@ -8,7 +8,7 @@
  * Service in the newsletterEditorApp.
  */
 angular.module('newsletterEditorApp')
-  .service('FileManager', function () {
+  .service('FileManager', function() {
     var img = [];
 
     if (img.length === 0) {

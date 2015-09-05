@@ -20,7 +20,7 @@ angular.module('newsletterEditorApp')
       }
     };
 
-    BlocksModel.map(function(block, index) {
+    BlocksModel.map(function(block) {
       var previewBlock;
       if (block.type === 'double') {
         var table = DomManipulator.createTable(block.toString());

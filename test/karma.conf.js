@@ -43,8 +43,10 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
       // endbower
+      // Aviary
+      'test/editor.js',
       'app/scripts/**/*.js',
-      'test/spec/**/*.js',
+      'test/spec/**/*.spec.js',
 
       // Les templates
       'app/views/**/*.html',
@@ -84,7 +86,7 @@ module.exports = function(config) {
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'app/',
-      moduleName: 'my.templates'
+      moduleName: 'directivesTemplates'
     },
 
     // Continuous Integration mode
