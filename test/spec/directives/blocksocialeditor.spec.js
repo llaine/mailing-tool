@@ -30,10 +30,15 @@ describe('Directive: blockSocialEditor', function() {
     return directive;
   }
 
+  function createButtonBlock(BlockFactory) {
+    var bf = new BlockFactory();
+    return bf.create({type:'button'});
+  }
+
   beforeEach(inject(function($rootScope, $compile, BlockFactory) {
     scope = $rootScope.$new();
     compile = $compile;
-    blocks = mockBlockModels(BlockFactory, false);
+    blocks = mockBlockModels(BlockFactory, true);
     element = mockBlockSocialEditor(blocks[0]);
 
   }));
