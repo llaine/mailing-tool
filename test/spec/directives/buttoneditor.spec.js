@@ -57,11 +57,9 @@ describe('Directive: buttonEditor', function() {
   });
 
   it('la taille du bouton doit augmenter en fonction de la taille du text', function() {
-    for (var i = 0; i < controller.options.txt.length; i++) {
-      var previousLength = controller.options.width;
-      controller.options.txt += 'l';
-      expect(controller.options.width).toBeGreaterThan(previousLength);
-    }
-
+    var previousLength = controller.options.width;
+    controller.options.txt += 'toto';
+    scope.$digest();
+    expect(controller.options.width).toBeGreaterThan(previousLength);
   });
 });
