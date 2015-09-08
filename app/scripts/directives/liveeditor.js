@@ -9,8 +9,10 @@
 angular.module('newsletterEditorApp')
   .directive('liveEditor', function($rootScope, $log, $modal, BlocksManager, EventEmiter, DomManipulator) {
     return {
-      templateUrl: '../views/directives/liveEditor.html',
+      templateUrl: 'views/directives/liveEditor.html',
       restrict: 'E',
+      controllerAs: 'vm',
+      bindToController: true,
       /**
        * Fonction link
        * @param scope
@@ -27,8 +29,8 @@ angular.module('newsletterEditorApp')
        * @param $scope
        */
       controller: function($scope) {
-        $scope.blocks = BlocksManager.getAll();
-        console.log($scope.blocks);
+        var self = this;
+        self.blocks = BlocksManager.getAll();
 
         $scope.sortableOptions = {
           handle: 'a.handleDrag'
@@ -39,11 +41,11 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        $scope.duplicate = function(event, block) {
-          var position = $scope.blocks.indexOf(block);
+        self.duplicate = function(event, block) {
+          var position = self.blocks.indexOf(block);
 
           // Assignation directe, pour conserver le prototypage de l'objet dupliqué.
-          $scope.blocks.splice(position, 0, angular.copy(block));
+          self.blocks.splice(position, 0, angular.copy(block));
 
           $rootScope.safeApply();
 
@@ -58,7 +60,7 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        $scope.update = function(event, block) {
+        self.update = function(event, block) {
           // TODO Eviter de toggle l'éditeur quand block divider.
           $log.info('update appelé depuis liveEditor');
           var tr = $(event.target);
@@ -72,10 +74,10 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        $scope.delete = function(event, block) {
-          var position = $scope.blocks.indexOf(block);
+        self.delete = function(event, block) {
+          var position = self.blocks.indexOf(block);
 
-          $scope.blocks.splice(position, 1);
+          self.blocks.splice(position, 1);
 
           $rootScope.safeApply();
 
@@ -85,8 +87,8 @@ angular.module('newsletterEditorApp')
         /**
          * Affiche la preview du mail
          */
-        $scope.preview = function() {
-          if ($scope.blocks.length > 0) {
+        self.preview = function() {
+          if (self.blocks.length > 0) {
             $modal.open({
               templateUrl: 'modalPreview.html',
               controller: 'ModalPreviewCtrl',
@@ -96,7 +98,7 @@ angular.module('newsletterEditorApp')
                  * @returns {Array|*}
                  */
                 BlocksModel: function() {
-                  return $scope.blocks;
+                  return self.blocks;
                 },
                 /**
                  * fezfze

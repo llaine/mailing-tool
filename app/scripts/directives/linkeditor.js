@@ -9,27 +9,29 @@
 angular.module('newsletterEditorApp')
   .directive('linkEditor', function() {
     return {
-      templateUrl: '../../views/directives/link-editor.html',
+      templateUrl: 'views/directives/link-editor.html',
       restrict: 'E',
       scope: {
         block:'='
       },
       controllerAs:'usCtrl',
       bindToController:true,
+      /**
+       * Le controller de la directive.
+       */
       controller: function() {
         this.options = {
           dispo:this.block.attributes.link ? this.block.attributes.link.dispo : 'left',
           txt:this.block.attributes.link ? this.block.attributes.link.txt : ''
         };
 
+        /**
+         * Modifie les attributs du bouton lien.
+         */
         this.changes = function() {
-          if (!this.options.txt) {
-            alert('Merci de renter un texte valide');
-            return;
-          }
-
           var align;
           var type;
+          // Modifie les options
           switch (this.options.dispo) {
             case 'left':
               align = 'pull-left';
@@ -41,6 +43,7 @@ angular.module('newsletterEditorApp')
               align = 'center-block';
               break;
           }
+          // En fonction du type
           switch (this.block.type) {
             case 'online':
               type = 'online';
@@ -50,10 +53,9 @@ angular.module('newsletterEditorApp')
               break;
           }
 
-          this.block.content = '<a rel="' + type +'" class="' + align + '">' + this.options.txt + '</a>';
+          this.block.content = '<a rel="' + type + '" class="' + align + '">' + this.options.txt + '</a>';
           this.block.attributes.link = this.options;
         };
-
       }
     };
   });

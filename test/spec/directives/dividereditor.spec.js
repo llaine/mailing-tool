@@ -28,7 +28,6 @@ describe('Directive: dividerEditor', function() {
     return directive;
   }
 
-
   /**
    * Mock le block divider.
    * @param BlockFactory
@@ -37,7 +36,6 @@ describe('Directive: dividerEditor', function() {
     var bf = new BlockFactory();
     return bf.create({type:'divider'});
   }
-
 
   beforeEach(inject(function($rootScope, BlockFactory, $compile) {
     scope = $rootScope.$new();
@@ -61,7 +59,7 @@ describe('Directive: dividerEditor', function() {
       background:'black',
       borderRadius:'3px'
     };
-    // Test un petit peu idiot, mais on vérifie que tout est bien modifié dans le scope.
+    // Test un petit peu idiot, mais on vérifie que tout est bien modifié dans lewwwww scope.
     controller.block.metaStyle = mockMetaStyle;
     expect(controller.block.metaStyle).toEqual(mockMetaStyle);
   });

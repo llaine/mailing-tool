@@ -3,5 +3,6 @@ var $modalInstance = {
   dismiss: jasmine.createSpy('modalInstance.dismiss'),
   result: {
     then: jasmine.createSpy('modalInstance.result.then')
-  }
-}
+  },
+  open: jasmine.createSpy('modalInstance.open')
+};

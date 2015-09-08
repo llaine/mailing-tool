@@ -74,8 +74,10 @@ describe('Controller: ModalPreviewCtrl', function() {
       expect(scope.style).toEqual(blackStyle);
     });
 
-    xit('génère automatiquement le HTML de l\'editeur live', function() {
+    /*
+    it('génère automatiquement le HTML de l\'editeur live', function() {
       expect(scope.preview).toEqual(blockPreviewFromModalWithDouble);
     });
+    */
   });
 });
