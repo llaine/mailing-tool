@@ -15,7 +15,7 @@ angular.module('newsletterEditorApp')
         block:'=',
         modeEdition:'='
       },
-      controllerAs:'vm',
+      controllerAs:'stylePickerCtrl',
       bindToController:true,
       /**
        * Controller
@@ -25,7 +25,45 @@ angular.module('newsletterEditorApp')
       controller: function($scope, $element) {
         var vm = this;
 
-        vm.params = GlobalStyles.getDefaultParams();
+        vm.params = {
+          title: {
+            color: '#00000',
+            fontSize: 30 + 'px',
+            fontFamily: 'Arial',
+            fontWeight: 'normal',
+            lineHeight: '1'
+          },
+          paragraph: {
+            color: '#00000',
+            fontSize: 12 + 'px',
+            fontFamily: 'Arial'
+          },
+          link: {
+            color: '#00000',
+            fontSize: 12 + 'px',
+            fontFamily: 'Arial'
+          },
+          background: {
+            // La couleur de fond de l'email
+            bgColor: '#FFFFF',
+            // La bordure autour de l'email
+            borderSize: '1px',
+            borderType: 'solid',
+            borderColor: 'black'
+          },
+          layout: {
+            blockDouble: {layout: 'Half', value: '400-400'},
+            images: {
+              margin: {
+                left: 1,
+                top: 1,
+                right: 1,
+                bottom: 1
+              },
+              width: 20
+            }
+          }
+        };
 
         vm.fonts = GlobalStyles.getFonts();
         vm.sizeTitle = GlobalStyles.getTitleSize();

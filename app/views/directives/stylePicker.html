@@ -4,24 +4,24 @@
             <h5>Fond</h5>
             <div class="form-group">
                 Transparent
-                <input type="checkbox" ng-click="vm.setToTransparent()"/>
+                <input type="checkbox" ng-click="stylePickerCtrl.setToTransparent()"/>
 
-                <label for="backgroundColor" ng-if="!vm.displayGlobalStyles">Couleur de fond</label>
-                <input type="color" class="form-control" ng-if="!vm.displayGlobalStyles" ng-change="vm.changeBackground()" ng-model="vm.params.background.bgColor" id="backgroundColor">
+                <label for="backgroundColor" ng-if="!stylePickerCtrl.displayGlobalStyles">Couleur de fond</label>
+                <input type="color" class="form-control" ng-if="!stylePickerCtrl.displayGlobalStyles" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.bgColor" id="backgroundColor">
             </div>
-            <div ng-if="!vm.displayGlobalStyles">
+            <div ng-if="!stylePickerCtrl.displayGlobalStyles">
                 <h5>Page</h5>
                 <div class="form-group" id="border">
                     <label for="marginBorder" >Bordure email</label>
                     <div class="form-inline">
-                        <select class="form-control form-small" id="marginBorder" ng-change="vm.changeBackground()" ng-model="vm.params.background.borderType">
+                        <select class="form-control form-small" id="marginBorder" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.borderType">
                             <option value="solid">Solid</option>
                             <option value="dashed">Dashed</option>
                             <option value="dotted">Dotted</option>
                             <option value="default">default</option>
                         </select>
-                        <input type="text" class="form-control form-small" ng-change="vm.changeBackground()" ng-model="vm.params.background.borderSize" placeholder="Epaisseur">
-                        <input type="text" class="form-control form-small" ng-change="vm.changeBackground()" ng-model="vm.params.background.borderColor" placeholder="Couleur">
+                        <input type="text" class="form-control form-small" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.borderSize" placeholder="Epaisseur">
+                        <input type="text" class="form-control form-small" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.borderColor" placeholder="Couleur">
                     </div>
                 </div>
             </div>
@@ -32,31 +32,31 @@
             <div class="form-group">
                 <div class="form-inline">
                     <label for="textColorTitle">Couleur du texte</label>
-                    <input id="textColorTitle" class="form-control form-small title"  ng-change="vm.changeTitle()" ng-model="vm.params.title.color" type="color" />
+                    <input id="textColorTitle" class="form-control form-small title"  ng-change="stylePickerCtrl.changeTitle()" ng-model="stylePickerCtrl.params.title.color" type="color" />
 
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-inline">
                     <label for="fontFamilyTitle">Police</label>
-                    <select id="fontFamilyTitle" class="form-control form-sm" ng-change="vm.changeTitle()" ng-model="vm.params.title.fontFamily" >
-                        <option ng-repeat="f in vm.fonts" value="{{f.text}}">{{f.text}}</option>
+                    <select id="fontFamilyTitle" class="form-control form-sm" ng-change="stylePickerCtrl.changeTitle()" ng-model="stylePickerCtrl.params.title.fontFamily" >
+                        <option ng-repeat="f in stylePickerCtrl.fonts" value="{{f.text}}">{{f.text}}</option>
                     </select>
                     <label>Taille</label>
-                    <select class="form-control form-sm" ng-change="vm.changeTitle()" ng-model="vm.params.title.fontSize" >
-                        <option ng-repeat="f in vm.sizeTitle" value="{{f.size}}">{{f.size}}</option>
+                    <select class="form-control form-sm" ng-change="stylePickerCtrl.changeTitle()" ng-model="stylePickerCtrl.params.title.fontSize" >
+                        <option ng-repeat="f in stylePickerCtrl.sizeTitle" value="{{f.size}}">{{f.size}}</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-inline">
                     <label>Epaisseur</label>
-                    <select class="form-control form-sm" ng-change="vm.changeTitle()" ng-model="vm.params.title.fontWeight">
+                    <select class="form-control form-sm" ng-change="stylePickerCtrl.changeTitle()" ng-model="stylePickerCtrl.params.title.fontWeight">
                         <option value="normal">Normal</option>
                         <option value="bold">Gras</option>
                     </select>
                     <label>Interligne</label>
-                    <select class="form-control form-sm" ng-change="vm.changeTitle()" ng-model="vm.params.title.lineHeight">
+                    <select class="form-control form-sm" ng-change="stylePickerCtrl.changeTitle()" ng-model="stylePickerCtrl.params.title.lineHeight">
                         <option value="0.85">Petit</option>
                         <option value="1">Normal</option>
                         <option value="2">Grand</option>
@@ -69,20 +69,20 @@
         <form id="paragraphs">
             <div class="form-group" >
                 <label for="textColor">Couleur de texte</label>
-                <input type="color" class="form-control" ng-change="vm.changeParagraph()" id="textColor"
-                       ng-model="params.paragraph.color">
+                <input type="color" class="form-control" ng-change="stylePickerCtrl.changeParagraph()" id="textColor"
+                       ng-model="stylePickerCtrl.params.paragraph.color">
             </div>
             <div class="form-group">
                 <div class="form-inline">
                     <label>Police</label>
-                    <select class="form-control form-sm" ng-change="vm.changeParagraph()"
-                            ng-model="params.paragraph.fontFamily" >
-                        <option ng-repeat="f in vm.fonts" value="{{f.text}}">{{f.text}}</option>
+                    <select class="form-control form-sm" ng-change="stylePickerCtrl.changeParagraph()"
+                            ng-model="stylePickerCtrl.params.paragraph.fontFamily" >
+                        <option ng-repeat="f in stylePickerCtrl.fonts" value="{{f.text}}">{{f.text}}</option>
                     </select>
                     <label>Taille</label>
-                    <select class="form-control form-sm" ng-change="vm.changeParagraph()"
-                            ng-model="params.paragraph.fontSize" >
-                        <option ng-repeat="f in vm.size" value="{{f.size}}">{{f.size}}</option>
+                    <select class="form-control form-sm" ng-change="stylePickerCtrl.changeParagraph()"
+                            ng-model="stylePickerCtrl.params.paragraph.fontSize" >
+                        <option ng-repeat="f in stylePickerCtrl.size" value="{{f.size}}">{{f.size}}</option>
                     </select>
                 </div>
             </div>
@@ -90,21 +90,21 @@
             <h5>Liens</h5>
             <div class="form-group" >
                 <label for="linkColor">Couleur des liens</label>
-                <input type="color" class="form-control" ng-change="vm.changeParagraph()" id="linkColor"
-                       ng-model="params.link.color">
+                <input type="color" class="form-control" ng-change="stylePickerCtrl.changeParagraph()" id="linkColor"
+                       ng-model="stylePickerCtrl.params.link.color">
             </div>
             <div class="form-group">
                 <div class="form-inline">
                     <label>Police</label>
-                    <select class="form-control form-sm" ng-change="vm.changeParagraph()"
-                            ng-model="params.link.fontFamily" >
-                        <option ng-repeat="f in vm.fonts" value="{{f.text}}">{{f.text}}</option>
+                    <select class="form-control form-sm" ng-change="stylePickerCtrl.changeParagraph()"
+                            ng-model="stylePickerCtrl.params.link.fontFamily" >
+                        <option ng-repeat="f in stylePickerCtrl.fonts" value="{{f.text}}">{{f.text}}</option>
                     </select>
                     <label>Taille</label>
                     <select class="form-control form-sm"
-                            ng-change="vm.changeParagraph()"
-                            ng-model="params.link.fontSize">
-                        <option ng-repeat="f in vm.size" value="{{f.size}}">{{f.size}}</option>
+                            ng-change="stylePickerCtrl.changeParagraph()"
+                            ng-model="stylePickerCtrl.params.link.fontSize">
+                        <option ng-repeat="f in stylePickerCtrl.size" value="{{f.size}}">{{f.size}}</option>
                     </select>
                 </div>
             </div>
@@ -115,20 +115,20 @@
         <div class="form-group">
             <label for="layoutDouble">Layout</label>
             <select id="layoutDouble" class="form-control form-sm"
-                    ng-change="vm.changeLayout()"
-                    ng-model="vm.params.layout.blockDouble"
-                    ng-options="c.layout for c in vm.layoutDouble track by c.value"></select>
+                    ng-change="stylePickerCtrl.changeLayout()"
+                    ng-model="stylePickerCtrl.params.layout.blockDouble"
+                    ng-options="c.layout for c in stylePickerCtrl.layoutDouble track by c.value"></select>
         </div>
         <h5>Images</h5>
         <div class="form-group">
             <label>Marges (exprimé en %)</label>
-            <position-btn on-change="vm.onImgPosChanged"></position-btn>
+            <position-btn on-change="stylePickerCtrl.onImgPosChanged"></position-btn>
         </div>
         <div class="from-group">
             <label for="taille">Taille</label>
             <input type="number"
-                   ng-change="vm.changeLayout()"
-                   class="form-control form-sm" id="taille" ng-model="vm.params.layout.images.width" />
+                   ng-change="stylePickerCtrl.changeLayout()"
+                   class="form-control form-sm" id="taille" ng-model="stylePickerCtrl.params.layout.images.width" />
         </div>
     </accordion-group>
 </accordion>
