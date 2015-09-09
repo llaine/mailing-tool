@@ -22,9 +22,12 @@ angular.module('newsletterEditorApp')
        */
       controller: function() {
         var self = this;
-        // Assignation de l'image par défaut et du lien.
-        self.currentImageUrl = self.block.attributes.url;
-        self.linkForImage = self.block.attributes.link;
+
+        if (self.block.attributes) {
+          // Assignation de l'image par défaut et du lien.
+          self.currentImageUrl = self.block.attributes.url;
+          self.linkForImage = self.block.attributes.link;
+        }
 
         /**
          * Ouvre la popup de gestionnaire des fichiers

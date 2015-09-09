@@ -30,7 +30,7 @@ angular.module('newsletterEditorApp')
        */
       controller: function($scope) {
         var self = this;
-        self.blocks = BlocksManager.getAll();
+        $scope.blocks = BlocksManager.getAll();
 
         $scope.sortableOptions = {
           handle: 'a.handleDrag'
@@ -41,11 +41,11 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        self.duplicate = function(event, block) {
-          var position = self.blocks.indexOf(block);
+        this.duplicate = function(event, block) {
+          var position = $scope.blocks.indexOf(block);
 
           // Assignation directe, pour conserver le prototypage de l'objet dupliqué.
-          self.blocks.splice(position, 0, angular.copy(block));
+          $scope.blocks.splice(position, 0, angular.copy(block));
 
           $rootScope.safeApply();
 
@@ -60,7 +60,7 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        self.update = function(event, block) {
+        this.update = function(event, block) {
           // TODO Eviter de toggle l'éditeur quand block divider.
           $log.info('update appelé depuis liveEditor');
           var tr = $(event.target);
@@ -74,10 +74,10 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        self.delete = function(event, block) {
-          var position = self.blocks.indexOf(block);
+        this.delete = function(event, block) {
+          var position = $scope.blocks.indexOf(block);
 
-          self.blocks.splice(position, 1);
+          $scope.blocks.splice(position, 1);
 
           $rootScope.safeApply();
 
@@ -87,8 +87,8 @@ angular.module('newsletterEditorApp')
         /**
          * Affiche la preview du mail
          */
-        self.preview = function() {
-          if (self.blocks.length > 0) {
+        this.preview = function() {
+          if ($scope.blocks.length > 0) {
             $modal.open({
               templateUrl: 'modalPreview.html',
               controller: 'ModalPreviewCtrl',
@@ -98,7 +98,7 @@ angular.module('newsletterEditorApp')
                  * @returns {Array|*}
                  */
                 BlocksModel: function() {
-                  return self.blocks;
+                  return $scope.blocks;
                 },
                 /**
                  * fezfze

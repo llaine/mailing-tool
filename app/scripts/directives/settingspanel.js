@@ -12,7 +12,7 @@ angular.module('newsletterEditorApp')
       templateUrl: 'views/directives/settingsPanel.html',
       restrict: 'E',
       controller: 'SettingsPanelCtrl',
-      controllerAs:'vm',
+      controllerAs:'spCtrl',
       bindToController:true
     };
   });

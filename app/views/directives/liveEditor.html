@@ -1,12 +1,12 @@
 <div id="mailCadre">
     <table class="emailCompo" id="emailTemplate1">
         <thead></thead>
-        <tbody ui-sortable="sortableOptions" ng-model="vm.blocks">
+        <tbody ui-sortable="sortableOptions" ng-model="blocks">
             <tr droppable
                 class="dropzone"
-                ng-repeat="block in vm.blocks track by $index"
+                ng-repeat="block in blocks track by $index"
                 ng-class="{'mailFooter': block.type === 'footer', 'mailHr': block.type === 'divider'}"
-                ng-click="update($event, block)"
+                ng-click="vm.update($event, block)"
                 ng-style="block.metaStyle">
                 <td ng-class="{'emailImg': block.type === 'file',
                         'mailSocial': block.type === 'social',

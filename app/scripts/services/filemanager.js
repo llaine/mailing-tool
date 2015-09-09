@@ -11,12 +11,6 @@ angular.module('newsletterEditorApp')
   .service('FileManager', function() {
     var img = [];
 
-    return {
-      getAll:getAll,
-      updateImage:updateImage,
-      getSocialImages:getSocialImages
-    };
-
     if (img.length === 0) {
       // TODO Brancher l'API
       for (var i = 0 ; i < 4 ; ++i) {
@@ -82,5 +76,11 @@ angular.module('newsletterEditorApp')
         {name:'vimeo', img: '<img src="images/social_icons/32/09_vimeo.png"/>', link:''}
       ];
     }
+
+    return {
+      getAll:getAll,
+      updateImage:updateImage,
+      getSocialImages:getSocialImages
+    };
 
   });

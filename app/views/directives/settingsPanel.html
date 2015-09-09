@@ -1,37 +1,37 @@
 <div id="mailOutils2">
-    <h2 ng-show="vm.modeEdition" class="text-center">Modification du block {{ vm.currentBlock.type }}</h2>
+    <h2 ng-show="modeEdition" class="text-center">Modification du block {{ spCtrl.currentBlock.type }}</h2>
     <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-        <a ng-hide="vm.vm.currentBlock.type == 'divider'" href="#list" class="btn btn-default active" role="button" data-toggle="tab">
+        <a ng-hide="spCtrl.currentBlock.type == 'divider'" href="#list" class="btn btn-default active" role="button" data-toggle="tab">
             Content
         </a>
-        <a ng-hide="vm.vm.currentBlock.type == 'divider'" href="#settings" class="btn btn-default" role="button" data-toggle="tab">
-            <span ng-show="vm.modeEdition">Style</span>
-            <span ng-show="!vm.modeEdition">Design</span>
+        <a ng-hide="spCtrl.currentBlock.type == 'divider'" href="#settings" class="btn btn-default" role="button" data-toggle="tab">
+            <span ng-show="modeEdition">Style</span>
+            <span ng-show="!modeEdition">Design</span>
         </a>
     </div>
 
     <div class="tab-content" id="mailOutils3">
         <div id="list" role="tabpanel" class="tab-pane scrollable active">
             <br/>
-            <div ng-include="vm.modeEdition ? 'editionMode.html' : 'chooseBlock.html'"></div>
+            <div ng-include="modeEdition ? 'editionMode.html' : 'chooseBlock.html'"></div>
         </div>
         <div id="settings" role="tabpanel" class="tab-pane scrollable">
             <br/>
-            <style-picker block="vm.vm.currentBlock"></style-picker>
+            <style-picker block="spCtrl.currentBlock"></style-picker>
         </div>
     </div>
 
     <div>
-        <button ng-show="vm.modeEdition"  type="button" class="btn btn-default" ng-click="vm.saveAndClose()">Valider et fermer</button>
-        <button type="button" ng-click="vm.preview()" class="btn btn-default">
+        <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="spCtrl.saveAndClose()">Valider et fermer</button>
+        <button type="button" ng-click="spCtrl.preview()" class="btn btn-default">
             <span class="glyphicon glyphicon-export"></span>
             Prévisualiser
         </button>
-        <button ng-show="!vm.modeEdition" type="button" ng-click="vm.send()" class="btn btn-default">
+        <button ng-show="!modeEdition" type="button" ng-click="spCtrl.send()" class="btn btn-default">
             <span class="glyphicon glyphicon-send"></span>
             Programmer
         </button>
-        <button ng-show="!vm.modeEdition" ng-click="vm.addBlock()" class="btn btn-default btn-lg pull-right">
+        <button ng-show="!modeEdition" ng-click="spCtrl.addBlock()" class="btn btn-default btn-lg pull-right">
             <span class="glyphicon glyphicon-plus"></span>
             Ajouter un block
         </button>
@@ -39,14 +39,14 @@
 </div>
 
 <script type="text/ng-template" id="editionMode.html">
-    <divider-editor  ng-if="vm.vm.currentBlock.type === 'divider'" block="vm.currentBlock"></divider-editor>
-    <text-editor ng-if="vm.currentBlock.type == 'text'" block="vm.currentBlock"></text-editor>
-    <image-picker ng-if="vm.currentBlock.type == 'file'"  block="vm.currentBlock"></image-picker>
-    <button-editor ng-if="vm.currentBlock.type == 'button'" block="vm.currentBlock"></button-editor>
-    <link-editor ng-if="vm.currentBlock.type == 'unsub' || vm.currentBlock.type == 'online'" block="vm.currentBlock"></link-editor>
-    <div ng-if="vm.currentBlock.type == 'double' || vm.currentBlock.type == 'footer'">
+    <divider-editor  ng-if="spCtrl.currentBlock.type === 'divider'" block="spCtrl.currentBlock"></divider-editor>
+    <text-editor ng-if="spCtrl.currentBlock.type == 'text'" block="spCtrl.currentBlock"></text-editor>
+    <image-picker ng-if="spCtrl.currentBlock.type == 'file'"  block="spCtrl.currentBlock"></image-picker>
+    <button-editor ng-if="spCtrl.currentBlock.type == 'button'" block="spCtrl.currentBlock"></button-editor>
+    <link-editor ng-if="spCtrl.currentBlock.type == 'unsub' || spCtrl.currentBlock.type == 'online'" block="spCtrl.currentBlock"></link-editor>
+    <div ng-if="spCtrl.currentBlock.type == 'double' || spCtrl.currentBlock.type == 'footer'">
         <accordion>
-            <accordion-group ng-repeat="cell in vm.currentBlock.cells track by $index"
+            <accordion-group ng-repeat="cell in spCtrl.currentBlock.cells track by $index"
                     ng-switch on="cell.type"
                     heading="Section #{{$index + 1}}">
                 <text-editor ng-switch-when="text" block="cell"></text-editor>

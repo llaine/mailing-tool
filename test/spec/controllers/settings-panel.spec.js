@@ -32,12 +32,12 @@ describe('Controller: SettingsPanelCtrl', function(){
 
   describe('lorsque le settingsPanel se lance', function() {
     it('ne doit pas être en mode edition', function() {
-      expect(SettingsPanelCtrl.modeEdition).toBeFalsy();
+      expect($scope.modeEdition).toBeFalsy();
     });
 
     it('$scope.saveAndClose, doit fermer l\'editeur et thrower un event', function() {
       SettingsPanelCtrl.saveAndClose();
-      expect(SettingsPanelCtrl.modeEdition).toBeFalsy();
+      expect($scope.modeEdition).toBeFalsy();
       expect(eventEmiter.emit).toHaveBeenCalledWith('panel:closed', true);
     });
 
@@ -64,7 +64,7 @@ describe('Controller: SettingsPanelCtrl', function(){
     });
 
     it('doit afficher l\'éditeur avec le block correspondant', function() {
-      expect(SettingsPanelCtrl.modeEdition).toBeTruthy();
+      expect($scope.modeEdition).toBeTruthy();
       expect(SettingsPanelCtrl.currentBlock).toEqual($scope.blocks[0]);
     });
   });

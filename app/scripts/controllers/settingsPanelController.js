@@ -3,7 +3,7 @@ angular.module('newsletterEditorApp')
     function($rootScope, $scope, EventEmiter, BlocksManager, BlockFactory, Restangular) {
     var vm = this;
     var currentBlock;
-    vm.modeEdition = false;
+    $scope.modeEdition = false;
     var bf = new BlockFactory();
 
     getIconsForBlocks();
@@ -27,7 +27,7 @@ angular.module('newsletterEditorApp')
      * Lorsqu'on clique sur le bouton de sauvegarde.
      */
     vm.saveAndClose = function() {
-      vm.modeEdition = false;
+      $scope.modeEdition = false;
       removeClassFromBlock();
       EventEmiter.emit('panel:closed', true);
       displayContentTab();
@@ -61,7 +61,7 @@ angular.module('newsletterEditorApp')
        * Donc si la modif était déjà active sur un autre, on supprime. */
       removeClassFromBlock();
 
-      vm.modeEdition = true;
+      $scope.modeEdition = true;
       currentBlock = values.tr;
       currentBlock.addClass('active');
       vm.currentBlock = values.block;
@@ -69,6 +69,7 @@ angular.module('newsletterEditorApp')
       $rootScope.safeApply();
 
       displayContentTab();
+      console.log($scope.modeEdition);
     });
 
     EventEmiter.on('edition:closed', function() {

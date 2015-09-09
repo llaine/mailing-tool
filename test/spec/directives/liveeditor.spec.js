@@ -41,7 +41,7 @@ describe('Directive: liveEditor', function() {
   }));
 
   it('Doit contenir un tableau de blocks', function() {
-    expect(controller.blocks).toEqual(blocks);
+    expect(scope.blocks).toEqual(blocks);
   });
 
   it('doit avoir des options pour le sortable', function() {
@@ -53,7 +53,7 @@ describe('Directive: liveEditor', function() {
     controller.duplicate(event, blockToDuplicate);
 
     expect(event.stopPropagation).toHaveBeenCalled();
-    expect(controller.blocks[3]).toEqual(blockToDuplicate);
+    expect(scope.blocks[3]).toEqual(blockToDuplicate);
   });
 
   it('doit avoir une fonction permettant d\'ouvrir le settingsPanel pour modifier le block', function() {
@@ -70,8 +70,8 @@ describe('Directive: liveEditor', function() {
     controller.delete(event, blockToBeDeleted);
 
     expect(event.stopPropagation).toHaveBeenCalled();
-    expect(controller.blocks.length).toBe(length - 1);
-    expect(controller.blocks.indexOf(blockToBeDeleted)).toBe(-1);
+    expect(scope.blocks.length).toBe(length - 1);
+    expect(scope.blocks.indexOf(blockToBeDeleted)).toBe(-1);
   });
 
   it('doit avoir une fonction permettant de prévisualiser l\'ensemble des blocks', function() {
