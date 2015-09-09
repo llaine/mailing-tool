@@ -14,7 +14,6 @@ describe('Directive: liveEditor', function() {
   var eventEmiter;
   var modal;
 
-
   beforeEach(inject(function($rootScope, $compile, BlockFactory, EventEmiter, $modal) {
     scope = $rootScope.$new();
     modal = $modal;

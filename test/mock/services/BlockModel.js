@@ -13,7 +13,7 @@ function mockBlockModels(BlockFactory, isDouble) {
     var blockOpts = {};
     if (isDouble) {
       blockOpts = {
-        content:'<p>Contenu</p>',
+        content:'<p>Contenu<h1>feezf</h1></p>',
         order:'text-text',
         type:'double',
         nbColumns:2

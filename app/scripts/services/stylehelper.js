@@ -38,7 +38,6 @@ angular.module('newsletterEditorApp')
               tr.find('td.cell-' + i).css(block.cells[i].contentStyle.td);
             }
           }
-
         }
 
         for (var tag in block.contentStyle) {

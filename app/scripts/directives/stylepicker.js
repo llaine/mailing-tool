@@ -12,8 +12,7 @@ angular.module('newsletterEditorApp')
       templateUrl: 'views/directives/stylePicker.html',
       restrict: 'E',
       scope: {
-        block:'=',
-        modeEdition:'='
+        block:'='
       },
       controllerAs:'stylePickerCtrl',
       bindToController:true,
@@ -68,10 +67,7 @@ angular.module('newsletterEditorApp')
         vm.fonts = GlobalStyles.getFonts();
         vm.sizeTitle = GlobalStyles.getTitleSize();
         vm.size = GlobalStyles.getParagraphSize();
-
-        if (!vm.layoutDouble) {
-          vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble();
-        }
+        vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble();
 
         /**
          * Mets en transparent, le background de la row sélectionné.
@@ -87,13 +83,16 @@ angular.module('newsletterEditorApp')
           }
         };
 
-        vm.isBlockDouble = false;
         vm.currentRowEdited = false;
         vm.displayGlobalStyles = false;
 
+        // TODO Refacto :
+        // Catcher le Block correspondant,
+        // le foutre dans une variable
+        // pour que dans le applyStyle, on puisse directement
+        // apply dessus.
         EventEmiter.on('edition:toggled', function(event, opts) {
-          var row = $(opts.tr).parents('tr:first');
-          vm.currentRowEdited = row;
+          vm.currentRowEdited = $(opts.tr).parents('tr:first');
           vm.displayGlobalStyles = true;
         });
 
@@ -119,11 +118,16 @@ angular.module('newsletterEditorApp')
          */
         function applyStyle(elements, style) {
           elements.map(function() {
-            var scope = angular.element(this).scope();
-            scope.$parent.block.setStyle(style, this.tagName);
-            // Le two way data-bindings ne se fait pas pour le ng-style.
-            // Obligé de forcer le reload du style inline.
-            StyleHelper.applyStyleToDom(scope.$parent.block);
+            if (vm.block) {
+              vm.block.setStyle(style, this.tagName);
+              StyleHelper.applyStyleToDom(vm.block);
+            } else {
+              var scope = angular.element(this).scope();
+              scope.$parent.block.setStyle(style, this.tagName);
+              // Le two way data-bindings ne se fait pas pour le ng-style.
+              // Obligé de forcer le reload du style inline.
+              StyleHelper.applyStyleToDom(scope.$parent.block);
+            }
           });
         }
 
