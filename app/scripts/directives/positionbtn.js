@@ -19,7 +19,6 @@ angular.module('newsletterEditorApp')
       scope: {
         onChange:'='
       },
-      controller:positionBtnCtrl,
       /**
        * La fonction link
        * @param scope
@@ -34,10 +33,3 @@ angular.module('newsletterEditorApp')
       }
     };
   });
-
-/**
- * Le controller de la directive.
- */
-function positionBtnCtrl($scope, $element, $attrs) {
-
-}

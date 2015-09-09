@@ -16,14 +16,10 @@ angular.module('newsletterEditorApp')
       },
       /**
        * Affiche l'éditeur.
-       * @param scope
-       * @param element
-       * @param attrs
+       * @param $scope
        */
-      link: function postLink(scope, element, attrs) {
-        /* par défaut l'éditeur est masqué. */
-        scope.editionMode = false;
-        scope.options = {
+      controller: function($scope) {
+        $scope.options = {
           language: 'fr',
           allowedContent: true,
           entities: false
