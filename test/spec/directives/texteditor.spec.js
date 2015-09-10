@@ -33,13 +33,4 @@ describe('Directive: textEditor', function() {
   it('doit avoir un block dans le scope', function() {
     expect(scope.block).toEqual(block);
   });
-
-  xit('doit avoir des attributs correspondant à ckEditor', function() {
-    var ckEditorOps = {
-      language:'fr',
-      allowedContent:true,
-      entities:false
-    };
-    expect(scope.options).toEqual(ckEditorOps);
-  });
 });

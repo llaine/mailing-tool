@@ -36,7 +36,7 @@ angular.module('newsletterEditorApp')
      * @param content
      */
     this.updateContent = function(index, content) {
-      blockStack[index].content = content;
+      blockStack[index] = content;
     };
 
     /**

@@ -14,7 +14,7 @@ angular.module('newsletterEditorApp')
      * @param element
      * @returns {{top: number, left: number}}
      */
-    this.getPositionOfElement = function(element){
+    this.getPositionOfElement = function(element) {
       var elem = element.getBoundingClientRect(),
         parent = element.parentNode.parentNode.getBoundingClientRect(),
         top = parseInt(elem.top) - parseInt(parent.top),

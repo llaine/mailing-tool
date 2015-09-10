@@ -10,7 +10,7 @@
  * dans ce service, se basant sur du VanillaJS
  */
 angular.module('newsletterEditorApp')
-  .service('DomManipulator', function () {
+  .service('DomManipulator', function() {
     var self = this;
 
     /**
@@ -31,29 +31,6 @@ angular.module('newsletterEditorApp')
     self.getStyleAttribute = function(node, attribute) {
       var style = window.getComputedStyle(node); // .getPropertyValue('background');
       return style.getPropertyValue(attribute);
-    };
-
-    /**
-     * Set le style d'un node HTML
-     * @param node
-     * @param styleAttribute
-     * @param style
-     */
-    self.setStyle = function(node, styleAttribute, style) {
-      node.style.styleAttribute = style;
-    };
-
-    /**
-     * Set les styles d'un node HTML
-     * @param node
-     * @param styleArray
-     */
-    self.setStyles = function(node, styleArray) {
-      for(var tag in styleArray) {
-        if (styleArray.hasOwnProperty(tag)) {
-          angular.element(node).css(styleArray[tag]);
-        }
-      }
     };
 
     /**

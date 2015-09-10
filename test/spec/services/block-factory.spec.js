@@ -192,5 +192,4 @@ describe('Service: BlockFactory', function() {
       expect(blockSocial.contentStyle).toEqual({p:{color:'black'}});
     });
   });
-
 });
