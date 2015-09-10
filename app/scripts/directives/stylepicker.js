@@ -86,11 +86,6 @@ angular.module('newsletterEditorApp')
         vm.currentRowEdited = false;
         vm.displayGlobalStyles = false;
 
-        // TODO Refacto :
-        // Catcher le Block correspondant,
-        // le foutre dans une variable
-        // pour que dans le applyStyle, on puisse directement
-        // apply dessus.
         EventEmiter.on('edition:toggled', function(event, opts) {
           vm.currentRowEdited = $(opts.tr).parents('tr:first');
           vm.displayGlobalStyles = true;
@@ -137,15 +132,15 @@ angular.module('newsletterEditorApp')
         vm.changeTitle = function() {
           var selector = getSelector();
           var titles = selector.find('h1, h2, h3, h4, h5, h6');
-
-          applyStyle(titles, {
+          var opts = {
             'font-size': vm.params.title.fontSize,
             'font-family': vm.params.title.fontFamily,
             color: vm.params.title.color,
             'font-weight': vm.params.title.fontWeight,
             'line-height': vm.params.title.lineHeight
-          });
+          };
 
+          applyStyle(titles, opts);
         };
 
         /**
@@ -155,7 +150,7 @@ angular.module('newsletterEditorApp')
           var selector = getSelector();
           var background = angular.element('#mailCadre');
 
-          if (vm.currentRowEdited) {
+          if (vm.block) {
 
             applyStyle(selector, {
               'background': vm.params.background.bgColor
@@ -240,28 +235,6 @@ angular.module('newsletterEditorApp')
 
             vm.applyStyle(blockDouble);
           });
-        };
-
-        /**
-         * Enlève tout les styles inline.
-         */
-        vm.reset = function() {
-          var selector = getSelector();
-
-          /**
-           * Supprime le style inline
-           * @param node
-           */
-          function removeAttr(node) {
-            selector.find(node).removeAttr('style');
-          }
-
-          removeAttr('p');
-          removeAttr('a');
-          removeAttr('img');
-          removeAttr('h1, h2, h3, h4, h5, h6');
-
-          selector.removeAttr('style');
         };
       }
     };

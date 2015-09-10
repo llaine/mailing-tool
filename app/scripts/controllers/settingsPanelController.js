@@ -69,7 +69,6 @@ angular.module('newsletterEditorApp')
       $rootScope.safeApply();
 
       displayContentTab();
-      console.log($scope.modeEdition);
     });
 
     EventEmiter.on('edition:closed', function() {

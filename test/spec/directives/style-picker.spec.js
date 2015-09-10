@@ -8,6 +8,7 @@ describe('Directive: stylePicker', function() {
   var controller;
   var styleHelper;
   var currentRow;
+  var draggableHelper;
 
   // load the directive's module
   beforeEach(module('newsletterEditorApp'));
@@ -32,19 +33,27 @@ describe('Directive: stylePicker', function() {
     return dir;
   }
 
-  beforeEach(inject(function($rootScope, $compile, BlockFactory, StyleHelper, EventEmiter) {
+  beforeEach(inject(function($rootScope, $compile, BlockFactory, StyleHelper, DraggableHelper) {
     scope = $rootScope.$new();
     compile = $compile;
     styleHelper = StyleHelper;
+    draggableHelper = DraggableHelper;
 
     // On ajout un h1 et un p dans le block.
     var b = mockBlockModels(BlockFactory, false)[0];
-    b.content = '<h1>fezfze</h1><p>fezfiphzefpi</p>';
+    b.content = '<h1>fezfze</h1><p>fezfiphzefpi</p><img src="toto.png"/> ';
     block = b;
 
     element = createDirective(block);
 
     spyOn(styleHelper, 'applyStyleToDom').and.callThrough();
+    // Mock la fonction getPositionOfElement
+    spyOn(draggableHelper, 'getPositionOfElement').and.callFake(function() {
+      return {
+        top:10,
+        left:10
+      }
+    });
   }));
 
   it('doit contenir des paramètrs par défaut', function() {
@@ -72,20 +81,37 @@ describe('Directive: stylePicker', function() {
 
     describe('un block de type simple', function() {
       it('doit pouvoir changer les titres du block courant', function() {
-        controller.params.title = mockTitlesStylePicker;
+        controller.params.title = mockParamsTitles;
         controller.changeTitle();
 
         expect(styleHelper.applyStyleToDom).toHaveBeenCalled();
         expect(controller.block.contentStyle.h1).toEqual(mockTitlesStylePicker);
       });
+
+      it('doit pouvoir changer le style du background', function() {
+        controller.params.background = mockBackgroundStylePicker;
+        controller.changeBackground();
+
+        expect(styleHelper.applyStyleToDom).toHaveBeenCalled();
+        expect(controller.block.contentStyle.tr).toEqual(mockParamsBackground);
+      });
+
+      it('doit pouvoir changer les styles des paragraph', function() {
+        controller.params.paragraph = mockParagraphStylePicker;
+        controller.changeParagraph();
+
+        expect(styleHelper.applyStyleToDom).toHaveBeenCalled();
+        expect(controller.block.contentStyle.p).toEqual(mockParamsParagraph);
+      });
+
+      it('doit pouvoir changer les marges sur une image', function() {
+        controller.onImgPosChanged(document.createElement('span'));
+
+        expect(draggableHelper.getPositionOfElement).toHaveBeenCalled();
+        expect(styleHelper.applyStyleToDom).toHaveBeenCalled();
+        expect(controller.block.contentStyle.img).toEqual(mockParamsImg);
+      });
+
     });
   });
-
-  describe('Lorsqu\'on a pas sélectionné de block', function() {
-
-  });
-
-
-
-
 });

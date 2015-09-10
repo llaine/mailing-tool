@@ -6,6 +6,14 @@ var mockTitlesStylePicker = {
   'line-height': '2'
 };
 
+var mockParamsTitles = {
+  fontSize: 18 + 'px',
+  fontFamily: 'Times News Roman',
+  color:'#FFFFF',
+  fontWeight: 'normal',
+  lineHeight: '2'
+};
+
 var mockBackgroundStylePicker = {
   bgColor:'#000000',
   borderSize:'2px',
@@ -13,10 +21,25 @@ var mockBackgroundStylePicker = {
   borderColor:'blue'
 };
 
+var mockParamsBackground = {
+  background: '#000000'
+};
+
 var mockParagraphStylePicker = {
   color: 'black',
   fontSize: 13 + 'px',
   fontFamily: 'Times'
+};
+
+var mockParamsParagraph = {
+  color: 'black',
+  'font-size': 13 + 'px',
+  'font-family': 'Times'
+};
+
+var mockParamsImg = {
+  'margin-top':'10%',
+  'margin-left':'10%'
 };
 
 var mockLinkStylePicker = {
