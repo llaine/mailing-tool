@@ -1,5 +1,7 @@
 angular.module('newsletterEditorApp')
-  .controller('SettingsPanelCtrl', function($rootScope, $scope, EventEmiter, BlocksManager, BlockFactory, Restangular) {
+  .controller('SettingsPanelCtrl',
+    function($rootScope, $scope, EventEmiter, BlocksManager, BlockFactory, Restangular) {
+    var vm = this;
     var currentBlock;
     $scope.modeEdition = false;
     var bf = new BlockFactory();
@@ -14,11 +16,19 @@ angular.module('newsletterEditorApp')
     }
 
     /**
+     * Supprime la classe active sur le block courant.
+     */
+    function removeClassFromBlock() {
+      if (currentBlock) {
+        currentBlock.removeClass('active');
+      }
+    }
+    /**
      * Lorsqu'on clique sur le bouton de sauvegarde.
      */
-    $scope.saveAndClose = function() {
+    vm.saveAndClose = function() {
       $scope.modeEdition = false;
-      currentBlock.removeClass('active');
+      removeClassFromBlock();
       EventEmiter.emit('panel:closed', true);
       displayContentTab();
     };
@@ -26,16 +36,15 @@ angular.module('newsletterEditorApp')
     /**
      * Ajoute un block au model.
      */
-    $scope.addBlock = function() {
+    vm.addBlock = function() {
       $scope.blocks.push(bf.create({type:'text'}));
     };
-
 
     /**
      * Exporte les données.
      */
-    $scope.send = function() {
-      console.log($scope.blocks);
+    vm.send = function() {
+      console.log(vm.blocks);
     };
 
     /* toggle des tabs. */
@@ -50,14 +59,12 @@ angular.module('newsletterEditorApp')
     EventEmiter.on('edition:toggled', function(event, values) {
       /* On ne peut modifier qu'un seul block à la fois.
        * Donc si la modif était déjà active sur un autre, on supprime. */
-      if (currentBlock) {
-        currentBlock.removeClass('active');
-      }
+      removeClassFromBlock();
 
       $scope.modeEdition = true;
       currentBlock = values.tr;
       currentBlock.addClass('active');
-      $scope.currentBlock = values.block;
+      vm.currentBlock = values.block;
 
       $rootScope.safeApply();
 
@@ -77,8 +84,6 @@ angular.module('newsletterEditorApp')
           item.icons = BlocksManager.getIconsForType(item.type === 'double' ? item.order : item.type);
           return item;
         });
-        console.log($scope.availableBlocks);
-
       });
     }
   });

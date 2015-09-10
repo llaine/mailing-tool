@@ -43,13 +43,15 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
       // endbower
+      // Aviary
+      'test/editor.js',
       'app/scripts/**/*.js',
-      'test/spec/**/*.js',
+      'test/spec/**/*.spec.js',
 
-      // Les tesmplates
-      'app/views/**/*.html'
-
-      //'test/mock/**/*.js'
+      // Les templates
+      'app/views/**/*.html',
+      // Les mocks
+      'test/mock/**/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -68,7 +70,7 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS'
+      'Chrome'
     ],
 
     // Which plugins to enable
@@ -84,7 +86,7 @@ module.exports = function(config) {
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'app/',
-      moduleName: 'my.templates'
+      moduleName: 'directivesTemplates'
     },
 
     // Continuous Integration mode
@@ -95,7 +97,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_INFO
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     // proxies: {

@@ -8,7 +8,7 @@
  */
 angular.module('newsletterEditorApp')
   .directive('positionBtn', function() {
-    return  {
+    return {
       template:
       '<div id="container-for-draggable" style="background: #e3e3e3; height: 75px; width: 100px;"> ' +
         '<span id="btn-movable" draggable containment="parent">' +
@@ -19,19 +19,17 @@ angular.module('newsletterEditorApp')
       scope: {
         onChange:'='
       },
-      controller:positionBtnCtrl,
+      /**
+       * La fonction link
+       * @param scope
+       * @param element
+       * @param attrs
+       */
       link: function(scope, element, attrs) {
-        element.find('span').bind('dragstop', function () {
+        element.find('span').bind('dragstop', function() {
           // On appelle la fonction passée à la directive, qui va s'occuper de mettre à jour le model. .
           scope.onChange(this);
         });
       }
     };
   });
-
-/**
- * Le controller de la directive.
- */
-function positionBtnCtrl($scope, $element, $attrs) {
-
-}

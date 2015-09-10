@@ -9,9 +9,6 @@
  */
 angular.module('newsletterEditorApp')
     .service('StyleHelper', function(BlocksManager) {
-      return {
-        applyStyleToDom:applyStyle
-      };
 
       /**
        * Le style n'est pas two-way databinding sur les élements générés
@@ -41,7 +38,6 @@ angular.module('newsletterEditorApp')
               tr.find('td.cell-' + i).css(block.cells[i].contentStyle.td);
             }
           }
-
         }
 
         for (var tag in block.contentStyle) {
@@ -53,4 +49,8 @@ angular.module('newsletterEditorApp')
           }
         }
       }
+
+      return {
+        applyStyleToDom:applyStyle
+      };
     });

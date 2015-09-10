@@ -9,8 +9,10 @@
 angular.module('newsletterEditorApp')
   .directive('liveEditor', function($rootScope, $log, $modal, BlocksManager, EventEmiter, DomManipulator) {
     return {
-      templateUrl: '../views/directives/liveEditor.html',
+      templateUrl: 'views/directives/liveEditor.html',
       restrict: 'E',
+      controllerAs: 'vm',
+      bindToController: true,
       /**
        * Fonction link
        * @param scope
@@ -27,8 +29,8 @@ angular.module('newsletterEditorApp')
        * @param $scope
        */
       controller: function($scope) {
+        var self = this;
         $scope.blocks = BlocksManager.getAll();
-        console.log($scope.blocks);
 
         $scope.sortableOptions = {
           handle: 'a.handleDrag'
@@ -39,7 +41,7 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        $scope.duplicate = function(event, block) {
+        this.duplicate = function(event, block) {
           var position = $scope.blocks.indexOf(block);
 
           // Assignation directe, pour conserver le prototypage de l'objet dupliqué.
@@ -58,7 +60,7 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        $scope.update = function(event, block) {
+        this.update = function(event, block) {
           // TODO Eviter de toggle l'éditeur quand block divider.
           $log.info('update appelé depuis liveEditor');
           var tr = $(event.target);
@@ -72,7 +74,7 @@ angular.module('newsletterEditorApp')
          * @param event
          * @param block
          */
-        $scope.delete = function(event, block) {
+        this.delete = function(event, block) {
           var position = $scope.blocks.indexOf(block);
 
           $scope.blocks.splice(position, 1);
@@ -85,7 +87,7 @@ angular.module('newsletterEditorApp')
         /**
          * Affiche la preview du mail
          */
-        $scope.preview = function() {
+        this.preview = function() {
           if ($scope.blocks.length > 0) {
             $modal.open({
               templateUrl: 'modalPreview.html',
@@ -98,11 +100,19 @@ angular.module('newsletterEditorApp')
                 BlocksModel: function() {
                   return $scope.blocks;
                 },
-                backgroundColor: function () {
+                /**
+                 * fezfze
+                 * @returns {string}
+                 */
+                backgroundColor: function() {
                   var editorFrame = document.getElementById('mailCadre');
                   return DomManipulator.getStyleAttribute(editorFrame, 'background-color');
                 },
-                borderType: function () {
+                /**
+                 * fezf
+                 * @returns {string}
+                 */
+                borderType: function() {
                   var emailTemplate = document.getElementById('emailTemplate1');
                   return DomManipulator.getStyleAttribute(emailTemplate, 'border');
                 }

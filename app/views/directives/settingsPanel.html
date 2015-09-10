@@ -1,10 +1,10 @@
 <div id="mailOutils2">
-    <h2 ng-show="modeEdition" class="text-center">Modification du block {{ currentBlock.type }}</h2>
+    <h2 ng-show="modeEdition" class="text-center">Modification du block {{ spCtrl.currentBlock.type }}</h2>
     <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-        <a ng-hide="currentBlock.type == 'divider'" href="#list" class="btn btn-default active" role="button" data-toggle="tab">
+        <a ng-hide="spCtrl.currentBlock.type == 'divider'" href="#list" class="btn btn-default active" role="button" data-toggle="tab">
             Content
         </a>
-        <a ng-hide="currentBlock.type == 'divider'" href="#settings" class="btn btn-default" role="button" data-toggle="tab">
+        <a ng-hide="spCtrl.currentBlock.type == 'divider'" href="#settings" class="btn btn-default" role="button" data-toggle="tab">
             <span ng-show="modeEdition">Style</span>
             <span ng-show="!modeEdition">Design</span>
         </a>
@@ -17,21 +17,21 @@
         </div>
         <div id="settings" role="tabpanel" class="tab-pane scrollable">
             <br/>
-            <style-picker block="currentBlock"></style-picker>
+            <style-picker block="spCtrl.currentBlock"></style-picker>
         </div>
     </div>
 
     <div>
-        <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="saveAndClose()">Valider et fermer</button>
-        <button type="button" ng-click="preview()" class="btn btn-default">
+        <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="spCtrl.saveAndClose()">Valider et fermer</button>
+        <button type="button" ng-click="spCtrl.preview()" class="btn btn-default">
             <span class="glyphicon glyphicon-export"></span>
             Prévisualiser
         </button>
-        <button ng-show="!modeEdition" type="button" ng-click="send()" class="btn btn-default">
+        <button ng-show="!modeEdition" type="button" ng-click="spCtrl.send()" class="btn btn-default">
             <span class="glyphicon glyphicon-send"></span>
             Programmer
         </button>
-        <button ng-show="!modeEdition" ng-click="addBlock()" class="btn btn-default btn-lg pull-right">
+        <button ng-show="!modeEdition" ng-click="spCtrl.addBlock()" class="btn btn-default btn-lg pull-right">
             <span class="glyphicon glyphicon-plus"></span>
             Ajouter un block
         </button>
@@ -39,14 +39,14 @@
 </div>
 
 <script type="text/ng-template" id="editionMode.html">
-    <divider-editor  ng-if="currentBlock.type === 'divider'" block="currentBlock"></divider-editor>
-    <text-editor ng-if="currentBlock.type == 'text'" block="currentBlock"></text-editor>
-    <image-picker ng-if="currentBlock.type == 'file'"  block="currentBlock"></image-picker>
-    <button-editor ng-if="currentBlock.type == 'button'" block="currentBlock"></button-editor>
-    <link-editor ng-if="currentBlock.type == 'unsub' || currentBlock.type == 'online'" block="currentBlock"></link-editor>
-    <div ng-if="currentBlock.type == 'double' || currentBlock.type == 'footer'">
+    <divider-editor  ng-if="spCtrl.currentBlock.type === 'divider'" block="spCtrl.currentBlock"></divider-editor>
+    <text-editor ng-if="spCtrl.currentBlock.type == 'text'" block="spCtrl.currentBlock"></text-editor>
+    <image-picker ng-if="spCtrl.currentBlock.type == 'file'"  block="spCtrl.currentBlock"></image-picker>
+    <button-editor ng-if="spCtrl.currentBlock.type == 'button'" block="spCtrl.currentBlock"></button-editor>
+    <link-editor ng-if="spCtrl.currentBlock.type == 'unsub' || spCtrl.currentBlock.type == 'online'" block="spCtrl.currentBlock"></link-editor>
+    <div ng-if="spCtrl.currentBlock.type == 'double' || spCtrl.currentBlock.type == 'footer'">
         <accordion>
-            <accordion-group ng-repeat="cell in currentBlock.cells track by $index"
+            <accordion-group ng-repeat="cell in spCtrl.currentBlock.cells track by $index"
                     ng-switch on="cell.type"
                     heading="Section #{{$index + 1}}">
                 <text-editor ng-switch-when="text" block="cell"></text-editor>

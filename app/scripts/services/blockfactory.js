@@ -166,22 +166,6 @@ angular.module('newsletterEditorApp')
       function generateSubBlocks(nbColumns, order) {
         if (nbColumns < 2) { return []; }
         var cells = [];
-        /**
-         * Détermirne le type de chaque cellule.
-         * @param typOfContent
-         * @returns {*}
-         */
-        function getType(typOfContent) {
-          var type;
-          if (typOfContent === 'text') {
-            type = 'txt';
-          } else if (typOfContent === 'file') {
-            type = 'file';
-          } else if (typOfContent === 'social') {
-            type = 'social';
-          }
-          return type;
-        }
         var typeArray = order.split('-');
 
         for (var i = 0; i < nbColumns; i++) {
@@ -201,11 +185,11 @@ angular.module('newsletterEditorApp')
         if (content) { return content; }
         switch (type) {
           case 'text':
-            return '<p>Déposer votre contenu ici</p>';
+            return '<p>Contenu</p>';
           case 'file':
-            return '<p>Sélectionner un fichier</p>';
+            return '<p>Fichier</p>';
           case 'unsub':
-            return '<a rel="unsubscribe">Lien de désinscription</a>';
+            return '<a rel="unsubscribe">Unsubscribe</a>';
           case 'online':
             return '<a rel="online">Voir la version en ligne</a>';
           case 'button':

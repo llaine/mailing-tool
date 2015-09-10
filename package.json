@@ -1,7 +1,8 @@
 {
   "name": "newslettereditor",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+  },
   "repository": {},
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -30,7 +31,8 @@
     "jscs-jsdoc": "~1.0.1",
     "jscs-stylish": "^0.3.1",
     "jshint-stylish": "^1.0.0",
-    "karma-jasmine": "*",
+    "karma": "~0.13.9",
+    "karma-jasmine": "~0.3.6",
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-phantomjs-launcher": "^0.2.0",
     "load-grunt-tasks": "^3.1.0",

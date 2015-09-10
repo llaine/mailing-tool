@@ -14,9 +14,16 @@ angular.module('newsletterEditorApp')
       scope: {
         block: '='
       },
+      controllerAs:'btnEditorCtrl',
+      bindToController:true,
+      /**
+       * Le controller de la directive.
+       * @param $scope
+       */
       controller: function($scope) {
+        var self = this;
         // Les options de style par défaut qu'on peut appliquer sur le bouton.
-        this.options = {
+        self.options = {
           height:this.block.attributes.btn ? this.block.attributes.btn.height : 32,
           width:this.block.attributes.btn ? this.block.attributes.btn.width : 96,
           bords:this.block.attributes.btn ? this.block.attributes.btn.bords  : '5px',
@@ -30,16 +37,16 @@ angular.module('newsletterEditorApp')
          * Lorsqu'on change le contenu du bouton,
          * mets à jour celui dans le model.
          */
-        this.changes = function() {
+        self.changes = function() {
           var style = {
-            height:this.options.height + 'px',
-            width:this.options.width + 'px',
-            'border-radius': this.options.bords,
-            'background-color': this.options.bgColor
+            height:self.options.height + 'px',
+            width:self.options.width + 'px',
+            'border-radius': self.options.bords,
+            'background-color': self.options.bgColor
           };
           var align;
 
-          switch (this.options.dispo) {
+          switch (self.options.dispo) {
             case 'left':
               align = 'pull-left';
               break;
@@ -52,32 +59,29 @@ angular.module('newsletterEditorApp')
           }
 
           var content = '<button class="btn btn-default ' + align + '" ng-style="' + JSON.stringify(style) +'">' +
-                        '<a href="' + this.options.link + '">' + this.options.txt + '</a>' +
+                        '<a href="' + self.options.link + '">' + self.options.txt + '</a>' +
                         '</button>';
 
-          this.block.setStyle(style, 'button');
-          this.block.content = content;
+          self.block.setStyle(style, 'button');
+          self.block.content = content;
           // Stocke les méta données du bouton, pour les récupérer + facilement par la suite
-          this.block.attributes.btn = this.options;
+          self.block.attributes.btn = self.options;
         };
 
         // Je veux que la width du bouton, soit toujours plus grande que le texte
         // donc j'augmente la width au fur et a mesure que le texte grandit.
-        $scope.$watch(angular.bind(this,
+        $scope.$watch(angular.bind(self,
             function() {
-              return this.options.txt;
+              return self.options.txt;
             }),
             function(newVal, oldVal) {
               if (oldVal.length < newVal.length && newVal.length > 12) {
-                this.options.width += 10;
+                self.options.width += 10;
               } else {
-                this.options.width = 96;
+                self.options.width = 96;
               }
-            }.bind(this)
+            }
         );
-
-      },
-      controllerAs:'btnEditorCtrl',
-      bindToController:true
+      }
     };
   });

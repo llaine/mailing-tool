@@ -6,7 +6,7 @@
                 class="dropzone"
                 ng-repeat="block in blocks track by $index"
                 ng-class="{'mailFooter': block.type === 'footer', 'mailHr': block.type === 'divider'}"
-                ng-click="update($event, block)"
+                ng-click="vm.update($event, block)"
                 ng-style="block.metaStyle">
                 <td ng-class="{'emailImg': block.type === 'file',
                         'mailSocial': block.type === 'social',
@@ -21,10 +21,10 @@
                         <div class="mailEditIco">
                             <a class="no-style" href ><span class="glyphicon glyphicon-pencil"></span></a>
                         </div>
-                        <div class="mailEditIco" ng-click="duplicate($event, block);">
+                        <div class="mailEditIco" ng-click="vm.duplicate($event, block);">
                             <a class="no-style" href ><span class="glyphicon glyphicon-duplicate"></span></a>
                         </div>
-                        <div class="mailEditIco" ng-click="delete($event, block);">
+                        <div class="mailEditIco" ng-click="vm.delete($event, block);">
                             <a class="no-style" href ><span class="glyphicon glyphicon-trash"></span></a>
                         </div>
                     </div>

@@ -11,6 +11,8 @@ angular.module('newsletterEditorApp')
     return {
       templateUrl: 'views/directives/settingsPanel.html',
       restrict: 'E',
-      controller: 'SettingsPanelCtrl'
+      controller: 'SettingsPanelCtrl',
+      controllerAs:'spCtrl',
+      bindToController:true
     };
   });
