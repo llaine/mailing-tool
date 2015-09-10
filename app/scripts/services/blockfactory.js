@@ -166,22 +166,6 @@ angular.module('newsletterEditorApp')
       function generateSubBlocks(nbColumns, order) {
         if (nbColumns < 2) { return []; }
         var cells = [];
-        /**
-         * Détermirne le type de chaque cellule.
-         * @param typOfContent
-         * @returns {*}
-         */
-        function getType(typOfContent) {
-          var type;
-          if (typOfContent === 'text') {
-            type = 'txt';
-          } else if (typOfContent === 'file') {
-            type = 'file';
-          } else if (typOfContent === 'social') {
-            type = 'social';
-          }
-          return type;
-        }
         var typeArray = order.split('-');
 
         for (var i = 0; i < nbColumns; i++) {

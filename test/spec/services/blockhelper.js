@@ -7,7 +7,7 @@ describe('Service: BlockHelper', function () {
 
   // instantiate service
   var BlockHelper;
-  beforeEach(inject(function (_BlockHelper_) {
+  beforeEach(inject(function(_BlockHelper_) {
     BlockHelper = _BlockHelper_;
   }));
 
