@@ -144,6 +144,10 @@ table.emailCompo {
     margin:0px auto;
 }
 
+.emailCompo tr {
+    word-wrap: break-word;
+}
+
 .emailCompo th, .emailCompo tr{
     height:60px;
 }
@@ -223,6 +227,9 @@ table.emailCompo {
     color:#AAA;
 }
 
+#emailTemplate1 {
+    table-layout: fixed;
+}
 
 
 /* personalisation Template 1 ***************************/
@@ -329,7 +336,8 @@ td.mail-list-stats .progress {
     margin-left: 5px;   
     min-width:12rem;
     min-height:11rem;
-    
+    width: 19%;
+    word-wrap: break-word;
 }
 #mailOutils2 li.draggable .glyphicon{
     font-size: 3rem;
