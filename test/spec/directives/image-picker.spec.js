@@ -89,4 +89,8 @@ describe('Directive: imagePicker', function() {
     controller.open();
     expect(modal.open).toHaveBeenCalled();
   });
+
+  it('doit avoir une fonction permettant de mettre à jour le lien', function() {
+    expect(controller.updateLink()).toBeDefined();
+  });
 });

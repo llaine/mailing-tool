@@ -385,7 +385,7 @@ vertical-align: middle;
     border: 1px solid #E0E0E0;
     background-image: url(http://bobelweb.eu/boutique/img/p/6/7/67-large_default.jpg);
     padding-bottom: 66.67%;
-
+    background-repeat: no-repeat;
 }
 #fileManager .uploadGrid .uploadFileTitle {
     overflow: hidden;

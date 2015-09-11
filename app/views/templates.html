@@ -1,11 +1,10 @@
 <div class="col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 main">
-
     <div class="row" id="createNews">
         <tabset>
             <tab heading="Modèles drag'n'drop">
                 <div class="col-sm-6 col-md-4 col-lg-3 marginBottom placeholders" ng-repeat="template in templates.availableTemplates">
                     <div class="createNewsTemp" ng-class="{'active': templates.selected.id === template.id}">
-                        <img ng-src="{{ template.image }}">
+                        <html-to-img html="{{ templates.html }}"></html-to-img>
                         <br>{{ template.name }}<br>
                         <a class="btn btn-bob" ng-click="templates.select(template)">Choisir</a>
                     </div>
@@ -13,7 +12,7 @@
             </tab>
             <tab heading="Code HTML">
                 Déposer votre code HTML
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
             </tab>
         </tabset>
         <div class="col-sm-12 col-lg-12 contactCont placeholder">

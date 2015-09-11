@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('newsletterEditorApp')
-  .controller('ModalFileManagerCtrl', function($scope, $modalInstance, CurrentBlock, CurrentLink, AviaryEditor, FileManager) {
+  .controller('ModalFileManagerCtrl', function($scope, $modalInstance, CurrentBlock, AviaryEditor, FileManager) {
     $scope.images = FileManager.getAll();
 
     /**
@@ -19,12 +19,12 @@ angular.module('newsletterEditorApp')
     $scope.select = function(image) {
       var randomId = Math.random().toString(36).slice(2);
       var imgWithoutLink = '<img id="' + randomId + '" src="' + image.url + '" class="img-rounded"/>';
-      var imgWithLink = CurrentLink ? '<a target="_blank" href="' + encodeURI(CurrentLink) + '">' + imgWithoutLink + '</a>' : imgWithoutLink;
+      var imgWithLink = CurrentBlock.attributes.link ? '<a target="_blank" href="' + encodeURI(CurrentBlock.attributes.link) + '">' + imgWithoutLink + '</a>' : imgWithoutLink;
 
       CurrentBlock.attributes = {
         id: randomId,
         url: image.url,
-        link: CurrentLink
+        link:CurrentBlock.attributes.link
       };
 
       CurrentBlock.content = imgWithLink;

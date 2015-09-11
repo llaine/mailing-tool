@@ -230,10 +230,8 @@ angular.module('newsletterEditorApp')
             var blockDouble = angular.element(cells).scope().block;
 
             for (var i = 0 ; i < blockDouble.cells.length ; ++i) {
-              blockDouble.cells[i].setStyle({width:newRule[i] + '%'}, cells[i].tagName)
+              blockDouble.cells[i].setStyle({width:newRule[i] + '%'}, cells[i].tagName);
             }
-
-            vm.applyStyle(blockDouble);
           });
         };
       }

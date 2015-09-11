@@ -169,7 +169,25 @@ angular.module('newsletterEditorApp')
         var typeArray = order.split('-');
 
         for (var i = 0; i < nbColumns; i++) {
-          cells.push(new BlockSimple({type:typeArray[i]}));
+          var prototype;
+          switch (typeArray[i]) {
+            case 'text':
+              prototype = BlockSimple;
+              break;
+            case 'file':
+              prototype = BlockFile;
+              break;
+            case 'unsub':
+              prototype = BlockAction;
+              break;
+            case 'online':
+              prototype = BlockAction;
+              break;
+            case 'button':
+              prototype = BlockAction;
+              break;
+          }
+          cells.push(new prototype({type:typeArray[i]}));
         }
 
         return cells;
@@ -243,7 +261,7 @@ angular.module('newsletterEditorApp')
           var div = document.createElement('div');
           div.innerHTML = obj.content;
 
-          for (var tag in self.style) {
+          for (var tag in self.contentStyle) {
             if (self.contentStyle.hasOwnProperty(tag)) {
               var item = angular.element(div).find(tag);
               item.css(self.contentStyle[tag]);

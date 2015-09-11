@@ -1,12 +1,23 @@
 <div id="imagePick">
-    <button type="button" class="btn btn-primary btn-lg" ng-click="vm.open()">
-        Choisir une image
-    </button>
-
-    <div>
-        Image sélectionnée :
-        <img ng-src="{{ vm.currentImageUrl }}" />
-        <input type="text" ng-model="vm.linkForImage" placeholder="Ajouter un lien à l'image"/>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary btn-lg" ng-click="imgPickCtrl.open()">
+                Choisir une image
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4" ng-if="imgPickCtrl.block.attributes.url">
+            Image courante
+            <img class="img-thumbnail"  ng-src="{{ imgPickCtrl.block.attributes.url }}" />
+        </div>
+        <div class="col-md-6">
+            Lien sur l'image
+            <input type="text" class="form-control"
+                   ng-model="imgPickCtrl.block.attributes.link" placeholder="Ajouter un lien à l'image"/>
+            <button ng-if="imgPickCtrl.block.attributes.url" class="btn btn-default btn-sm"
+                    ng-click="imgPickCtrl.updateLink()">Mettre à jour le lien</button>
+        </div>
     </div>
 </div>
 

@@ -14,7 +14,7 @@ angular.module('newsletterEditorApp')
       scope: {
         block:'='
       },
-      controllerAs: 'vm',
+      controllerAs: 'imgPickCtrl',
       bindToController: true,
       /**
        * Controller de la directive
@@ -28,6 +28,23 @@ angular.module('newsletterEditorApp')
           self.currentImageUrl = self.block.attributes.url;
           self.linkForImage = self.block.attributes.link;
         }
+
+        /**
+         * Mets à jour le lien sur l'image.
+         */
+        self.updateLink = function() {
+          if (!self.block.attributes.link) {
+            window.alert('Merci de rentrer un lien');
+          } else {
+            var img = '<img id="' + self.block.attributes.id + '" src="' +
+                self.block.attributes.url + '" class="img-rounded"/>';
+
+            self.block.content =  '<a target="_blank" href="' +
+                encodeURI(self.block.attributes.link) + '">' +
+                img + '</a>';
+
+          }
+        };
 
         /**
          * Ouvre la popup de gestionnaire des fichiers
@@ -45,14 +62,6 @@ angular.module('newsletterEditorApp')
                */
               CurrentBlock: function() {
                 return self.block;
-              },
-              /**
-               *
-               * @returns {*}
-               * @constructor
-               */
-              CurrentLink: function() {
-                return self.linkForImage;
               }
             }
           });
