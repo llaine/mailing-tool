@@ -338,6 +338,7 @@ td.mail-list-stats .progress {
     min-height:11rem;
     width: 19%;
     word-wrap: break-word;
+    white-space: normal;
 }
 #mailOutils2 li.draggable .glyphicon{
     font-size: 3rem;
