@@ -22,7 +22,7 @@ angular.module('newsletterEditorApp')
       controller: function() {
         this.options = {
           dispo:this.block.attributes.link ? this.block.attributes.link.dispo : 'left',
-          txt:this.block.attributes.link ? this.block.attributes.link.txt : ''
+          txt:this.block.attributes.link ? this.block.attributes.link.txt : 'Texte sur le lien'
         };
 
         /**

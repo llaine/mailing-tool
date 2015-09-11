@@ -19,34 +19,35 @@ angular.module('newsletterEditorApp')
          * @param opts
          */
         this.create = function(opts) {
-          var parent = null;
-
-          switch (opts.type) {
-            case 'text':
-              parent = BlockSimple;
-              break;
-            case 'file':
-              parent = BlockFile;
-              break;
-            case 'divider':
-              parent = BlockDivider;
-              break;
-            case 'unsub':
-              parent = BlockAction;
-              break;
-            case 'online':
-              parent = BlockAction;
-              break;
-            case 'button':
-              parent = BlockAction;
-              break;
-            case 'social':
-              parent = BlockMulti;
-              break;
-            case 'double':
-              parent = BlockMulti;
-              break;
+          /**
+           * Récupère le type de proto à instancier en
+           * fonction du type de block.
+           * @param type
+           */
+          function getType(type) {
+            switch (type) {
+              case 'text':
+                return BlockSimple;
+              case 'file':
+                return BlockFile;
+              case 'divider':
+                return BlockDivider;
+              case 'unsub':
+                return BlockAction;
+              case 'online':
+                return BlockAction;
+              case 'button':
+                return BlockAction;
+              case 'social':
+                return BlockMulti;
+              case 'double':
+                return BlockMulti;
+              default:
+                return null;
+            }
           }
+
+          var parent = getType(opts.type);
 
           if (parent === null) {
             throw 'Sous type indéfinie lors de la création du block';
@@ -144,16 +145,17 @@ angular.module('newsletterEditorApp')
        * @param node
        */
       function setStyle(style, node) {
+        var self = this;
         node = node.toLowerCase();
 
-        if (this.contentStyle[node]) {
+        if (self.contentStyle[node]) {
           for (var props in style) {
             if (style.hasOwnProperty(props)) {
-              this.contentStyle[node][props] = style[props];
+              self.contentStyle[node][props] = style[props];
             }
           }
         } else {
-          this.contentStyle[node] = style;
+          self.contentStyle[node] = style;
         }
       }
 
@@ -256,8 +258,8 @@ angular.module('newsletterEditorApp')
         var self = this;
         var strings = [];
 
-        for (var i = 0; i < this.cells.length; i++) {
-          var obj = this.cells[i];
+        for (var i = 0; i < self.cells.length; i++) {
+          var obj = self.cells[i];
           var div = document.createElement('div');
           div.innerHTML = obj.content;
 

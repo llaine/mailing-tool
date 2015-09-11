@@ -203,7 +203,6 @@ angular.module('newsletterEditorApp')
           position.top > 100 ? position.top = 100 : position.top;
           position.left > 100 ? position.left = 100 : position.left;
 
-          // TODO : Trouver une solution pour que ça fonctionne vraiment bien.
           applyStyle(images, {
             'margin-top': position.top + '%',
             'margin-left': position.left + '%'

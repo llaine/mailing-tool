@@ -77,6 +77,7 @@ angular.module('newsletterEditorApp')
 
     /**
      * Charge le template en fonction du paramètrs dans l'url.
+     * Si aucun paramètre passé, génère trois block de type texte.
      */
     function loadTemplate() {
       var bf = new BlockFactory();
@@ -94,12 +95,7 @@ angular.module('newsletterEditorApp')
         });
       } else {
         [1, 2, 3].forEach(function() {
-          blockStack.push(bf.create({
-              content:'Déposer votre contenu ici',
-              order:'text-text',
-              type:'double',
-              nbColumns:2})
-          );
+          blockStack.push(bf.create({type:'text'}));
         });
       }
     }

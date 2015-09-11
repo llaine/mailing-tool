@@ -69,6 +69,7 @@ describe('Directive: imagePicker', function() {
 
       beforeEach(function() {
         mockAttributes = {
+          id:'toto',
           url:'http://google.com',
           link:'http://bobelweb.eu/images/image1.jpg'
         };
@@ -91,6 +92,7 @@ describe('Directive: imagePicker', function() {
   });
 
   it('doit avoir une fonction permettant de mettre à jour le lien', function() {
-    expect(controller.updateLink()).toBeDefined();
+    expect(controller.updateLink).toBeDefined();
   });
+
 });

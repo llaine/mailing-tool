@@ -15,9 +15,23 @@ Run `grunt` for building and `grunt serve` for preview.
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma.
+L'application possède des test unitaires, situé dans `test/spec`
+
+Ces tests sont utiles pour comprendre le fonctionnement de chaque directive ainsi que vérifier le bon
+fonctionnement de l'application. 
+
+Karma va lancer Google Chrome pour effectuer la batterie de test. 
+
+`./node_modules/karma/bin/karma start test/karma.conf.js`
+
+Puis on ouvre la navigateur à l'adresse indiqué (généralement localhost:8081).
 
 
 ## Architecture
 
 L'application est décomposé en directive.
+
+![Schéma de "l'architecture" des directives](./archi_directive.png "Schéma de l'archi")
+
+
+

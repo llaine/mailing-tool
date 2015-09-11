@@ -136,6 +136,7 @@ table.mailResult {
     padding-top:15px;
     padding-bottom:15px;
     padding-right: 9px;
+    height: 500px;
 }
 table.emailCompo {
     width:600px;

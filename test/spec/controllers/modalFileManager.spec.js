@@ -16,14 +16,13 @@ describe('Controller: ModalFileManagerCtrl', function() {
     modalInstance = $modalInstance;
     var bf = new BlockFactory();
     currentBlock = bf.create({type:'file'});
-    CurrentLink = 'http://google.com';
+    currentBlock.attributes.link = 'http://google.com';
     $scope = $rootScope.$new();
 
     ModalFileManagerCtrl = $controller('ModalFileManagerCtrl', {
       $scope: $scope,
       $modalInstance: modalInstance,
       CurrentBlock: currentBlock,
-      CurrentLink: CurrentLink,
       AviaryEditor:AviaryMock,
       FileManager:FileManager
     });
@@ -51,7 +50,7 @@ describe('Controller: ModalFileManagerCtrl', function() {
 
           expect(currentBlock.attributes).not.toBeUndefined();
           expect(currentBlock.attributes.id).not.toBeUndefined();
-          expect(currentBlock.attributes.link).toEqual(CurrentLink);
+          expect(currentBlock.attributes.link).toEqual('http://google.com');
           expect(currentBlock.attributes.url).toEqual(image.url);
         }
     );
