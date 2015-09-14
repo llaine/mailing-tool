@@ -8,7 +8,7 @@
  * Factory in the newsletterEditorApp.
  */
 angular.module('newsletterEditorApp')
-  .factory('AviaryEditor', function(FileManager, $rootScope) {
+  .factory('AviaryEditor', function($rootScope, FileManager, EventEmiter) {
     var Aviary = window.Aviary || {};
 
     var featherEditor = new Aviary.Feather({
@@ -20,6 +20,9 @@ angular.module('newsletterEditorApp')
        */
       onSave: function(imageID, newURL) {
         FileManager.updateImage(imageID, newURL);
+
+        EventEmiter.emit('file:changed', {url:newURL});
+
         $rootScope.safeApply();
       }
     });
@@ -29,7 +32,7 @@ angular.module('newsletterEditorApp')
      * et la ligne du tableau dans laquelle l'image doit être.
      * @param image
      */
-    function launchEditor(image) {
+    function launchEditor(image, block) {
       featherEditor.launch({
         image: image.id,
         url: image.url

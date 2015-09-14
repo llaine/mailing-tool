@@ -201,11 +201,11 @@ table.emailCompo {
 }
 
 .emailCompo tr .active {
-    opacity: 0.9;
+    border: dashed 2px rgba(109, 63, 92, 0.5);
 }
 
 .emailCompo .state-hover {
-    opacity: 0.9;
+    border: dashed 2px rgba(109, 63, 92, 0.5);
 }
 
 .emailCompo tr:hover .btnAction{
@@ -362,14 +362,14 @@ td.mail-list-stats .progress {
 
 
 /* Modal Upload images */
-#fileManager .modal-dialog { width: 85%;}
-#fileManager #dropFileZone {
+.fileManager .modal-dialog { width: 85%;}
+.fileManager #dropFileZone {
     text-align: center;
     border:2px dashed grey;
     height:200px;
     padding-top:80px;
 }
-#fileManager #dropFileZone .glyphicon {
+.fileManager #dropFileZone .glyphicon {
     font-size: 3rem;
 }
 /*#uploadedFilesTable {
@@ -380,23 +380,23 @@ vertical-align: middle;
 }*/
 
 /* grille images de la bibli */ 
-#fileManager #searchUploadedForm  {
+.fileManager #searchUploadedForm  {
     width:100%;
 }
-#fileManager #searchUploadedForm .input-group {
+.fileManager #searchUploadedForm .input-group {
     width:100%;
 }
 
-#fileManager ul {
+.fileManager ul {
     padding:0px;
 }
-#fileManager li.uploadGrid{
+.fileManager li.uploadGrid{
     height: auto;
     list-style:none;
     margin:0;
     padding:8px;
 }
-#fileManager .uploadGrid .uploadImg{
+.fileManager .uploadGrid .uploadImg{
     height: auto;
     width: auto;
     background-position: 50% 50%;
@@ -408,19 +408,19 @@ vertical-align: middle;
     padding-bottom: 66.67%;
     background-repeat: no-repeat;
 }
-#fileManager .uploadGrid .uploadFileTitle {
+.fileManager .uploadGrid .uploadFileTitle {
     overflow: hidden;
 }
-#fileManager .imgEdit {
+.fileManager .imgEdit {
     padding-bottom: 0px;
     position: absolute;
     top: 32px;
     left: 18px;
 }
-#fileManager .uploadGrid .btn {
+.fileManager .uploadGrid .btn {
     width:100%;
 }
-#fileManager .imgEdit .btn {
+.fileManager .imgEdit .btn {
     font-size: 2rem;
     width:3rem;
     height:3rem;
@@ -429,4 +429,11 @@ vertical-align: middle;
 
 .modal-dialog {
     width: 85%;
+}
+
+
+.edition-preview-img > button {
+    position: absolute;
+    top: 17%;
+    left: 13%;
 }

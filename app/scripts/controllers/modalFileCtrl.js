@@ -1,6 +1,9 @@
 'use strict';
 
 angular.module('newsletterEditorApp')
+  .controller('UploadImageCtrl', function() {
+    console.log('toto');
+  })
   .controller('ModalFileManagerCtrl', function($scope, $modalInstance, CurrentBlock, AviaryEditor, FileManager) {
     $scope.images = FileManager.getAll();
 
@@ -17,7 +20,7 @@ angular.module('newsletterEditorApp')
      * @param image
      */
     $scope.select = function(image) {
-      var randomId = Math.random().toString(36).slice(2);
+      var randomId = image.id;
       var imgWithoutLink = '<img id="' + randomId + '" src="' + image.url + '" class="img-rounded"/>';
       var imgWithLink = CurrentBlock.attributes.link ? '<a target="_blank" href="' + encodeURI(CurrentBlock.attributes.link) + '">' + imgWithoutLink + '</a>' : imgWithoutLink;
 
@@ -28,6 +31,7 @@ angular.module('newsletterEditorApp')
       };
 
       CurrentBlock.content = imgWithLink;
+      $modalInstance.close();
     };
 
     /**

@@ -183,21 +183,6 @@ angular.module('newsletterEditorApp')
           applyStyle(images, {
             width:vm.params.layout.images.width  + 'px'
           });
-
-          var container = angular.element('#container-for-draggable');
-          var width = parseInt(container.css('width'));
-
-          if (vm.params.layout.images.width > width) {
-            width += 20;
-          } else {
-            width -= 20;
-          }
-
-          console.log(width);
-          console.log(vm.params.layout.images.width);
-
-          container.css({width:width});
-
         };
 
         /**

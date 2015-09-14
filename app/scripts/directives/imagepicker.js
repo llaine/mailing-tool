@@ -7,7 +7,7 @@
  * # imagePicker
  */
 angular.module('newsletterEditorApp')
-  .directive('imagePicker', function($modal) {
+  .directive('imagePicker', function($modal, AviaryEditor, EventEmiter) {
     return {
       templateUrl: 'views/directives/imagePicker.html',
       restrict: 'E',
@@ -23,6 +23,11 @@ angular.module('newsletterEditorApp')
       controller: function() {
         var self = this;
 
+        EventEmiter.on('file:changed', function(evt, opts) {
+          self.block.attributes.url = opts.url;
+          self.updateLink(true);
+        });
+
         if (self.block.attributes) {
           // Assignation de l'image par défaut et du lien.
           self.currentImageUrl = self.block.attributes.url;
@@ -32,25 +37,41 @@ angular.module('newsletterEditorApp')
         /**
          * Mets à jour le lien sur l'image.
          */
-        self.updateLink = function() {
-          if (!self.block.attributes.link) {
-            window.alert('Merci de rentrer un lien');
-          } else {
-            var img = '<img id="' + self.block.attributes.id + '" src="' +
-                self.block.attributes.url + '" class="img-rounded"/>';
+        self.updateLink = function(updateImg) {
+          var img = '<img id="' + self.block.attributes.id + '" src="' +
+              self.block.attributes.url + '" class="img-rounded"/>';
 
+          if (updateImg && !self.block.attributes.link) {
+            self.block.content = img;
+          } else if (self.block.attributes.link) {
             self.block.content =  '<a target="_blank" href="' +
                 encodeURI(self.block.attributes.link) + '">' +
                 img + '</a>';
-
           }
         };
 
         /**
-         * Ouvre la popup de gestionnaire des fichiers
+         *
+         * @param image
          */
-        self.open = function() {
+        self.modify = function(image) {
+          AviaryEditor.launchEditor(image);
+        };
 
+        /**
+         * Ouvre la popup d'upload de fichier
+         */
+        self.openUploader = function() {
+          $modal.open({
+            templateUrl:'uploadImage.html',
+            controller:'UploadImageCtrl'
+          });
+        };
+
+        /**
+         * Ouvre la popup de gestionnaire de fichier.
+         */
+        self.openImageManager = function() {
           $modal.open({
             templateUrl: 'fileManager.html',
             controller: 'ModalFileManagerCtrl',
@@ -66,7 +87,6 @@ angular.module('newsletterEditorApp')
             }
           });
         };
-
       }
     };
   });

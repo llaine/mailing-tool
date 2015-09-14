@@ -10,8 +10,8 @@ angular.module('newsletterEditorApp')
   .directive('positionBtn', function() {
     return {
       template:
-      '<div id="container-for-draggable" style="background: #e3e3e3; height: 50px; width: 86px;"> ' +
-        '<span id="btn-movable" class="btn btn-default btn-sm" draggable containment="parent">' +
+      '<div id="container-for-draggable" style="background: #e3e3e3; height: 75px; width: 100px;"> ' +
+        '<span id="btn-movable" class="btn btn-default" draggable containment="parent">' +
           '<span class="glyphicon glyphicon-picture"></span>' +
         '</span>' +
       '</div>',
