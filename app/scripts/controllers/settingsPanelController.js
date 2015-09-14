@@ -47,15 +47,6 @@ angular.module('newsletterEditorApp')
       console.log(vm.blocks);
     };
 
-    /* toggle des tabs. */
-    $('.btn-group a').click(function(e) {
-      e.preventDefault();
-      $(this).tab('show');
-
-      $(this).siblings().removeClass('active');
-      $(this).addClass('active');
-    });
-
     EventEmiter.on('edition:toggled', function(event, values) {
       /* On ne peut modifier qu'un seul block à la fois.
        * Donc si la modif était déjà active sur un autre, on supprime. */

@@ -75,11 +75,11 @@ table.mailResult {
 }
 
 /* navigation onglets template *********************************/
-.nav-tabs.navTemplate {
+.nav-tabs {
     border-bottom: 1px solid #DDD;
 }
 
-.nav-tabs.navTemplate > li > a {
+.nav-tabs > li > a {
     padding: 10px 15px;
 }
 

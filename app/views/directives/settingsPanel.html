@@ -1,10 +1,11 @@
 <div id="mailOutils2">
     <h2 ng-show="modeEdition" class="text-center">Modification du block {{ spCtrl.currentBlock.type }}</h2>
+
     <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-        <a ng-hide="spCtrl.currentBlock.type == 'divider'" href="#list" class="btn btn-default active" role="button" data-toggle="tab">
+        <a href="#list" class="btn btn-default active" role="button" data-toggle="tab">
             Content
         </a>
-        <a ng-hide="spCtrl.currentBlock.type == 'divider'" href="#settings" class="btn btn-default" role="button" data-toggle="tab">
+        <a href="#settings" class="btn btn-default" role="button" data-toggle="tab">
             <span ng-show="modeEdition">Style</span>
             <span ng-show="!modeEdition">Design</span>
         </a>
