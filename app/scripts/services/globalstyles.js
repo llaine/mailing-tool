@@ -16,7 +16,8 @@ angular.module('newsletterEditorApp')
       getLayoutForBlockDouble:getLayoutForBlockDouble,
       getDefaultParams:getDefaultParams,
       getMarginTypes:getMarginTypes,
-      getMarginSize:getMarginSize
+      getMarginSize:getMarginSize,
+      getDefaultButtonParams:getDefaultButtonParams
     };
 
     /**
@@ -89,14 +90,37 @@ angular.module('newsletterEditorApp')
     /**
      * Layout qu'on peut appliquer sur les blocks double (les tables)
      */
-    function getLayoutForBlockDouble() {
-      return [
-        {layout:'1/4', value:'25-75'},
-        {layout:'1/3', value:'37.5-75'},
-        {layout:'1/2', value:'50-50'},
-        {layout:'2/3', value:'75-50'},
-        {layout:'3/4', value:'75-25'}
-      ];
+    function getLayoutForBlockDouble(isDouble) {
+      if (isDouble) {
+        return [
+          {layout:'1/4', value:'25-75'},
+          {layout:'1/3', value:'37.5-75'}
+        ];
+      } else {
+        return [
+          {layout:'1/4', value:'25-75'},
+          {layout:'1/3', value:'37.5-75'},
+          {layout:'1/2', value:'50-50'},
+          {layout:'2/3', value:'75-50'},
+          {layout:'3/4', value:'75-25'}
+        ];
+      }
+    }
+
+    /**
+     * Paramètres par défaut des block de type button
+     * @returns {{link: string, txt: string, height: number, width: number, bords: string, dispo: string, bgColor: string}}
+     */
+    function getDefaultButtonParams() {
+      return {
+        link:'http://example.com',
+        txt:'Cliquez ici !',
+        height:32,
+        width:96,
+        bords:'5px',
+        dispo:'left',
+        bgColor:'#F2F2F2'
+      };
     }
 
     /**
@@ -141,8 +165,17 @@ angular.module('newsletterEditorApp')
             },
             width: 140
           }
+        },
+        button: {
+          height:32,
+          width:96,
+          bords:'5px',
+          dispo:'left',
+          backgroundColor:'#F2F2F2',
+          link:'http://example.com',
+          txt:'Cliquze ici!'
         }
-      }
+      };
     }
 
   });

@@ -1,4 +1,42 @@
 <accordion>
+    <accordion-group heading="Bouton" ng-if="stylePickerCtrl.block.type === 'button'">
+        <h5>Taille</h5>
+        <div class="form-group">
+            <label for="height">Hauteur (px)</label>
+            <input type="number" id="height"
+                   class="form-control"
+                   ng-change="stylePickerCtrl.changesButton()"
+                   ng-model="stylePickerCtrl.block.attributes.btn.height">
+
+            <label for="width">Largueur (px)</label>
+            <input type="number" id="width"
+                   class="form-control"
+                   ng-change="stylePickerCtrl.changesButton()"
+                   ng-model="stylePickerCtrl.block.attributes.btn.width">
+        </div>
+        <h5>Arrondis</h5>
+        <div class="form-group">
+            <select class="form-control"
+                    ng-change="stylePickerCtrl.changesButton()"
+                    ng-options="o as o for o in ['5px', '10px', '15px', '20px', '25px']"
+                    ng-model="stylePickerCtrl.block.attributes.btn.bords">
+            </select>
+        </div>
+        <h5>Disposition</h5>
+        <div class="form-group">
+            <select name="dispo" class="form-control"
+                    ng-change="stylePickerCtrl.changesButton()" id="dispo"
+                    ng-model="stylePickerCtrl.block.attributes.btn.dispo"
+                    ng-options="o as o for o in ['left', 'center', 'right']"></select>
+        </div>
+        <h5>Couleur</h5>
+        <div class="form-group">
+            <input type="color" class="form-control"
+                   ng-model="stylePickerCtrl.block.attributes.btn.backgroundColor"
+                   ng-change="stylePickerCtrl.changesButton()">
+        </div>
+
+    </accordion-group>
     <accordion-group heading="Page" ng-if="!stylePickerCtrl.displayGlobalStyles">
         <h5>Couleur de fond</h5>
         <div class="form-group">
@@ -33,7 +71,7 @@
             </div>
         </form>
     </accordion-group>
-    <accordion-group heading="Bloc double" ng-show="stylePickerCtrl.block.type === 'double'">
+    <accordion-group heading="Bloc double" ng-if="stylePickerCtrl.block.type === 'double'">
         <h5>Layout</h5>
         <div class="form-group">
             <select id="layoutDouble" class="form-control form-sm"
@@ -42,7 +80,7 @@
                     ng-options="c.layout for c in stylePickerCtrl.layoutDouble track by c.value"></select>
         </div>
     </accordion-group>
-    <accordion-group heading="Titres">
+    <accordion-group heading="Titres" ng-if="stylePickerCtrl.block.type !== 'file'">
         <form>
             <div class="form-group">
                 <div class="form-inline">
@@ -79,8 +117,8 @@
                 </div>
             </div>
         </form>
-    </accordion-group>
-    <accordion-group heading="Textes">
+    </accordion-group ng-show= ng-ng-sho ng-sho>
+    <accordion-group heading="Textes" ng-if="stylePickerCtrl.block.type !== 'file'">
         <form id="paragraphs">
             <div class="form-group" >
                 <label for="textColor">Couleur de texte</label>
@@ -125,7 +163,7 @@
             </div>
         </form>
     </accordion-group>
-    <accordion-group heading="Images" >
+    <accordion-group heading="Images" ng-if="stylePickerCtrl.block.type === 'double' || stylePickerCtrl.block.type === 'file'">
         <h5>Images</h5>
         <div class="form-group">
             <label>Marges (Déplacer le bouton)</label>

@@ -28,9 +28,43 @@ angular.module('newsletterEditorApp')
         vm.fonts = GlobalStyles.getFonts();
         vm.sizeTitle = GlobalStyles.getTitleSize();
         vm.size = GlobalStyles.getParagraphSize();
-        vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble();
         vm.marginType = GlobalStyles.getMarginTypes();
         vm.marginSize = GlobalStyles.getMarginSize();
+        if (vm.block) {
+          vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble(vm.block.type === 'double');
+        }
+
+        /**
+         * Change les style des boutons
+         */
+        vm.changesButton = function() {
+          var style = {
+            height:vm.block.attributes.btn.height + 'px',
+            width:vm.block.attributes.btn.width + 'px',
+            'border-radius': vm.block.attributes.btn.bords,
+            'background-color': vm.block.attributes.btn.backgroundColor
+          };
+          var align;
+
+          switch (vm.block.attributes.btn.dispo) {
+            case 'left':
+              align = 'pull-left';
+              break;
+            case 'right':
+              align = 'pull-right';
+              break;
+            case 'center':
+              align = 'center-block';
+              break;
+          }
+
+          var content = '<button class="btn btn-default ' + align + '" ng-style="' + JSON.stringify(style) + '">' +
+              '<a href="' + vm.block.attributes.btn.link + '">' + vm.block.attributes.btn.txt + '</a>' +
+              '</button>';
+
+          vm.block.setStyle(style, 'button');
+          vm.block.content = content;
+        };
 
         /**
          * Mets en transparent, le background de la row sélectionné.
@@ -57,6 +91,7 @@ angular.module('newsletterEditorApp')
         EventEmiter.on('panel:closed', function() {
           vm.currentRowEdited = false;
           vm.displayGlobalStyles = false;
+          vm.block = undefined;
         });
 
         /**

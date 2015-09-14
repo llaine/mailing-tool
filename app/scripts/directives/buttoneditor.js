@@ -22,63 +22,50 @@ angular.module('newsletterEditorApp')
        */
       controller: function($scope) {
         var self = this;
-        // Les options de style par défaut qu'on peut appliquer sur le bouton.
-        self.options = {
-          height:this.block.attributes.btn ? this.block.attributes.btn.height : 32,
-          width:this.block.attributes.btn ? this.block.attributes.btn.width : 96,
-          bords:this.block.attributes.btn ? this.block.attributes.btn.bords  : '5px',
-          link:this.block.attributes.btn ? this.block.attributes.btn.link  : '',
-          dispo:this.block.attributes.btn ? this.block.attributes.btn.dispo  : 'left',
-          bgColor:this.block.attributes.btn ? this.block.attributes.btn.bgColor  : '#F2F2F2',
-          txt:this.block.attributes.btn ? this.block.attributes.btn.txt : 'Cliquez ici !'
-        };
 
+        // Setup des paramètres par défaut
+        if (Object.keys(self.block.attributes.btn).length === 0) {
+          self.block.attributes.btn ={
+            height:32,
+            width:96,
+            bords:'5px',
+            dispo:'left',
+            backgroundColor:'#F2F2F2',
+            link:'http://example.com',
+            txt:'Cliquze ici!'
+          }
+        }
         /**
          * Lorsqu'on change le contenu du bouton,
          * mets à jour celui dans le model.
          */
         self.changes = function() {
           var style = {
-            height:self.options.height + 'px',
-            width:self.options.width + 'px',
-            'border-radius': self.options.bords,
-            'background-color': self.options.bgColor
+            height:self.block.attributes.btn.height + 'px',
+            width:self.block.attributes.btn.width + 'px',
+            'border-radius': self.block.attributes.btn.bords,
+            'background-color': self.block.attributes.btn.bgColor
           };
-          var align;
 
-          switch (self.options.dispo) {
-            case 'left':
-              align = 'pull-left';
-              break;
-            case 'right':
-              align = 'pull-right';
-              break;
-            case 'center':
-              align = 'center-block';
-              break;
-          }
-
-          var content = '<button class="btn btn-default ' + align + '" ng-style="' + JSON.stringify(style) +'">' +
-                        '<a href="' + self.options.link + '">' + self.options.txt + '</a>' +
-                        '</button>';
-
-          self.block.setStyle(style, 'button');
-          self.block.content = content;
-          // Stocke les méta données du bouton, pour les récupérer + facilement par la suite
-          self.block.attributes.btn = self.options;
+          self.block.content = '<button class="btn btn-default ' +
+              self.block.attributes.btn.dispo +
+              '" ng-style="' + JSON.stringify(style) + '">' +
+              '<a href="' + self.block.attributes.btn.link + '">' +
+              self.block.attributes.btn.txt + '</a>' +
+              '</button>';
         };
 
         // Je veux que la width du bouton, soit toujours plus grande que le texte
         // donc j'augmente la width au fur et a mesure que le texte grandit.
         $scope.$watch(angular.bind(self,
             function() {
-              return self.options.txt;
+              return self.block.attributes.btn.txt;
             }),
             function(newVal, oldVal) {
               if (oldVal.length < newVal.length && newVal.length > 12) {
-                self.options.width += 10;
+                self.block.attributes.btn.width += 10;
               } else {
-                self.options.width = 96;
+                self.block.attributes.btn.width = 96;
               }
             }
         );
