@@ -12,7 +12,8 @@ angular.module('newsletterEditorApp')
      * Affiche le contenu de la tab "choose content"
      */
     function displayContentTab() {
-      $('.btn-group a[href="#list"]').tab('show');
+      $('.btn-group:eq(0)').tab('show');
+      $('#btnBlockChoices').siblings().removeClass('active').addClass('active');
     }
 
     /**

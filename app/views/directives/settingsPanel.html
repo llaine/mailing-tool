@@ -9,14 +9,12 @@
     </h2>
 
     <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-        <a href="#list" class="btn btn-default active" role="button" data-toggle="tab">
-            Choix des blocs
-        </a>
+        <a href="#list" class="btn btn-default active" role="button" data-toggle="tab" ng-hide="spCtrl.currentBlock.type == 'divider'">Choix des blocs</a>
         <a href="#settings" class="btn btn-default" role="button" data-toggle="tab">Styles</a>
     </div>
 
     <div class="tab-content" id="mailOutils3">
-        <div id="list" role="tabpanel" class="tab-pane scrollable active">
+        <div id="list" role="tabpanel" class="tab-pane scrollable active" ng-hide="spCtrl.currentBlock.type == 'divider'">
             <br/>
             <div ng-include="modeEdition ? 'editionMode.html' : 'chooseBlock.html'"></div>
         </div>
@@ -27,7 +25,9 @@
     </div>
 
     <div>
-        <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="spCtrl.saveAndClose()">Valider et fermer</button>
+        <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="spCtrl.saveAndClose()">
+            Valider et fermer
+        </button>
         <button type="button" ng-click="vm.preview()" class="btn btn-default">
             <span class="glyphicon glyphicon-export"></span>
             Prévisualiser

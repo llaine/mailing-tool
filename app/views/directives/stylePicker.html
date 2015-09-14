@@ -1,5 +1,5 @@
-<accordion>
-    <accordion-group heading="Bouton" ng-if="stylePickerCtrl.block.type === 'button'">
+<accordion ng-hide="stylePickerCtrl.block.type == 'divider'">
+    <accordion-group heading="Bouton" ng-if="stylePickerCtrl.block.type == 'button'">
         <h5>Taille</h5>
         <div class="form-group">
             <label for="height">Hauteur (px)</label>
@@ -71,7 +71,7 @@
             </div>
         </form>
     </accordion-group>
-    <accordion-group heading="Bloc double" ng-if="stylePickerCtrl.block.type === 'double'">
+    <accordion-group heading="Bloc double" ng-if="stylePickerCtrl.block.type == 'double'">
         <h5>Layout</h5>
         <div class="form-group">
             <select id="layoutDouble" class="form-control form-sm"
@@ -80,7 +80,7 @@
                     ng-options="c.layout for c in stylePickerCtrl.layoutDouble track by c.value"></select>
         </div>
     </accordion-group>
-    <accordion-group heading="Titres" ng-if="stylePickerCtrl.block.type !== 'file'">
+    <accordion-group heading="Titres" ng-hide="stylePickerCtrl.block.type == 'button' || stylePickerCtrl.block.type == 'file'">
         <form>
             <div class="form-group">
                 <div class="form-inline">
@@ -118,7 +118,7 @@
             </div>
         </form>
     </accordion-group ng-show= ng-ng-sho ng-sho>
-    <accordion-group heading="Textes" ng-if="stylePickerCtrl.block.type !== 'file'">
+    <accordion-group heading="Textes" ng-if="stylePickerCtrl.block.type != 'file'">
         <form id="paragraphs">
             <div class="form-group" >
                 <label for="textColor">Couleur de texte</label>
@@ -163,7 +163,7 @@
             </div>
         </form>
     </accordion-group>
-    <accordion-group heading="Images" ng-if="stylePickerCtrl.block.type === 'double' || stylePickerCtrl.block.type === 'file'">
+    <accordion-group heading="Images" ng-if="stylePickerCtrl.block.type == 'double' || stylePickerCtrl.block.type == 'file'">
         <h5>Images</h5>
         <div class="form-group">
             <label>Marges (Déplacer le bouton)</label>
@@ -177,5 +177,33 @@
                    id="taille"
                    ng-model="stylePickerCtrl.params.layout.images.width" />
         </div>
+    </accordion-group>
+</accordion>
+
+<accordion ng-show="stylePickerCtrl.block.type == 'divider'">
+    <accordion-group heading="Séparateur" active="true">
+        <form>
+            <h5>Taille</h5>
+            <div class="form-group">
+                <select name="taille"
+                        class="form-control"
+                        ng-model="stylePickerCtrl.block.metaStyle.height"
+                        ng-options="o as o for o in ['0px', '2px', '5px', '7px', '13px', '15px', '18px', '20px', '24px']">
+                </select>
+            </div>
+            <h5>Couleur</h5>
+            <div class="form-group">
+                <input type="color"
+                       class="form-control"
+                       ng-model="stylePickerCtrl.block.metaStyle.background"/>
+            </div>
+            <h5>Bords</h5>
+            <div class="form-group">
+                <select class="form-control"
+                        ng-options="o as o for o in ['5px', '10px', '15px', '20px', '25px']"
+                        ng-model="stylePickerCtrl.block.metaStyle.borderRadius">
+                </select>
+            </div>
+        </form>
     </accordion-group>
 </accordion>
