@@ -1,31 +1,46 @@
 <accordion>
-    <accordion-group heading="Page et Fond" >
+    <accordion-group heading="Page" ng-if="!stylePickerCtrl.displayGlobalStyles">
+        <h5>Couleur de fond</h5>
+        <div class="form-group">
+            <input type="color" class="form-control" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.bgColor" id="backgroundColor">
+        </div>
+        <h5>Bordures</h5>
+        <div class="form-group">
+            <div class="form-inline">
+                <select id="marginBorder" class="form-control form-sm"
+                        ng-change="stylePickerCtrl.changeBackground()"
+                        ng-model="stylePickerCtrl.params.background.borderType"
+                        ng-options="c.text for c in stylePickerCtrl.marginType track by c.type"></select>
+                <select class="form-control form-small"
+                        ng-change="stylePickerCtrl.changeBackground()"
+                        ng-model="stylePickerCtrl.params.background.borderSize"
+                        ng-options="c.size for c in stylePickerCtrl.marginSize"></select>
+
+               <input type="color" class="form-control form-small" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.borderColor" placeholder="Couleur">
+            </div>
+        </div>
+    </accordion-group>
+    <accordion-group heading="Blocs">
         <form id="background">
             <h5>Fond</h5>
             <div class="form-group">
                 Transparent
                 <input type="checkbox" ng-click="stylePickerCtrl.setToTransparent()"/>
-
-                <label for="backgroundColor" ng-if="!stylePickerCtrl.displayGlobalStyles">Couleur de fond</label>
-                <input type="color" class="form-control" ng-if="!stylePickerCtrl.displayGlobalStyles" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.bgColor" id="backgroundColor">
             </div>
-            <div ng-if="!stylePickerCtrl.displayGlobalStyles">
-                <h5>Page</h5>
-                <div class="form-group" id="border">
-                    <label for="marginBorder" >Bordure email</label>
-                    <div class="form-inline">
-                        <select class="form-control form-small" id="marginBorder" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.borderType">
-                            <option value="solid">Solid</option>
-                            <option value="dashed">Dashed</option>
-                            <option value="dotted">Dotted</option>
-                            <option value="default">default</option>
-                        </select>
-                        <input type="text" class="form-control form-small" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.borderSize" placeholder="Epaisseur">
-                        <input type="text" class="form-control form-small" ng-change="stylePickerCtrl.changeBackground()" ng-model="stylePickerCtrl.params.background.borderColor" placeholder="Couleur">
-                    </div>
-                </div>
+            <h5>Couleur de fond</h5>
+            <div class="form-group" id="border">
+                <input type="color" ng-model="stylePickerCtrl.block.metaStyle.background"/>
             </div>
         </form>
+    </accordion-group>
+    <accordion-group heading="Bloc double" ng-show="stylePickerCtrl.block.type === 'double'">
+        <h5>Layout</h5>
+        <div class="form-group">
+            <select id="layoutDouble" class="form-control form-sm"
+                    ng-change="stylePickerCtrl.changeLayout()"
+                    ng-model="stylePickerCtrl.params.layout.blockDouble"
+                    ng-options="c.layout for c in stylePickerCtrl.layoutDouble track by c.value"></select>
+        </div>
     </accordion-group>
     <accordion-group heading="Titres">
         <form>
@@ -110,25 +125,19 @@
             </div>
         </form>
     </accordion-group>
-    <accordion-group heading="Layout">
-        <h5>Block doubles</h5>
-        <div class="form-group">
-            <label for="layoutDouble">Layout</label>
-            <select id="layoutDouble" class="form-control form-sm"
-                    ng-change="stylePickerCtrl.changeLayout()"
-                    ng-model="stylePickerCtrl.params.layout.blockDouble"
-                    ng-options="c.layout for c in stylePickerCtrl.layoutDouble track by c.value"></select>
-        </div>
+    <accordion-group heading="Images" ng-show="stylePickerCtrl.block.type === 'double' || stylePickerCtrl.block.type === 'file'">
         <h5>Images</h5>
         <div class="form-group">
-            <label>Marges (exprimé en %)</label>
+            <label>Marges (Déplacer le bouton)</label>
             <position-btn on-change="stylePickerCtrl.onImgPosChanged"></position-btn>
         </div>
         <div class="from-group">
             <label for="taille">Taille</label>
             <input type="number"
-                   ng-change="stylePickerCtrl.changeLayout()"
-                   class="form-control form-sm" id="taille" ng-model="stylePickerCtrl.params.layout.images.width" />
+                   ng-change="stylePickerCtrl.changeImage()"
+                   class="form-control form-sm"
+                   id="taille"
+                   ng-model="stylePickerCtrl.params.layout.images.width" />
         </div>
     </accordion-group>
 </accordion>

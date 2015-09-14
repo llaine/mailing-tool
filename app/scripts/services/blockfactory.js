@@ -205,7 +205,7 @@ angular.module('newsletterEditorApp')
         if (content) { return content; }
         switch (type) {
           case 'text':
-            return '<p>Contenu</p>';
+            return '<p>Glisser ici un type de bloc</p>';
           case 'file':
             return '<p>Fichier</p>';
           case 'unsub':

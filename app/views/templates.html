@@ -2,16 +2,25 @@
     <div class="row" id="createNews">
         <tabset>
             <tab heading="Modèles drag'n'drop">
+                <div class="col-sm-6 col-md-4 col-lg-3 marginBottom placeholders">
+                    <div class="createNewsTemp" ng-class="{'active': templates.emptyModel}">
+                        <html-to-img html="<body style='background:#FFF;'></body>"></html-to-img>
+                        <br>Modèle vierge<br>
+                        <a class="btn btn-bob" ng-click="templates.select(emptyModel)">Choisir</a>
+                    </div>
+                </div>
                 <div class="col-sm-6 col-md-4 col-lg-3 marginBottom placeholders" ng-repeat="template in templates.availableTemplates">
                     <div class="createNewsTemp" ng-class="{'active': templates.selected.id === template.id}">
-                        <html-to-img html="{{ templates.html }}"></html-to-img>
+                        <html-to-img html="test"></html-to-img>
                         <br>{{ template.name }}<br>
                         <a class="btn btn-bob" ng-click="templates.select(template)">Choisir</a>
                     </div>
                 </div>
             </tab>
-            <tab heading="Code HTML">
-                Déposer votre code HTML
+            <tab heading="Newsletter précédentes">
+
+            </tab>
+            <tab heading="Créer en HTML">
                 <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
             </tab>
         </tabset>

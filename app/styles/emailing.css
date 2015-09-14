@@ -1,3 +1,6 @@
+#createNews {
+    padding: 15px;
+}
 /* habillage vignettes template */
 #createNews .createNewsTemp {
     background-color:#EEE;
@@ -79,8 +82,16 @@ table.mailResult {
     border-bottom: 1px solid #DDD;
 }
 
+.nav-tabs > li.active > a {
+    background-color: #7a4768 !important;
+    color: #FFF !important;
+}
+
 .nav-tabs > li > a {
     padding: 10px 15px;
+    background-color: #FFF !important;
+    color: #000 !important;
+    border: 1px solid #ddd;
 }
 
 /* cadre outils de création ********************************/

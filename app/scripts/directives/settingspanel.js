@@ -14,6 +14,12 @@ angular.module('newsletterEditorApp')
       controller: 'SettingsPanelCtrl',
       controllerAs:'spCtrl',
       bindToController:true,
+      /**
+       * Fonction modifiant le dom de la directive.
+       * @param scope
+       * @param element
+       * @param attrs
+       */
       link: function(scope, element, attrs) {
         element.find('.btn-group > .btn').click(function(e) {
           e.preventDefault();
