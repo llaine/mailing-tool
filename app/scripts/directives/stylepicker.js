@@ -67,6 +67,37 @@ angular.module('newsletterEditorApp')
         };
 
         /**
+         * Change le style des liens
+         */
+        vm.changeLink = function() {
+          var align;
+          var type;
+          // Modifie les options
+          switch (vm.block.attributes.link.dispo) {
+            case 'left':
+              align = 'pull-left';
+              break;
+            case 'right':
+              align = 'pull-right';
+              break;
+            case 'center':
+              align = 'center-block';
+              break;
+          }
+          // En fonction du type
+          switch (vm.block.type) {
+            case 'online':
+              type = 'online';
+              break;
+            case 'unsub':
+              type = 'unsubscribe';
+              break;
+          }
+
+          vm.block.content = '<a rel="' + type + '" class="' + align + '">' + vm.block.attributes.link.txt + '</a>';
+        };
+
+        /**
          * Mets en transparent, le background de la row sélectionné.
          */
         vm.setToTransparent = function() {

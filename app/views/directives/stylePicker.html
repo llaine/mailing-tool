@@ -80,7 +80,9 @@
                     ng-options="c.layout for c in stylePickerCtrl.layoutDouble track by c.value"></select>
         </div>
     </accordion-group>
-    <accordion-group heading="Titres" ng-hide="stylePickerCtrl.block.type == 'button' || stylePickerCtrl.block.type == 'file'">
+    <accordion-group heading="Titres" ng-hide="stylePickerCtrl.block.type == 'button' ||
+                                                stylePickerCtrl.block.type == 'file' ||
+                                                stylePickerCtrl.block.type == 'online'">
         <form>
             <div class="form-group">
                 <div class="form-inline">
@@ -117,7 +119,7 @@
                 </div>
             </div>
         </form>
-    </accordion-group ng-show= ng-ng-sho ng-sho>
+    </accordion-group>
     <accordion-group heading="Textes" ng-if="stylePickerCtrl.block.type != 'file'">
         <form id="paragraphs">
             <div class="form-group" >
@@ -176,6 +178,14 @@
                    class="form-control form-sm"
                    id="taille"
                    ng-model="stylePickerCtrl.params.layout.images.width" />
+        </div>
+    </accordion-group>
+    <accordion-group heading="Diposition" ng-if="stylePickerCtrl.block.type == 'online'">
+        <h5>Disposition</h5>
+        <div class="form-group">
+            <select name="dispo" class="form-control"
+                    ng-change="stylePickerCtrl.changeLink()" ng-model="stylePickerCtrl.block.attributes.link.dispo"
+                    ng-options="o as o for o in ['left', 'right']"></select>
         </div>
     </accordion-group>
 </accordion>

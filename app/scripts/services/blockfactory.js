@@ -99,7 +99,7 @@ angular.module('newsletterEditorApp')
         this.id = Math.random().toString(36).slice(2);
         this.metaStyle = {};
         this.contentStyle = {};
-        this.attributes = {btn:{}};
+        this.attributes = {btn:{}, link:{}};
         this.type = opts.type;
         this.content = generateContent(opts.type, opts.content);
         this.toString = toString;
@@ -211,7 +211,7 @@ angular.module('newsletterEditorApp')
           case 'unsub':
             return '<a rel="unsubscribe">Unsubscribe</a>';
           case 'online':
-            return '<a rel="online">Voir la version en ligne</a>';
+            return '<a rel="online">Lien vers l\'affichage en ligne</a>';
           case 'button':
             return '<button class="btn btn-default"><a href="#">Cliquez ici !</a></button>';
           case 'social':
