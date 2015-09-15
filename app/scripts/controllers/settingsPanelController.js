@@ -48,9 +48,7 @@ angular.module('newsletterEditorApp')
       console.log(vm.blocks);
     };
 
-    EventEmiter.on('edition:toggled', function(event, values) {
-      /* On ne peut modifier qu'un seul block à la fois.
-       * Donc si la modif était déjà active sur un autre, on supprime. */
+    EventEmiter.onEvent($scope, 'edition:toggled', function(event, values) {
       removeClassFromBlock();
 
       $scope.modeEdition = true;
@@ -62,6 +60,21 @@ angular.module('newsletterEditorApp')
 
       displayContentTab();
     });
+
+    //EventEmiter.on('edition:toggled', function(event, values) {
+    //  /* On ne peut modifier qu'un seul block à la fois.
+    //   * Donc si la modif était déjà active sur un autre, on supprime. */
+    //  removeClassFromBlock();
+    //
+    //  $scope.modeEdition = true;
+    //  currentBlock = values.tr;
+    //  currentBlock.addClass('active');
+    //  vm.currentBlock = values.block;
+    //
+    //  $rootScope.safeApply();
+    //
+    //  displayContentTab();
+    //});
 
     EventEmiter.on('edition:closed', function() {
       $scope.saveAndClose();

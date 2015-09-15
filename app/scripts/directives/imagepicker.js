@@ -7,7 +7,7 @@
  * # imagePicker
  */
 angular.module('newsletterEditorApp')
-  .directive('imagePicker', function($modal, AviaryEditor, EventEmiter) {
+  .directive('imagePicker', function($modal, AviaryEditor, EventEmiter, DomManipulator) {
     return {
       templateUrl: 'views/directives/imagePicker.html',
       restrict: 'E',
@@ -20,12 +20,14 @@ angular.module('newsletterEditorApp')
        * Controller de la directive
        * @param $scope
        */
-      controller: function() {
+      controller: function($scope) {
         var self = this;
 
-        EventEmiter.on('file:changed', function(evt, opts) {
-          self.block.attributes.url = opts.url;
-          self.updateLink(true);
+        EventEmiter.onEvent($scope, 'file:changed', function(evt, opts) {
+          if (opts.position === self.block.position) {
+            self.block.attributes.url = opts.url;
+            self.updateLink(true, opts.position);
+          }
         });
 
         if (self.block.attributes) {
@@ -38,24 +40,22 @@ angular.module('newsletterEditorApp')
          * Mets à jour le lien sur l'image.
          */
         self.updateLink = function(updateImg) {
-          var img = '<img id="' + self.block.attributes.id + '" src="' +
-              self.block.attributes.url + '" class="img-rounded"/>';
+          var img = DomManipulator.createStringImg(self.block.attributes.id, self.block.attributes.url);
 
           if (updateImg && !self.block.attributes.link) {
             self.block.content = img;
           } else if (self.block.attributes.link) {
-            self.block.content =  '<a target="_blank" href="' +
-                encodeURI(self.block.attributes.link) + '">' +
-                img + '</a>';
+            self.block.content = DomManipulator.createStringLink(self.block.attributes.link, img);
           }
         };
 
         /**
-         *
+         * Modifie l'image situé à la position dans la ligne.
          * @param image
+         * @param fromPosition
          */
-        self.modify = function(image) {
-          AviaryEditor.launchEditor(image);
+        self.modify = function(image, fromPosition) {
+          AviaryEditor.launchEditor(image, fromPosition);
         };
 
         /**

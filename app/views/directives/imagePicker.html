@@ -1,6 +1,7 @@
 <div id="imagePick">
     <div class="row">
         <div class="col-md-6">
+            {{ imgPickCtrl.block.position | json }}
             <button type="button" class="btn btn-default btn-lg" ng-click="imgPickCtrl.openImageManager()">
                 Choisir une image
             </button>
@@ -16,7 +17,7 @@
             Image choisie
             <div class="edition-preview-img">
                 <img class="img-thumbnail" id="{{imgPickCtrl.block.attributes.id}}" ng-src="{{ imgPickCtrl.block.attributes.url }}" alt=""/>
-                <button class="btn btn-default btn-sm" type="submit" ng-click="imgPickCtrl.modify(imgPickCtrl.block.attributes)">
+                <button class="btn btn-default btn-sm" type="submit" ng-click="imgPickCtrl.modify(imgPickCtrl.block.attributes, imgPickCtrl.block.position) ">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
             </div>

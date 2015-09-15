@@ -114,16 +114,17 @@ angular.module('newsletterEditorApp')
         vm.currentRowEdited = false;
         vm.displayGlobalStyles = false;
 
-        EventEmiter.on('edition:toggled', function(event, opts) {
-          vm.currentRowEdited = $(opts.tr).parents('tr:first');
-          vm.displayGlobalStyles = true;
-        });
-
-        EventEmiter.on('panel:closed', function() {
-          vm.currentRowEdited = false;
-          vm.displayGlobalStyles = false;
-          vm.block = undefined;
-        });
+        //
+        //EventEmiter.on('edition:toggled', function(event, opts) {
+        //  vm.currentRowEdited = $(opts.tr).parents('tr:first');
+        //  vm.displayGlobalStyles = true;
+        //});
+        //
+        //EventEmiter.on('panel:closed', function() {
+        //  vm.currentRowEdited = false;
+        //  vm.displayGlobalStyles = false;
+        //  vm.block = undefined;
+        //});
 
         /**
          * Retourne l'élement courant sélectionné

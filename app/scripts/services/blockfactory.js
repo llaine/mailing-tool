@@ -67,6 +67,7 @@ angular.module('newsletterEditorApp')
         this.id = Math.random().toString(36).slice(2);
         this.metaStyle = {};
         this.contentStyle = {};
+        this.position = opts.position;
         this.type = opts.type;
         this.content = generateContent(opts.type, opts.content);
         this.toString = toString;
@@ -100,6 +101,7 @@ angular.module('newsletterEditorApp')
         this.metaStyle = {};
         this.contentStyle = {};
         this.attributes = {btn:{}, link:{}};
+        this.position = opts.position;
         this.type = opts.type;
         this.content = generateContent(opts.type, opts.content);
         this.toString = toString;
@@ -116,6 +118,7 @@ angular.module('newsletterEditorApp')
         this.metaStyle = {};
         this.contentStyle = {};
         this.attributes = {};
+        this.position = opts.position;
         this.type = opts.type;
         this.content = generateContent(opts.type, opts.content);
         this.toString = toString;
@@ -189,7 +192,7 @@ angular.module('newsletterEditorApp')
               prototype = BlockAction;
               break;
           }
-          cells.push(new prototype({type:typeArray[i]}));
+          cells.push(new prototype({type:typeArray[i], position:i}));
         }
 
         return cells;
