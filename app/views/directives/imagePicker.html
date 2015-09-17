@@ -1,53 +1,74 @@
 <div id="imagePick">
     <div class="row">
         <div class="col-md-6">
-            <button type="button" class="btn btn-primary btn-lg" ng-click="imgPickCtrl.open()">
+            {{ imgPickCtrl.block.position | json }}
+            <button type="button" class="btn btn-default btn-lg" ng-click="imgPickCtrl.openImageManager()">
                 Choisir une image
+            </button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default btn-lg" ng-click="imgPickCtrl.openUploader()">
+                Uploader une image
             </button>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4" ng-if="imgPickCtrl.block.attributes.url">
-            Image courante
-            <img class="img-thumbnail"  ng-src="{{ imgPickCtrl.block.attributes.url }}" />
+            Image choisie
+            <div class="edition-preview-img">
+                <img class="img-thumbnail" id="{{imgPickCtrl.block.attributes.id}}" ng-src="{{ imgPickCtrl.block.attributes.url }}" alt=""/>
+                <button class="btn btn-default btn-sm" type="submit" ng-click="imgPickCtrl.modify(imgPickCtrl.block.attributes, imgPickCtrl.block.position) ">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </div>
         </div>
         <div class="col-md-6">
             Lien sur l'image
             <input type="text" class="form-control"
                    ng-model="imgPickCtrl.block.attributes.link" placeholder="Ajouter un lien à l'image"/>
             <button ng-if="imgPickCtrl.block.attributes.url" class="btn btn-default btn-sm"
-                    ng-click="imgPickCtrl.updateLink()">Mettre à jour le lien</button>
+                    ng-click="imgPickCtrl.updateLink(false)">Mettre à jour le lien</button>
         </div>
     </div>
 </div>
 
+
+<script type="text/ng-template" id="uploadImage.html">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span></button>
+            <h4>Uploader un fichier</h4>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <h3>Upload de fichiers</h3>
+                    <div class="col-md-4">
+                        <form>
+                            <div class="form-group">
+                                <input type="file" id="exampleInputFile">
+                                <p class="help-block">Cliquez sur "Parcourir..." pour charger une image depuis votre ordinateur</p>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="dropFileZone" class="col-md-7 col-md-offset-1">
+                        <span class="glyphicon glyphicon-upload"></span><br>
+                        Ou déposez votre image dans cette zone
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="fileManager.html">
-    <div id="fileManager">
+    <div class="fileManager">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">File Manager</h4>
+                <h4 class="modal-title" id="myModalLabel">Sélectionner une image</h4>
             </div>
             <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <h3>Upload de fichiers</h3>
-                        <div class="col-md-4">
-                            <form>
-                                <div class="form-group">
-                                    <input type="file" id="exampleInputFile">
-                                    <p class="help-block">Cliquez sur "Parcourir..." pour charger une image depuis votre ordinateur</p>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div id="dropFileZone" class="col-md-7 col-md-offset-1">
-                            <span class="glyphicon glyphicon-upload"></span><br>
-                            Ou déposez votre image dans cette zone
-                        </div>
-                    </div>
-                </div>
-                <hr>
                 <div class="container-fluid">
                     <div class="row">
                         <h3>Images existantes</h3>

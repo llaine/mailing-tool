@@ -3,45 +3,12 @@
     <div class="form-group">
         <input type="text" class="form-control"
                ng-change="btnEditorCtrl.changes()"
-               ng-model="btnEditorCtrl.options.link" placeholder="http://monsite.com"/>
+               ng-model="btnEditorCtrl.block.attributes.btn.link" placeholder="http://monsite.com"/>
     </div>
     <h5>Texte</h5>
     <div class="form-group">
         <input type="text" class="form-control txt"
                ng-change="btnEditorCtrl.changes()"
-               ng-model="btnEditorCtrl.options.txt" placeholder="Cliquez ici pour aller sur monsite.com"/>
+               ng-model="btnEditorCtrl.block.attributes.btn.txt" placeholder="Cliquez ici pour aller sur monsite.com"/>
     </div>
-    <h5>Taille</h5>
-    <div class="form-group">
-        <label for="height">Hauteur (px)</label>
-        <input type="number" id="height"
-               class="form-control"
-               ng-change="btnEditorCtrl.changes()"
-               ng-model="btnEditorCtrl.options.height">
-
-        <label for="width">Largueur (px)</label>
-        <input type="number" id="width"
-               class="form-control"
-               ng-change="btnEditorCtrl.changes()"
-               ng-model="btnEditorCtrl.options.width">
-    </div>
-    <h5>Arrondis</h5>
-    <div class="form-group">
-        <select class="form-control"
-                ng-change="btnEditorCtrl.changes()"
-                ng-options="o as o for o in ['5px', '10px', '15px', '20px', '25px']"
-                ng-model="btnEditorCtrl.options.bords">
-        </select>
-    </div>
-    <h5>Disposition</h5>
-    <div class="form-group">
-        <select name="dispo" class="form-control"
-                ng-change="btnEditorCtrl.changes()" id="dispo" ng-model="btnEditorCtrl.options.dispo"
-                ng-options="o as o for o in ['left', 'center', 'right']"></select>
-    </div>
-    <h5>Couleur</h5>
-    <div class="form-group">
-        <input type="color" class="form-control" ng-model="btnEditorCtrl.options.bgColor" ng-change="btnEditorCtrl.changes()">
-    </div>
-
 </form>

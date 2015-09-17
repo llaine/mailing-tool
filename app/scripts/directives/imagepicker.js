@@ -7,7 +7,7 @@
  * # imagePicker
  */
 angular.module('newsletterEditorApp')
-  .directive('imagePicker', function($modal) {
+  .directive('imagePicker', function($modal, AviaryEditor, EventEmiter, DomManipulator) {
     return {
       templateUrl: 'views/directives/imagePicker.html',
       restrict: 'E',
@@ -20,8 +20,15 @@ angular.module('newsletterEditorApp')
        * Controller de la directive
        * @param $scope
        */
-      controller: function() {
+      controller: function($scope) {
         var self = this;
+
+        EventEmiter.onEvent($scope, 'file:changed', function(evt, opts) {
+          if (opts.position === self.block.position) {
+            self.block.attributes.url = opts.url;
+            self.updateLink(true, opts.position);
+          }
+        });
 
         if (self.block.attributes) {
           // Assignation de l'image par défaut et du lien.
@@ -32,25 +39,39 @@ angular.module('newsletterEditorApp')
         /**
          * Mets à jour le lien sur l'image.
          */
-        self.updateLink = function() {
-          if (!self.block.attributes.link) {
-            window.alert('Merci de rentrer un lien');
-          } else {
-            var img = '<img id="' + self.block.attributes.id + '" src="' +
-                self.block.attributes.url + '" class="img-rounded"/>';
+        self.updateLink = function(updateImg) {
+          var img = DomManipulator.createStringImg(self.block.attributes.id, self.block.attributes.url);
 
-            self.block.content =  '<a target="_blank" href="' +
-                encodeURI(self.block.attributes.link) + '">' +
-                img + '</a>';
-
+          if (updateImg && !self.block.attributes.link) {
+            self.block.content = img;
+          } else if (self.block.attributes.link) {
+            self.block.content = DomManipulator.createStringLink(self.block.attributes.link, img);
           }
         };
 
         /**
-         * Ouvre la popup de gestionnaire des fichiers
+         * Modifie l'image situé à la position dans la ligne.
+         * @param image
+         * @param fromPosition
          */
-        self.open = function() {
+        self.modify = function(image, fromPosition) {
+          AviaryEditor.launchEditor(image, fromPosition);
+        };
 
+        /**
+         * Ouvre la popup d'upload de fichier
+         */
+        self.openUploader = function() {
+          $modal.open({
+            templateUrl:'uploadImage.html',
+            controller:'UploadImageCtrl'
+          });
+        };
+
+        /**
+         * Ouvre la popup de gestionnaire de fichier.
+         */
+        self.openImageManager = function() {
           $modal.open({
             templateUrl: 'fileManager.html',
             controller: 'ModalFileManagerCtrl',
@@ -66,7 +87,6 @@ angular.module('newsletterEditorApp')
             }
           });
         };
-
       }
     };
   });

@@ -58,4 +58,24 @@ angular.module('newsletterEditorApp')
       }
       return table;
     };
+
+    /**
+    *
+    * @param href
+    * @param content
+    * @returns {string}
+    */
+    self.createStringLink = function(href, content) {
+      return '<a target="_blank" href="' + encodeURI(href) + '">' + content + '</a>';
+    };
+
+    /**
+     *
+     * @param id
+     * @param src
+     * @returns {string}
+     */
+    self.createStringImg = function(id, src) {
+      return '<img class="img-rounded" id="' + id + '" src="' + src + '" />';
+    };
   });

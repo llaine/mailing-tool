@@ -20,19 +20,26 @@ angular.module('newsletterEditorApp')
        * Le controller de la directive.
        */
       controller: function() {
-        this.options = {
-          dispo:this.block.attributes.link ? this.block.attributes.link.dispo : 'left',
-          txt:this.block.attributes.link ? this.block.attributes.link.txt : 'Texte sur le lien'
-        };
+        var self = this;
+
+        var txt;
+        if (this.block.type === 'online') {
+          txt = 'Lien vers l\'affichage en ligne';
+        } else {
+          txt = 'Texte sur le lien';
+        }
+
+        self.block.attributes.link.dispo = self.block.attributes.link.dispo || 'left';
+        self.block.attributes.link.txt = self.block.attributes.link.txt || txt;
 
         /**
          * Modifie les attributs du bouton lien.
          */
-        this.changes = function() {
+        self.changes = function() {
           var align;
           var type;
           // Modifie les options
-          switch (this.options.dispo) {
+          switch (self.block.attributes.link.dispo) {
             case 'left':
               align = 'pull-left';
               break;
@@ -44,7 +51,7 @@ angular.module('newsletterEditorApp')
               break;
           }
           // En fonction du type
-          switch (this.block.type) {
+          switch (self.block.type) {
             case 'online':
               type = 'online';
               break;
@@ -53,8 +60,7 @@ angular.module('newsletterEditorApp')
               break;
           }
 
-          this.block.content = '<a rel="' + type + '" class="' + align + '">' + this.options.txt + '</a>';
-          this.block.attributes.link = this.options;
+          self.block.content = '<a rel="' + type + '" class="' + align + '">' + self.block.attributes.link.txt + '</a>';
         };
       }
     };

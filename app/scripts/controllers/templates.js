@@ -11,7 +11,6 @@ angular.module('newsletterEditorApp')
   .controller('TemplatesCtrl', function($location, availableTemplates) {
     this.availableTemplates = availableTemplates;
 
-    this.html = '<html><head><style>p{color:orange;}</style></head><body><p>Prévisualisation</p><p>Test 2</p><p>Test 3</p></body></html>';
     /**
      * Attribut le template selectionné à celui qui vient d'être cliqué
      * @param selectedTpl

@@ -16,7 +16,7 @@ angular.module('newsletterEditorApp')
      */
     this.emit = function(eventName, props) {
       $log.info(eventName + ' emitted');
-      $rootScope.$emit(eventName, props);
+      $rootScope.$broadcast(eventName, props);
     };
 
     /**
@@ -32,6 +32,10 @@ angular.module('newsletterEditorApp')
         $log.info(eventName + ' catched');
         cb(event, data);
       });
+    };
+
+    this.onEvent = function(scope, eventName, cb) {
+      scope.$on(eventName, cb);
     };
 
   });

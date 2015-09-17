@@ -1,12 +1,6 @@
-<h5>Disposition</h5>
-<div class="form-group">
-    <select name="dispo" class="form-control"
-            ng-change="usCtrl.changes()" id="dispo" ng-model="usCtrl.options.dispo"
-            ng-options="o as o for o in ['left', 'right']"></select>
-</div>
 <h5>Texte</h5>
 <div class="form-group">
     <input type="text" class="form-control txt"
            ng-change="usCtrl.changes()"
-           ng-model="usCtrl.options.txt" placeholder="Entrez le texte du lien"/>
+           ng-model="usCtrl.block.attributes.link.txt" placeholder="Entrez le texte du lien"/>
 </div>

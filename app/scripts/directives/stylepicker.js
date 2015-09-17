@@ -21,64 +21,92 @@ angular.module('newsletterEditorApp')
        * @param $scope
        * @param $element
        */
-      controller: function($scope, $element) {
+      controller: function() {
         var vm = this;
 
-        vm.params = {
-          title: {
-            color: '#00000',
-            fontSize: 30 + 'px',
-            fontFamily: 'Arial',
-            fontWeight: 'normal',
-            lineHeight: '1'
-          },
-          paragraph: {
-            color: '#00000',
-            fontSize: 12 + 'px',
-            fontFamily: 'Arial'
-          },
-          link: {
-            color: '#00000',
-            fontSize: 12 + 'px',
-            fontFamily: 'Arial'
-          },
-          background: {
-            // La couleur de fond de l'email
-            bgColor: '#FFFFF',
-            // La bordure autour de l'email
-            borderSize: '1px',
-            borderType: 'solid',
-            borderColor: 'black'
-          },
-          layout: {
-            blockDouble: {layout: 'Half', value: '400-400'},
-            images: {
-              margin: {
-                left: 1,
-                top: 1,
-                right: 1,
-                bottom: 1
-              },
-              width: 20
-            }
-          }
-        };
-
+        vm.params = GlobalStyles.getDefaultParams();
         vm.fonts = GlobalStyles.getFonts();
         vm.sizeTitle = GlobalStyles.getTitleSize();
         vm.size = GlobalStyles.getParagraphSize();
-        vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble();
+        vm.marginType = GlobalStyles.getMarginTypes();
+        vm.marginSize = GlobalStyles.getMarginSize();
+        if (vm.block) {
+          vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble(vm.block.type === 'double');
+        }
+
+        /**
+         * Change les style des boutons
+         */
+        vm.changesButton = function() {
+          var style = {
+            height:vm.block.attributes.btn.height + 'px',
+            width:vm.block.attributes.btn.width + 'px',
+            'border-radius': vm.block.attributes.btn.bords,
+            'background-color': vm.block.attributes.btn.backgroundColor
+          };
+          var align;
+
+          switch (vm.block.attributes.btn.dispo) {
+            case 'left':
+              align = 'pull-left';
+              break;
+            case 'right':
+              align = 'pull-right';
+              break;
+            case 'center':
+              align = 'center-block';
+              break;
+          }
+
+          var content = '<button class="btn btn-default ' + align + '" ng-style="' + JSON.stringify(style) + '">' +
+              '<a href="' + vm.block.attributes.btn.link + '">' + vm.block.attributes.btn.txt + '</a>' +
+              '</button>';
+
+          vm.block.setStyle(style, 'button');
+          vm.block.content = content;
+        };
+
+        /**
+         * Change le style des liens
+         */
+        vm.changeLink = function() {
+          var align;
+          var type;
+          // Modifie les options
+          switch (vm.block.attributes.link.dispo) {
+            case 'left':
+              align = 'pull-left';
+              break;
+            case 'right':
+              align = 'pull-right';
+              break;
+            case 'center':
+              align = 'center-block';
+              break;
+          }
+          // En fonction du type
+          switch (vm.block.type) {
+            case 'online':
+              type = 'online';
+              break;
+            case 'unsub':
+              type = 'unsubscribe';
+              break;
+          }
+
+          vm.block.content = '<a rel="' + type + '" class="' + align + '">' + vm.block.attributes.link.txt + '</a>';
+        };
 
         /**
          * Mets en transparent, le background de la row sélectionné.
          */
         vm.setToTransparent = function() {
-          if (vm.block.metaStyle.background) {
-            delete vm.block.metaStyle.background;
+          if (vm.block.metaStyle.isTransparent) {
+            vm.block.metaStyle.isTransparent = false;
+            vm.block.metaStyle.background = vm.block.metaStyle.oldBg;
           } else {
-            if (vm.block.order === 'text-social') {
-              vm.block.metaStyle.color = 'white';
-            }
+            vm.block.metaStyle.oldBg = vm.block.metaStyle.background;
+            vm.block.metaStyle.isTransparent = true;
             vm.block.metaStyle.background = 'transparent';
           }
         };
@@ -86,15 +114,17 @@ angular.module('newsletterEditorApp')
         vm.currentRowEdited = false;
         vm.displayGlobalStyles = false;
 
-        EventEmiter.on('edition:toggled', function(event, opts) {
-          vm.currentRowEdited = $(opts.tr).parents('tr:first');
-          vm.displayGlobalStyles = true;
-        });
-
-        EventEmiter.on('panel:closed', function() {
-          vm.currentRowEdited = false;
-          vm.displayGlobalStyles = false;
-        });
+        //
+        //EventEmiter.on('edition:toggled', function(event, opts) {
+        //  vm.currentRowEdited = $(opts.tr).parents('tr:first');
+        //  vm.displayGlobalStyles = true;
+        //});
+        //
+        //EventEmiter.on('panel:closed', function() {
+        //  vm.currentRowEdited = false;
+        //  vm.displayGlobalStyles = false;
+        //  vm.block = undefined;
+        //});
 
         /**
          * Retourne l'élement courant sélectionné
@@ -162,8 +192,8 @@ angular.module('newsletterEditorApp')
             });
 
             selector.css('border',
-                vm.params.background.borderSize + ' ' +
-                vm.params.background.borderType + ' ' +
+                vm.params.background.borderSize.size + ' ' +
+                vm.params.background.borderType.type + ' ' +
                 vm.params.background.borderColor
             );
           }
@@ -210,17 +240,24 @@ angular.module('newsletterEditorApp')
         };
 
         /**
-         * Change le layout des block double
-         * et des images.
+         * Change image layout.
          */
-        vm.changeLayout = function() {
+        vm.changeImage = function() {
           var selector = getSelector();
 
           var images = selector.find('img');
 
           applyStyle(images, {
-            width:vm.params.layout.images.width  + '%'
+            width:vm.params.layout.images.width  + 'px'
           });
+        };
+
+        /**
+         * Change le layout des block double
+         * et des images.
+         */
+        vm.changeLayout = function() {
+          var selector = getSelector();
 
           selector.find('.table-block-double').map(function() {
             var table = $(this);
@@ -231,6 +268,8 @@ angular.module('newsletterEditorApp')
             for (var i = 0 ; i < blockDouble.cells.length ; ++i) {
               blockDouble.cells[i].setStyle({width:newRule[i] + '%'}, cells[i].tagName);
             }
+
+            StyleHelper.applyStyleToDom(blockDouble);
           });
         };
       }

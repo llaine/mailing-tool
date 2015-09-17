@@ -12,7 +12,8 @@ angular.module('newsletterEditorApp')
      * Affiche le contenu de la tab "choose content"
      */
     function displayContentTab() {
-      $('.btn-group a[href="#list"]').tab('show');
+      $('.btn-group:eq(0)').tab('show');
+      $('#btnBlockChoices').siblings().removeClass('active').addClass('active');
     }
 
     /**
@@ -47,18 +48,7 @@ angular.module('newsletterEditorApp')
       console.log(vm.blocks);
     };
 
-    /* toggle des tabs. */
-    $('.btn-group a').click(function(e) {
-      e.preventDefault();
-      $(this).tab('show');
-
-      $(this).siblings().removeClass('active');
-      $(this).addClass('active');
-    });
-
-    EventEmiter.on('edition:toggled', function(event, values) {
-      /* On ne peut modifier qu'un seul block à la fois.
-       * Donc si la modif était déjà active sur un autre, on supprime. */
+    EventEmiter.onEvent($scope, 'edition:toggled', function(event, values) {
       removeClassFromBlock();
 
       $scope.modeEdition = true;
@@ -70,6 +60,21 @@ angular.module('newsletterEditorApp')
 
       displayContentTab();
     });
+
+    //EventEmiter.on('edition:toggled', function(event, values) {
+    //  /* On ne peut modifier qu'un seul block à la fois.
+    //   * Donc si la modif était déjà active sur un autre, on supprime. */
+    //  removeClassFromBlock();
+    //
+    //  $scope.modeEdition = true;
+    //  currentBlock = values.tr;
+    //  currentBlock.addClass('active');
+    //  vm.currentBlock = values.block;
+    //
+    //  $rootScope.safeApply();
+    //
+    //  displayContentTab();
+    //});
 
     EventEmiter.on('edition:closed', function() {
       $scope.saveAndClose();

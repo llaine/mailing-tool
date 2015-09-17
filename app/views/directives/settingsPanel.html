@@ -1,17 +1,20 @@
 <div id="mailOutils2">
-    <h2 ng-show="modeEdition" class="text-center">Modification du block {{ spCtrl.currentBlock.type }}</h2>
+    <h2 ng-switch on="modeEdition" class="text-center">
+        <span ng-switch-when="true">
+            Modification du bloc {{ spCtrl.currentBlock.type }}
+        </span>
+        <span ng-switch-when="false">
+            Personnalisation de la page
+        </span>
+    </h2>
+
     <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-        <a ng-hide="spCtrl.currentBlock.type == 'divider'" href="#list" class="btn btn-default active" role="button" data-toggle="tab">
-            Content
-        </a>
-        <a ng-hide="spCtrl.currentBlock.type == 'divider'" href="#settings" class="btn btn-default" role="button" data-toggle="tab">
-            <span ng-show="modeEdition">Style</span>
-            <span ng-show="!modeEdition">Design</span>
-        </a>
+        <a href="#list" class="btn btn-default active" role="button" data-toggle="tab" ng-hide="spCtrl.currentBlock.type == 'divider'">Choix des blocs</a>
+        <a href="#settings" class="btn btn-default" role="button" data-toggle="tab">Styles</a>
     </div>
 
     <div class="tab-content" id="mailOutils3">
-        <div id="list" role="tabpanel" class="tab-pane scrollable active">
+        <div id="list" role="tabpanel" class="tab-pane scrollable active" ng-hide="spCtrl.currentBlock.type == 'divider'">
             <br/>
             <div ng-include="modeEdition ? 'editionMode.html' : 'chooseBlock.html'"></div>
         </div>
@@ -22,7 +25,9 @@
     </div>
 
     <div>
-        <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="spCtrl.saveAndClose()">Valider et fermer</button>
+        <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="spCtrl.saveAndClose()">
+            Valider et fermer
+        </button>
         <button type="button" ng-click="vm.preview()" class="btn btn-default">
             <span class="glyphicon glyphicon-export"></span>
             Prévisualiser
