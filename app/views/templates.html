@@ -18,7 +18,13 @@
                 </div>
             </tab>
             <tab heading="Newsletter précédentes">
-
+                <div class="col-sm-6 col-md-4 col-lg-3 marginBottom placeholders" ng-repeat="template in templates.createdTemplates">
+                    <div class="createNewsTemp" ng-class="{'active': templates.selected.id === template.id}">
+                        <html-to-img html="test"></html-to-img>
+                        <br>{{ template.name }}<br>
+                        <a class="btn btn-bob" ng-click="templates.select(template)">Choisir</a>
+                    </div>
+                </div>
             </tab>
             <tab heading="Créer en HTML">
                 <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>

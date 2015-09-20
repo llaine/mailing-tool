@@ -9,7 +9,13 @@
  */
 angular.module('newsletterEditorApp')
   .controller('TemplatesCtrl', function($location, availableTemplates) {
-    this.availableTemplates = availableTemplates;
+    this.availableTemplates = availableTemplates.filter(function(tpl) {
+      return tpl.type === 'system';
+    });
+
+    this.createdTemplates = availableTemplates.filter(function(tpl) {
+      return tpl.type === 'user'
+    });
 
     /**
      * Attribut le template selectionné à celui qui vient d'être cliqué

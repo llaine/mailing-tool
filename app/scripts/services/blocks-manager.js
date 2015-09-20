@@ -87,6 +87,11 @@ angular.module('newsletterEditorApp')
             blockStack.push(
                 bf.create({
                   content:item.content,
+                  cells:item.cells,
+                  attributes:item.attributes,
+                  contentStyle:item.contentStyle,
+                  metaStyle:item.metaStyle,
+                  order:item.order,
                   type:item.type,
                   nbColumns:item.columns
                 })

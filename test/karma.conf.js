@@ -35,7 +35,7 @@ module.exports = function(config) {
       'bower_components/jquery-ui/jquery-ui.js',
       'bower_components/angular-ui-sortable/sortable.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
-      'bower_components/ckeditor/ckeditor.js',
+      'bower_components/ckeditor-extended/ckeditor.js',
       'bower_components/html2canvas/build/html2canvas.js',
       'bower_components/jquery-mousewheel/jquery.mousewheel.js',
       'bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',

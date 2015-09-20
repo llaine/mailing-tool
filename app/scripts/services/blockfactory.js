@@ -65,11 +65,11 @@ angular.module('newsletterEditorApp')
        */
       function BlockSimple(opts) {
         this.id = Math.random().toString(36).slice(2);
-        this.metaStyle = {};
-        this.contentStyle = {};
+        this.metaStyle = opts.metaStyle || {};
+        this.contentStyle = opts.contentStyle || {};
         this.position = opts.position;
         this.type = opts.type;
-        this.content = generateContent(opts.type, opts.content);
+        this.content = opts.content || generateContent(opts.type, opts.content);
         this.toString = toString;
         this.setStyle = setStyle;
       }
@@ -81,13 +81,13 @@ angular.module('newsletterEditorApp')
        */
       function BlockMulti(opts) {
         this.id = Math.random().toString(36).slice(2);
-        this.metaStyle = {};
-        this.contentStyle = {};
-        this.order = opts.order;
+        this.metaStyle = opts.metaStyle || {};
+        this.contentStyle = opts.contentStyle || {};
+        this.position = opts.position;
         this.type = opts.type;
         this.toString = toStringDouble;
         this.setStyle = setStyle;
-        this.cells = generateSubBlocks(opts.nbColumns, opts.order);
+        this.cells = opts.cells || generateSubBlocks(opts.nbColumns, opts.order);
       }
 
       /**
@@ -98,12 +98,12 @@ angular.module('newsletterEditorApp')
        */
       function BlockAction(opts) {
         this.id = Math.random().toString(36).slice(2);
-        this.metaStyle = {};
-        this.contentStyle = {};
-        this.attributes = {btn:{}, link:{}};
+        this.metaStyle = opts.metaStyle || {};
+        this.contentStyle = opts.contentStyle || {};
+        this.attributes = opts.attributes || {btn:{}, link:{}};
         this.position = opts.position;
         this.type = opts.type;
-        this.content = generateContent(opts.type, opts.content);
+        this.content = opts.content || generateContent(opts.type, opts.content);
         this.toString = toString;
         this.setStyle = setStyle;
       }
@@ -115,12 +115,12 @@ angular.module('newsletterEditorApp')
        */
       function BlockFile(opts) {
         this.id = Math.random().toString(36).slice(2);
-        this.metaStyle = {};
-        this.contentStyle = {};
-        this.attributes = {};
+        this.metaStyle = opts.metaStyle || {};
+        this.contentStyle = opts.contentStyle || {};
+        this.attributes = opts.attributes || {};
         this.position = opts.position;
         this.type = opts.type;
-        this.content = generateContent(opts.type, opts.content);
+        this.content = opts.content || generateContent(opts.type, opts.content);
         this.toString = toString;
         this.setStyle = setStyle;
       }

@@ -7,23 +7,25 @@
  * # textEditor
  */
 angular.module('newsletterEditorApp')
-  .directive('textEditor', function() {
+  .directive('textEditor', function($rootScope) {
+    var CKEDITOR = window.CKEDITOR || {};
     return {
-      template: '<div ng-model="block.content" ckeditor="options"></div>',
+      template: '<div>' +
+                  '<textarea ng-model="block.content" id="editor"></textarea>' +
+                '</div>',
       restrict: 'E',
       scope: {
         block:'='
       },
-      /**
-       * Affiche l'éditeur.
-       * @param $scope
-       */
       controller: function($scope) {
-        $scope.options = {
-          language: 'fr',
-          allowedContent: true,
-          entities: false
-        };
+        CKEDITOR.replace('editor' );
+      },
+      link: function(scope, element) {
+        CKEDITOR.instances.editor.on('change', function(evt) {
+          $rootScope.safeApply(function() {
+            scope.block.content = evt.editor.getData();
+          });
+        })
       }
     };
   });
