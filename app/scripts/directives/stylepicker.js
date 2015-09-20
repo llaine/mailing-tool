@@ -30,9 +30,25 @@ angular.module('newsletterEditorApp')
         vm.size = GlobalStyles.getParagraphSize();
         vm.marginType = GlobalStyles.getMarginTypes();
         vm.marginSize = GlobalStyles.getMarginSize();
-        if (vm.block) {
-          vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble(vm.block.type === 'double');
-        }
+
+
+        vm.currentRowEdited = false;
+        vm.displayGlobalStyles = false;
+
+
+        EventEmiter.on('edition:toggled', function(event, opts) {
+          vm.currentRowEdited = $(opts.tr).parents('tr:first');
+          vm.displayGlobalStyles = true;
+
+          vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble(opts.block.type === 'double');
+        });
+
+        EventEmiter.on('panel:closed', function() {
+          vm.currentRowEdited = false;
+          vm.displayGlobalStyles = false;
+          vm.block = undefined;
+        });
+
 
         /**
          * Change les style des boutons
@@ -110,21 +126,6 @@ angular.module('newsletterEditorApp')
             vm.block.metaStyle.background = 'transparent';
           }
         };
-
-        vm.currentRowEdited = false;
-        vm.displayGlobalStyles = false;
-
-        //
-        //EventEmiter.on('edition:toggled', function(event, opts) {
-        //  vm.currentRowEdited = $(opts.tr).parents('tr:first');
-        //  vm.displayGlobalStyles = true;
-        //});
-        //
-        //EventEmiter.on('panel:closed', function() {
-        //  vm.currentRowEdited = false;
-        //  vm.displayGlobalStyles = false;
-        //  vm.block = undefined;
-        //});
 
         /**
          * Retourne l'élement courant sélectionné

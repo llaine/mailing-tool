@@ -243,7 +243,7 @@ angular.module('newsletterEditorApp')
           // Crée un container dans lequel on va pouvoir rechercher nos tags
           div.innerHTML = self.content;
 
-          for (var tag in self.style) {
+          for (var tag in self.contentStyle) {
             if (self.contentStyle.hasOwnProperty(tag)) {
               var item = angular.element(div).find(tag);
               item.css(self.contentStyle[tag]);

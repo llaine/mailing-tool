@@ -39,6 +39,10 @@ angular.module('newsletterEditorApp')
      */
     vm.addBlock = function() {
       $scope.blocks.push(bf.create({type:'text'}));
+      // Scroll automatique au bottom
+      var div = document.getElementById('mCSB_1_container');
+      $('#mailCadre').mCustomScrollbar('update');
+      $('#mailCadre').mCustomScrollbar('scrollTo', div.scrollHeight);
     };
 
     /**
