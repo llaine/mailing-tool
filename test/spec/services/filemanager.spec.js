@@ -7,20 +7,27 @@ describe('Service: fileManager', function() {
 
   // instantiate service
   var fileManager;
-  beforeEach(inject(function(FileManager) {
+  beforeEach(inject(function(FileManager, $httpBackend) {
     fileManager = FileManager;
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, FileManagerMock);
   }));
 
-  it('doit avoir une fonction pour récupérer toute les photos', function() {
-    expect(fileManager.getAll().length).toBeGreaterThan(0);
-  });
+  // Méthode bourrine pour tester que la promise
+  // a bien get le tout.
+  setTimeout(function() {
+    it('doit avoir une fonction pour récupérer toute les photos', function() {
+      expect(fileManager.getAll().length).toBeGreaterThan(0);
+    });
 
-  it('doit avoir une fonction pour mettre à jour une image', function() {
-    var pic = fileManager.getAll()[0];
-    var mockLink = 'http://toto.com';
-    fileManager.updateImage(pic.id, mockLink);
-    expect(fileManager.getAll()[0].url).toEqual(mockLink);
-  });
+    it('doit avoir une fonction pour mettre à jour une image', function() {
+      var pic = fileManager.getAll()[0];
+      var mockLink = 'http://toto.com';
+      fileManager.updateImage(pic.id, mockLink);
+      expect(fileManager.getAll()[0].url).toEqual(mockLink);
+    });
+  }, 4000);
 
   it('doit avoir une fonction permettant de récupérer les social medias photos', function() {
     var mockSocial = [

@@ -25,8 +25,9 @@ angular.module('newsletterEditorApp')
          *  etc
          * }
        * @param block
+       * @param position
        */
-      function applyStyle(block) {
+      function applyStyle(block, position) {
         var index = BlocksManager.getAll().indexOf(block);
         var tr = angular.element(document.querySelectorAll('table.emailCompo'))
             .find('tr.dropzone:eq(' + index + ')');
@@ -34,18 +35,30 @@ angular.module('newsletterEditorApp')
         // Application du layout sur les cells
         if (block.type === 'double') {
           for (var i = 0; i < block.cells.length ; ++i) {
-            if (block.cells[i].contentStyle.td) {
-              tr.find('td.cell-' + i).css(block.cells[i].contentStyle.td);
+            var bloc = block.cells[i];
+            if (bloc.contentStyle.td) {
+              tr.find('td.cell-' + i).css(bloc.contentStyle.td);
+            }
+
+            if (bloc.contentStyle.img) {
+              tr.find('td.cell-' + i).find('img').css(bloc.contentStyle.img);
             }
           }
         }
 
         for (var tag in block.contentStyle) {
           if (block.contentStyle.hasOwnProperty(tag)) {
-            // On sélectionne la span correspondante au model
-            // et on applique le css à l'intérieur
-            tr.find('span.node')
-                .find(tag).css(block.contentStyle[tag]);
+            if (!isNaN(position)) {
+              // On sélectionne la span correspondante au model
+              // et on applique le css à l'intérieur
+              var img = tr.find('span.node').find(tag)[position];
+              angular.element(img).css(block.contentStyle[tag]);
+            } else if (position === undefined) {
+              // On sélectionne la span correspondante au model
+              // et on applique le css à l'intérieur
+              tr.find('span.node')
+                  .find(tag).css(block.contentStyle[tag]);
+            }
           }
         }
       }

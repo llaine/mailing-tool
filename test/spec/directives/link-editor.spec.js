@@ -39,9 +39,13 @@ describe('Directive: dividerEditor', function() {
     return bf.create({type: type});
   }
 
-  beforeEach(inject(function($rootScope, BlockFactory, $compile) {
+  beforeEach(inject(function($rootScope, BlockFactory, $compile, $httpBackend) {
     scope = $rootScope.$new();
     compile = $compile;
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
+
   }));
 
   describe('Block de type lien de désinscription', function() {
@@ -62,8 +66,8 @@ describe('Directive: dividerEditor', function() {
     });
 
     it('doit avoir deux attributs dans le scope correspondant aux options', function() {
-      expect(controller.options.txt).toEqual(mockLinkAttributes.txt);
-      expect(controller.options.dispo).toEqual(mockLinkAttributes.dispo);
+      expect(controller.block.attributes.link.dispo).toBeTruthy();
+      expect(controller.block.attributes.link.dispo).toBeTruthy();
     });
 
     it('doit avoir une fonction permettant de modifier les attributs de l\'element du scope', function() {
@@ -72,7 +76,7 @@ describe('Directive: dividerEditor', function() {
         dispo:'right'
       };
 
-      controller.options = mockOptionsCtrl;
+      controller.block.attributes.link = mockOptionsCtrl;
 
       controller.changes();
 
@@ -99,8 +103,8 @@ describe('Directive: dividerEditor', function() {
     });
 
     it('doit avoir deux attributs dans le scope correspondant aux options', function() {
-      expect(controller.options.txt).toEqual(mockLinkAttributes.txt);
-      expect(controller.options.dispo).toEqual(mockLinkAttributes.dispo);
+      expect(controller.block.attributes.link.txt).toBeTruthy();
+      expect(controller.block.attributes.link.dispo).toBeTruthy();
     });
 
     it('doit avoir une fonction permettant de modifier les attributs de l\'element du scope', function() {
@@ -109,7 +113,7 @@ describe('Directive: dividerEditor', function() {
         dispo:'center'
       };
 
-      controller.options = mockOptionsCtrl;
+      controller.block.attributes.link = mockOptionsCtrl;
       controller.changes();
       expect(controller.block.attributes.link.txt).toEqual(mockOptionsCtrl.txt)
       expect(controller.block.attributes.link.dispo).toEqual(mockOptionsCtrl.dispo);

@@ -11,10 +11,8 @@ angular.module('newsletterEditorApp')
   .service('FileManager', function(Restangular) {
     var img = [];
 
-    if (img.length === 0) {
-      // TODO Remplacer par upload vignettes. 
-      loadImages();
-    }
+    // TODO Remplacer par upload vignettes.
+    loadImages();
 
     /**
      * Load les images

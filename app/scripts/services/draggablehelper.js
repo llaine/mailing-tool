@@ -27,6 +27,10 @@ angular.module('newsletterEditorApp')
       };
     };
 
+    /**
+     * Remonte le live editeur vers le haut
+     * @param position
+     */
     this.changeEditorPosition = function(position) {
       var div = document.getElementById('mCSB_1_container');
       scrollable.mCustomScrollbar('update');
@@ -34,10 +38,13 @@ angular.module('newsletterEditorApp')
 
     };
 
+    /**
+     * Descend liveEditor vers le bas.
+     */
     this.scrollToBottom = function() {
       var div = document.getElementById('mCSB_1_container');
       scrollable.mCustomScrollbar('update');
-      scrollable.mCustomScrollbar('scrollTo', div.scrollHeight);
+      scrollable.mCustomScrollbar('scrollTo', 1000000);
     }
   });
 

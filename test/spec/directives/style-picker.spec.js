@@ -9,6 +9,7 @@ describe('Directive: stylePicker', function() {
   var styleHelper;
   var currentRow;
   var draggableHelper;
+  var eventEmiter;
 
   // load the directive's module
   beforeEach(module('newsletterEditorApp'));
@@ -33,15 +34,20 @@ describe('Directive: stylePicker', function() {
     return dir;
   }
 
-  beforeEach(inject(function($rootScope, $compile, BlockFactory, StyleHelper, DraggableHelper) {
+  beforeEach(inject(function($rootScope, $compile, BlockFactory,
+                             StyleHelper, DraggableHelper, $httpBackend, EventEmiter) {
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
     scope = $rootScope.$new();
     compile = $compile;
     styleHelper = StyleHelper;
     draggableHelper = DraggableHelper;
+    eventEmiter = EventEmiter;
 
     // On ajout un h1 et un p dans le block.
     var b = mockBlockModels(BlockFactory, false)[0];
-    b.content = '<h1>fezfze</h1><p>fezfiphzefpi</p><img src="toto.png"/> ';
+    b.content = '<h1>fezfze</h1><p>fezfiphzefpi</p><img src="toto.png"/>';
     block = b;
 
     element = createDirective(block);
@@ -54,6 +60,13 @@ describe('Directive: stylePicker', function() {
         left:10
       }
     });
+
+
+    spyOn(EventEmiter, 'emit').and.callThrough();
+    spyOn(EventEmiter, 'on').and.callThrough();
+
+    eventEmiter.emit('edition:toggled', {block:block});
+
   }));
 
   it('doit contenir des paramètrs par défaut', function() {

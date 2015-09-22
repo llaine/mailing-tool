@@ -8,7 +8,10 @@ describe('Directive: droppable', function() {
   var element,
     scope;
 
-  beforeEach(inject(function($rootScope) {
+  beforeEach(inject(function($rootScope, $httpBackend) {
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
     scope = $rootScope.$new();
   }));
 

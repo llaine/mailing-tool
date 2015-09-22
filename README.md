@@ -35,3 +35,10 @@ L'application est décomposé en directive.
 
 
 
+## Prévisualisation
+
+
+Les fonctions de prévisualisation se situe dans le fichier modalPreviewController.js
+
+On itère sur chaque Block, lequel on utilise la fonction toString(), ou toStringDouble(),
+pour récupèrer le contenu généré.

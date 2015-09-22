@@ -267,10 +267,9 @@ angular.module('newsletterEditorApp')
           var div = document.createElement('div');
           div.innerHTML = obj.content;
 
-          for (var tag in self.contentStyle) {
-            if (self.contentStyle.hasOwnProperty(tag)) {
-              var item = angular.element(div).find(tag);
-              item.css(self.contentStyle[tag]);
+          for (var tag in obj.contentStyle) {
+            if (obj.contentStyle.hasOwnProperty(tag)) {
+              angular.element(div).find(tag).css(obj.contentStyle[tag]);
             }
           }
           strings.push({html:div.innerHTML, width: obj.contentStyle.td ? obj.contentStyle.td.width : '50%'});

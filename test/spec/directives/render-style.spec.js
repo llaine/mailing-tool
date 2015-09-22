@@ -9,10 +9,15 @@ describe('Directive: render-style', function() {
   // load the directive's module
   beforeEach(module('newsletterEditorApp'));
 
-  beforeEach(inject(function($rootScope, StyleHelper, BlockFactory) {
+  beforeEach(inject(function($rootScope, StyleHelper, BlockFactory, $httpBackend) {
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
+
     scope = $rootScope.$new();
     block = mockBlockModels(BlockFactory, false)[0];
     styleHelper = StyleHelper;
+
 
     spyOn(scope, '$watch').and.callThrough();
     spyOn(styleHelper, 'applyStyleToDom').and.callThrough();

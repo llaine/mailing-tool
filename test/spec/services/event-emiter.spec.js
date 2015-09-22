@@ -11,13 +11,13 @@ describe('Services: EventEmiter', function() {
   beforeEach(inject(function($rootScope, EventEmiter) {
     eventEmiter = EventEmiter;
     _rootScope = $rootScope;
-    spyOn($rootScope, '$emit').and.callThrough();
-    spyOn($rootScope, '$on').and.callThrough();
+    spyOn(_rootScope, '$broadcast').and.callThrough();
+    spyOn(_rootScope, '$on').and.callThrough();
   }));
 
   it('doit avoir une fonction permettant d\'emettre des events pour', function() {
     eventEmiter.emit('test', true);
-    expect(_rootScope.$emit).toHaveBeenCalledWith('test', true);
+    expect(_rootScope.$broadcast).toHaveBeenCalled();
   });
 
   it('doit avoir une fonction permettant de catcher les events pour', function() {

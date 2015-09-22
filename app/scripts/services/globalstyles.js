@@ -120,48 +120,29 @@ angular.module('newsletterEditorApp')
     }
 
     /**
-     * Default params
-     * @returns {{title: {color: string, fontSize: string, fontFamily: string, fontWeight: string, lineHeight: string}, paragraph: {color: string, fontSize: string, fontFamily: string}, link: {color: string, fontSize: string, fontFamily: string}, background: {bgColor: string, borderSize: string, borderType: string, borderColor: string}, layout: {blockDouble: {layout: string, value: string}, images: {margin: {left: number, top: number, right: number, bottom: number}, width: number}}}}
+     * Setup des paramètres par défaut.
+     * En fonction du block courant ou alors, des params par défaut.
+     * @param block
+     * @returns {{title: {}, paragraph: {}, a: {}, layout: {blockDouble: {layout: string, value: string}, images: {}}, images2: {}, images1: {}, background: {bgColor: string, borderSize: string, borderType: string, borderColor: string}, button: {height: number, width: number, bords: string, dispo: string, backgroundColor: string, link: string, txt: string}}}
      */
-    function getDefaultParams() {
-      return {
-        title: {
-          color: '#00000',
-          fontSize: 30 + 'px',
-          fontFamily: 'Arial',
-          fontWeight: 'normal',
-          lineHeight: '1'
+    function getDefaultParams(block) {
+      var defaultStyle = {
+        title: {},
+        paragraph: {},
+        a:{},
+        layout:{
+          blockDouble: {layout: '1/2', value: '400-400'},
+          images:{}
         },
-        paragraph: {
-          color: '#00000',
-          fontSize: 12 + 'px',
-          fontFamily: 'Arial',
-          lineHeight: '1'
-        },
-        link: {
-          color: '#00000',
-          fontSize: 12 + 'px',
-          fontFamily: 'Arial'
-        },
+        images2:{},
+        images1:{},
         background: {
           // La couleur de fond de l'email
-          bgColor: '#FFFFF',
+          bgColor: '#FFFFFF',
           // La bordure autour de l'email
           borderSize: '1px',
           borderType: 'solid',
           borderColor: 'black'
-        },
-        layout: {
-          blockDouble: {layout: '1/2', value: '400-400'},
-          images: {
-            margin: {
-              left: 1,
-              top: 1,
-              right: 1,
-              bottom: 1
-            },
-            width: 140
-          }
         },
         button: {
           height:32,
@@ -173,6 +154,120 @@ angular.module('newsletterEditorApp')
           txt:'Cliquze ici!'
         }
       };
-    }
+      // Les titres
+      if (block.contentStyle.h1) {
+        var h1 = block.contentStyle.h1;
+        defaultStyle.title = {
+          color: h1.color || '#000000',
+          fontSize:  h1['font-size'] || 30 + 'px',
+          fontFamily: h1['font-family'] || 'Arial',
+          fontWeight: h1['font-weight'] || 'normal',
+          lineHeight: h1['line-weight'] || '1'
+        };
+      } else {
+        defaultStyle.title = {
+          color:'#00000',
+          fontSize: 30 + 'px',
+          fontFamily: 'Arial',
+          fontWeight: 'normal',
+          lineHeight: '1'
+        };
+      }
 
+      if (block.contentStyle.p) {
+        var p = block.contentStyle.p;
+        defaultStyle.paragraph = {
+          color: p.color || '#000000',
+          fontSize:  p['font-size'] || 12 + 'px',
+          fontFamily: p['font-family'] || 'Arial',
+          lineHeight: p['line-weight'] || '1'
+        };
+      } else {
+        defaultStyle.paragraph = {
+          color: '#00000',
+          fontSize: 12 + 'px',
+          fontFamily: 'Arial',
+          lineHeight: '1'
+        };
+      }
+
+      if (block.contentStyle.a) {
+        var a = block.contentStyle.a;
+        defaultStyle.link = {
+          color: a.color || '#000000',
+          fontSize:  a['font-size'] || 12 + 'px',
+          fontFamily: a['font-family'] || 'Arial'
+        };
+      } else {
+        defaultStyle.link = {
+          color: '#00000',
+          fontSize: 12 + 'px',
+          fontFamily: 'Arial'
+        };
+      }
+
+      /*margin-left: "26%"
+       margin-top: "0%"
+       width: "233px"*/
+
+      if (block.contentStyle.img) {
+        var img = block.contentStyle.img;
+        defaultStyle.layout.images = {
+          margin: {
+            left: parseInt(img['margin-left']) || 0,
+            top: parseInt(img['margin-top']) || 0
+          },
+          width: parseInt(img.width) || 240
+        };
+      } else {
+        defaultStyle.layout.images = {
+          margin: {
+            left: 0,
+            top: 0
+          },
+          width: 240
+        };
+      }
+
+      // Les images doubles.
+      if (block.type === 'double' && block.cells[0].contentStyle.img) {
+        var img1 = block.cells[0].contentStyle.img;
+        defaultStyle.image1 = {
+          margin: {
+            left: parseInt(img1['margin-left']) || 0,
+            top: parseInt(img1['margin-top']) || 0
+          },
+          width: parseInt(img1.width) || 240
+        };
+      } else {
+        defaultStyle.image1 = {
+          margin: {
+            left: 0,
+            top: 0
+          },
+          width: 240
+        };
+      }
+
+      if (block.type === 'double' && block.cells[1].contentStyle.img) {
+        var img2 = block.cells[1].contentStyle.img;
+        defaultStyle.image2 = {
+          margin: {
+            left: parseInt(img2['margin-left']) || 0,
+            top: parseInt(img2['margin-top']) || 0
+          },
+          width: parseInt(img2.width) || 240
+        };
+      } else {
+        defaultStyle.image2 = {
+          margin: {
+            left: 0,
+            top: 0
+          },
+          width: 240
+        };
+      }
+
+      return defaultStyle;
+    }
   });

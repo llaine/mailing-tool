@@ -1,7 +1,7 @@
 var blockPreviewFromModalWithoutDouble = [
-  {attributes:{}, content: '<p>Contenu</p>', type: 'text'},
-  {attributes:{}, content: '<p>Contenu</p>', type: 'text'},
-  {attributes:{}, content: '<p>Contenu</p>', type: 'text'}
+  {attributes:{}, content: '<p>Glisser ici un type de bloc</p>', type: 'text'},
+  {attributes:{}, content: '<p>Glisser ici un type de bloc</p>', type: 'text'},
+  {attributes:{}, content: '<p>Glisser ici un type de bloc</p>', type: 'text'}
 ];
 
 var table = '<table style="width: 100%; table-layout: fixed;">' +

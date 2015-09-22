@@ -14,9 +14,12 @@ describe('Directive: liveEditor', function() {
   var eventEmiter;
   var modal;
 
-  beforeEach(inject(function($rootScope, $compile, BlockFactory, EventEmiter, $modal) {
+  beforeEach(inject(function($rootScope, $compile, BlockFactory, EventEmiter, $modal, $httpBackend) {
     scope = $rootScope.$new();
     modal = $modal;
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
 
     blocks = mockBlockModels(BlockFactory, true);
     eventEmiter = EventEmiter;

@@ -1,9 +1,9 @@
 var mockOptionsBtnEditor = {
-  height:122,
-  width:130,
-  bords: '5px',
-  link: 'foo.bar',
+  height:32,
+  width:96,
+  bords:'5px',
   dispo:'left',
-  bgColor:'black',
-  txt:'Ceci est un très long texte'
+  backgroundColor:'#F2F2F2',
+  link:'http://example.com',
+  txt:'Cliquze ici!'
 };

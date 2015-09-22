@@ -38,7 +38,10 @@ describe('Directive: buttonEditor', function() {
     return bf.create({type:'button'});
   }
 
-  beforeEach(inject(function($rootScope, BlockFactory, $compile) {
+  beforeEach(inject(function($rootScope, BlockFactory, $compile, $httpBackend) {
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
     scope = $rootScope.$new();
     block = createButtonBlock(BlockFactory);
     compile = $compile;
@@ -58,8 +61,8 @@ describe('Directive: buttonEditor', function() {
 
   it('la taille du bouton doit augmenter en fonction de la taille du text', function() {
     var previousLength = controller.options.width;
-    controller.options.txt += 'toto';
+    controller.block.attributes.btn.txt += 'toto';
     scope.$digest();
-    expect(controller.options.width).toBeGreaterThan(previousLength);
+    expect(controller.block.attributes.btn.width).toBeGreaterThan(previousLength);
   });
 });

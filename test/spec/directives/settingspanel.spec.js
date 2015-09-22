@@ -23,6 +23,9 @@ describe('Directive: settingsPanel', function() {
         .whenGET('http://api.preprod.bobelweb.eu/block-type')
         .respond(200, blocks);
 
+    httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
     element = angular.element('<settings-panel></settings-panel>');
     element = $compile(element)(scope);
     scope.$apply();
@@ -30,6 +33,6 @@ describe('Directive: settingsPanel', function() {
     // TODO, refacto avec un defer de la promise.
     setTimeout(function() {
       expect(scope.availableBlocks).toEqual(blocks);
-    }, 2000);
+    }, 4000);
   }));
 });

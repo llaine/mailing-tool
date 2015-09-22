@@ -28,6 +28,9 @@ describe('Controller: SettingsPanelCtrl', function(){
     spyOn(EventEmiter, 'emit').and.callThrough();
     spyOn(EventEmiter, 'on').and.callThrough();
 
+    httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
   }));
 
   describe('lorsque le settingsPanel se lance', function() {

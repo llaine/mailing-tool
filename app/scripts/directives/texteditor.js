@@ -11,13 +11,18 @@ angular.module('newsletterEditorApp')
     var CKEDITOR = window.CKEDITOR || {};
     return {
       template: '<div>' +
-                  '<textarea ng-model="block.content""></textarea>' +
+                  '<textarea ng-model="block.content"></textarea>' +
                 '</div>',
       restrict: 'E',
       scope: {
         block:'='
       },
       link: {
+        /**
+         * Fonction post
+         * @param scope
+         * @param element
+         */
         post:function(scope, element) {
           // Génération à la volée de l'id de l'éditeur, pour éviter la duplication
           // lors des block de type double.
@@ -30,9 +35,6 @@ angular.module('newsletterEditorApp')
             });
           });
         }
-      },
-      controller: function($scope, $element) {
-
       }
     };
   });

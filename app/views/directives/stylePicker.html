@@ -18,7 +18,7 @@
         <div class="form-group">
             <select class="form-control"
                     ng-change="stylePickerCtrl.changesButton()"
-                    ng-options="o as o for o in ['5px', '10px', '15px', '20px', '25px']"
+                    ng-options="o as o for o in ['0px', '5px', '10px', '15px', '20px', '25px']"
                     ng-model="stylePickerCtrl.block.attributes.btn.bords">
             </select>
         </div>
@@ -63,7 +63,7 @@
             <h5>Fond</h5>
             <div class="form-group">
                 Transparent
-                <input type="checkbox" ng-click="stylePickerCtrl.setToTransparent()"/>
+                <input type="checkbox" id="checkboxTransparent" ng-click="stylePickerCtrl.setToTransparent()"/>
             </div>
             <h5>Couleur de fond</h5>
             <div class="form-group" id="border">
@@ -84,7 +84,6 @@
                                                 stylePickerCtrl.block.type == 'file' ||
                                                 stylePickerCtrl.block.type == 'online' ||
                                                 isBlockFileTwice">
-        {{ isBlockFileTwice | json }}
         <form>
             <div class="form-group">
                 <div class="form-inline">
@@ -123,7 +122,6 @@
         </form>
     </accordion-group>
     <accordion-group heading="Textes" ng-hide="isBlockFileTwice" ng-if="stylePickerCtrl.block.type != 'file'">
-        {{ isBlockFileTwice | json }}
         <form id="paragraphs">
             <div class="form-group" >
                 <label for="textColor">Couleur de texte</label>
@@ -176,18 +174,37 @@
         </form>
     </accordion-group>
     <accordion-group heading="Images" ng-if="stylePickerCtrl.block.type == 'double' || stylePickerCtrl.block.type == 'file'">
-        <h5>Images</h5>
-        <div class="form-group">
-            <label>Marges (Déplacer le bouton)</label>
-            <position-btn on-change="stylePickerCtrl.onImgPosChanged"></position-btn>
+        <div ng-if="isBlockFileTwice">
+
+            <tabset>
+                <tab heading="Image 1">
+                    <image-editor position="0"
+                                  on-img-changed="stylePickerCtrl.onImgPosChanged"
+                                  change-width="stylePickerCtrl.changeImage"
+                                  model="stylePickerCtrl.params.image1.width"></image-editor>
+                </tab>
+                <tab heading="Image 2">
+                    <image-editor position="1"
+                                  on-img-changed="stylePickerCtrl.onImgPosChanged"
+                                  change-width="stylePickerCtrl.changeImage"
+                                  model="stylePickerCtrl.params.image2.width"></image-editor>
+                </tab>
+            </tabset>
         </div>
-        <div class="from-group">
-            <label for="taille">Taille</label>
-            <input type="number"
-                   ng-change="stylePickerCtrl.changeImage()"
-                   class="form-control form-sm"
-                   id="taille"
-                   ng-model="stylePickerCtrl.params.layout.images.width" />
+        <div ng-if="!isBlockFileTwice">
+            <h5>Images</h5>
+            <div class="form-group">
+                <label>Marges (Déplacer l'icone)</label>
+                <position-btn on-change="stylePickerCtrl.onImgPosChanged"></position-btn>
+            </div>
+            <div class="from-group">
+                <label for="taille">Taille</label>
+                <input type="number"
+                       ng-change="stylePickerCtrl.changeImage()"
+                       class="form-control form-sm"
+                       id="taille"
+                       ng-model="stylePickerCtrl.params.layout.images.width" />
+            </div>
         </div>
     </accordion-group>
     <accordion-group heading="Diposition" ng-if="stylePickerCtrl.block.type == 'online'">

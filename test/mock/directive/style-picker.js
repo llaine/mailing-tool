@@ -28,13 +28,15 @@ var mockParamsBackground = {
 var mockParagraphStylePicker = {
   color: 'black',
   fontSize: 13 + 'px',
-  fontFamily: 'Times'
+  fontFamily: 'Times',
+  'line-height':'10'
 };
 
 var mockParamsParagraph = {
   color: 'black',
   'font-size': 13 + 'px',
-  'font-family': 'Times'
+  'font-family': 'Times',
+  'line-height':undefined
 };
 
 var mockParamsImg = {

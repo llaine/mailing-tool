@@ -38,7 +38,10 @@ describe('Directive: imagePicker', function() {
     return bf.create({type:'file'});
   }
 
-  beforeEach(inject(function($rootScope, $modal, BlockFactory, $compile) {
+  beforeEach(inject(function($rootScope, $modal, BlockFactory, $compile, $httpBackend) {
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
     modal = $modal;
     scope = $rootScope.$new();
     block = createFile(BlockFactory);
@@ -87,7 +90,12 @@ describe('Directive: imagePicker', function() {
   });
 
   it('doit avoir une fonction permettant d\'ouvrir une modal', function() {
-    controller.open();
+    controller.openUploader();
+    expect(modal.open).toHaveBeenCalled();
+  });
+
+  it('doit avoir une fonction permettant d\'ouvrir une modal de manager', function() {
+    controller.openImageManager();
     expect(modal.open).toHaveBeenCalled();
   });
 

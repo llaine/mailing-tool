@@ -34,7 +34,14 @@ angular.module('newsletterEditorApp')
       });
     };
 
+    /**
+     * La même chose qu'on, en passant un scope enfant.
+     * @param scope
+     * @param eventName
+     * @param cb
+     */
     this.onEvent = function(scope, eventName, cb) {
+      $log.info(eventName + ' catched');
       scope.$on(eventName, cb);
     };
 

@@ -37,7 +37,11 @@ describe('Directive: dividerEditor', function() {
     return bf.create({type:'divider'});
   }
 
-  beforeEach(inject(function($rootScope, BlockFactory, $compile) {
+  beforeEach(inject(function($rootScope, BlockFactory, $compile, $httpBackend) {
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
+
     scope = $rootScope.$new();
     block = createDivider(BlockFactory);
     compile = $compile;

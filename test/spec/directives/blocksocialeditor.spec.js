@@ -30,17 +30,24 @@ describe('Directive: blockSocialEditor', function() {
     return directive;
   }
 
+  /**
+   * Mock la directive
+   * @param BlockFactory
+   */
   function createButtonBlock(BlockFactory) {
     var bf = new BlockFactory();
     return bf.create({type:'button'});
   }
 
-  beforeEach(inject(function($rootScope, $compile, BlockFactory) {
+  beforeEach(inject(function($rootScope, $compile, BlockFactory, $httpBackend) {
+    $httpBackend
+        .whenGET('http://api.preprod.bobelweb.eu/image')
+        .respond(200, []);
+
     scope = $rootScope.$new();
     compile = $compile;
     blocks = mockBlockModels(BlockFactory, true);
     element = mockBlockSocialEditor(blocks[0]);
-
   }));
 
   it('doit avoir un block dans le scope', function() {
