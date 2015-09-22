@@ -1,6 +1,7 @@
 angular.module('newsletterEditorApp')
   .controller('SettingsPanelCtrl',
-    function($rootScope, $scope, EventEmiter, BlocksManager, BlockFactory, Restangular) {
+    function($rootScope, $scope, $routeParams,
+             EventEmiter, BlocksManager, BlockFactory, Restangular, DraggableHelper) {
     var vm = this;
     var currentBlock;
     $scope.modeEdition = false;
@@ -21,8 +22,13 @@ angular.module('newsletterEditorApp')
      */
     function removeClassFromBlock() {
       if (currentBlock) {
-        currentBlock.removeClass('active');
+        currentBlock.closest('.rowToBeActive').removeClass('active');
       }
+    }
+
+    function addClassActiveToRow() {
+      // rowToBeActive
+      currentBlock.closest('.rowToBeActive').addClass('active');
     }
     /**
      * Lorsqu'on clique sur le bouton de sauvegarde.
@@ -40,9 +46,27 @@ angular.module('newsletterEditorApp')
     vm.addBlock = function() {
       $scope.blocks.push(bf.create({type:'text'}));
       // Scroll automatique au bottom
-      var div = document.getElementById('mCSB_1_container');
-      $('#mailCadre').mCustomScrollbar('update');
-      $('#mailCadre').mCustomScrollbar('scrollTo', div.scrollHeight);
+      DraggableHelper.scrollToBottom();
+    };
+
+    /**
+     * Mets à jour ou sauvegarde le template
+     */
+    vm.save = function() {
+      if ($routeParams.fromTemplate) {
+        Restangular.one('template', $routeParams.fromTemplate).patch($scope.blocks)
+            .then(function(template) {
+              // TODO
+              alert('Template bien mit à jour!')
+            });
+      } else {
+        Restangular.all('template').post($scope.blocks)
+            .then(function(template) {
+              // TODO, reload avec le fromTemplate=numero
+              // ou numero est égal au numéro de template crée.
+              alert('Template bien sauvegardé')
+            });
+      }
     };
 
     /**
@@ -57,12 +81,11 @@ angular.module('newsletterEditorApp')
 
       $scope.modeEdition = true;
       currentBlock = values.tr;
-      currentBlock.addClass('active');
       vm.currentBlock = values.block;
+      addClassActiveToRow();
+      displayContentTab();
 
       $rootScope.safeApply();
-
-      displayContentTab();
     });
 
     //EventEmiter.on('edition:toggled', function(event, values) {

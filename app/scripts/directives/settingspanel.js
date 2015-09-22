@@ -21,6 +21,8 @@ angular.module('newsletterEditorApp')
        * @param attrs
        */
       link: function(scope, element, attrs) {
+        $('#mailOutils2').mCustomScrollbar();
+
         element.find('.btn-group > .btn').click(function(e) {
           e.preventDefault();
           $(this).siblings().removeClass('active');

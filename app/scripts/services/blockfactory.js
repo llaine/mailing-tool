@@ -69,7 +69,7 @@ angular.module('newsletterEditorApp')
         this.contentStyle = opts.contentStyle || {};
         this.position = opts.position;
         this.type = opts.type;
-        this.content = opts.content || generateContent(opts.type, opts.content);
+        this.content = opts.content || generateContent(opts.type, opts.content, opts.isDrop);
         this.toString = toString;
         this.setStyle = setStyle;
       }
@@ -103,7 +103,7 @@ angular.module('newsletterEditorApp')
         this.attributes = opts.attributes || {btn:{}, link:{}};
         this.position = opts.position;
         this.type = opts.type;
-        this.content = opts.content || generateContent(opts.type, opts.content);
+        this.content = opts.content || generateContent(opts.type, opts.content, opts.isDrop);
         this.toString = toString;
         this.setStyle = setStyle;
       }
@@ -120,7 +120,7 @@ angular.module('newsletterEditorApp')
         this.attributes = opts.attributes || {};
         this.position = opts.position;
         this.type = opts.type;
-        this.content = opts.content || generateContent(opts.type, opts.content);
+        this.content = opts.content || generateContent(opts.type, opts.content, opts.isDrop);
         this.toString = toString;
         this.setStyle = setStyle;
       }
@@ -202,15 +202,16 @@ angular.module('newsletterEditorApp')
        * En fonction du type génère le contenu par défaut
        * @param type
        * @param content
+       * @param isDrop
        * @returns {string}
        */
-      function generateContent(type, content) {
+      function generateContent(type, content, isDrop) {
         if (content) { return content; }
         switch (type) {
           case 'text':
-            return '<p>Glisser ici un type de bloc</p>';
+            return isDrop ? '<p>Saisissez votre texte</p>' : '<p>Glisser ici un type de bloc</p>';
           case 'file':
-            return '<p>Fichier</p>';
+            return isDrop ? '<p>Sélectionner votre image</p>' :'<p>Fichier</p>';
           case 'unsub':
             return '<a rel="unsubscribe">Unsubscribe</a>';
           case 'online':

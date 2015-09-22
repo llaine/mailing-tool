@@ -50,7 +50,8 @@ angular.module('newsletterEditorApp')
               var bf = new BlockFactory();
               var blockAttrs = {
                 type:droppedBlock.type,
-                nbColumns: droppedBlock.columns
+                nbColumns: droppedBlock.columns,
+                isDrop:true
               };
 
               if (droppedBlock.type === 'double') {

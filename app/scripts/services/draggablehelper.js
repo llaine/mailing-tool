@@ -9,6 +9,7 @@
  */
 angular.module('newsletterEditorApp')
   .service('DraggableHelper', function () {
+    var scrollable = $('#mailCadre');
     /**
      * Récupère la position d'un élement par rapport à son parent.
      * @param element
@@ -25,5 +26,18 @@ angular.module('newsletterEditorApp')
         left: left
       };
     };
+
+    this.changeEditorPosition = function(position) {
+      var div = document.getElementById('mCSB_1_container');
+      scrollable.mCustomScrollbar('update');
+      scrollable.mCustomScrollbar('scrollTo',  div.scrollTop);
+
+    };
+
+    this.scrollToBottom = function() {
+      var div = document.getElementById('mCSB_1_container');
+      scrollable.mCustomScrollbar('update');
+      scrollable.mCustomScrollbar('scrollTo', div.scrollHeight);
+    }
   });
 

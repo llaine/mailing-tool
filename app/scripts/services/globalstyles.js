@@ -50,15 +50,9 @@ angular.module('newsletterEditorApp')
      */
     function getFonts() {
       return [
-        {text:'Times New Roman'},
         {text:'Arial'},
-        {text:'Helvetica'},
-        {text:'Lucida'},
-        {text:'Gill Sans Extrabold'},
-        {text:'Courier'},
-        {text:'Times'},
-        {text:'Verdana'},
-        {text:'Lucida Console'}
+        {text:'Courier New'},
+        {text:'Times New Roman'}
       ];
     }
 
@@ -80,10 +74,12 @@ angular.module('newsletterEditorApp')
     */
     function getParagraphSize() {
       return [
+        {size:'8px'},
         {size:'10px'},
         {size:'12px'},
         {size:'14px'},
-        {size:'16px'}
+        {size:'16px'},
+        {size:'18px'}
       ];
     }
 
@@ -139,7 +135,8 @@ angular.module('newsletterEditorApp')
         paragraph: {
           color: '#00000',
           fontSize: 12 + 'px',
-          fontFamily: 'Arial'
+          fontFamily: 'Arial',
+          lineHeight: '1'
         },
         link: {
           color: '#00000',

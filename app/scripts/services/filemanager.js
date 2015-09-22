@@ -8,35 +8,20 @@
  * Service in the newsletterEditorApp.
  */
 angular.module('newsletterEditorApp')
-  .service('FileManager', function() {
+  .service('FileManager', function(Restangular) {
     var img = [];
 
     if (img.length === 0) {
-      // TODO Brancher l'API
-      for (var i = 0 ; i < 4 ; ++i) {
-        img.push({
-          name: i + 'chat',
-          id:'image' + i,
-          url:'http://localhost:8000/images/chat-' + i + '.jpg'
-        });
-      }
+      // TODO Remplacer par upload vignettes. 
+      loadImages();
+    }
 
-      img.push({
-        name:'toto',
-        id:'fezfzef',
-        url:'http://lorempixel.com/400/560/sports/'
-      });
-
-      img.push({
-        name:'émilion',
-        id:'fezfzaaaef',
-        url:'http://lorempixel.com/1689/560/sports/'
-      });
-
-      img.push({
-        name:'dasfv',
-        id:'fezfdzdzdzef',
-        url:'http://lorempixel.com/320/962/sports/'
+    /**
+     * Load les images
+     */
+    function loadImages() {
+      Restangular.all('image').getList().then(function(data) {
+        img = data;
       });
     }
 
@@ -55,6 +40,8 @@ angular.module('newsletterEditorApp')
      * @param url
      */
     function updateImage(id, url) {
+      // TODO, en plus de l'update dans le tableau,
+      // faire POST sur l'API pour uploader la nouvelle image
       for (var j = 0; j < img.length ; ++j) {
         if (img[j].id === id) {
           img[j].url = url;

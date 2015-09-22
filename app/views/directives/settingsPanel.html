@@ -1,7 +1,16 @@
 <div id="mailOutils2">
     <h2 ng-switch on="modeEdition" class="text-center">
         <span ng-switch-when="true">
-            Modification du bloc {{ spCtrl.currentBlock.type }}
+            Modification du bloc
+            <span ng-switch on="spCtrl.currentBlock.type ">
+                <span ng-switch-when="text">texte</span>
+                <span ng-switch-when="file">image</span>
+                <span ng-switch-when="divider">séparateur</span>
+                <span ng-switch-when="online">lien en ligne</span>
+                <span ng-switch-when="button">bouton</span>
+                <span ng-switch-when="social">réseaux sociaux</span>
+                <span ng-switch-when="double">double</span>
+            </span>
         </span>
         <span ng-switch-when="false">
             Personnalisation de la page
@@ -9,7 +18,10 @@
     </h2>
 
     <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-        <a href="#list" class="btn btn-default active" role="button" data-toggle="tab" ng-hide="spCtrl.currentBlock.type == 'divider'">Choix des blocs</a>
+        <a href="#list" class="btn btn-default active" role="button" data-toggle="tab" ng-hide="spCtrl.currentBlock.type == 'divider'">
+            <span ng-if="modeEdition">Contenu</span>
+            <span ng-if="!modeEdition">Choix des blocs</span>
+        </a>
         <a href="#settings" class="btn btn-default" role="button" data-toggle="tab">Styles</a>
     </div>
 
@@ -26,7 +38,7 @@
 
     <div>
         <button ng-show="modeEdition"  type="button" class="btn btn-default" ng-click="spCtrl.saveAndClose()">
-            Valider et fermer
+            Valider & fermer
         </button>
         <button type="button" ng-click="vm.preview()" class="btn btn-default">
             <span class="glyphicon glyphicon-export"></span>
@@ -36,9 +48,13 @@
             <span class="glyphicon glyphicon-send"></span>
             Programmer
         </button>
-        <button ng-show="!modeEdition" ng-click="spCtrl.addBlock()" class="btn btn-default btn-lg pull-right">
+        <button ng-show="!modeEdition" ng-click="spCtrl.addBlock()" class="btn btn-default">
             <span class="glyphicon glyphicon-plus"></span>
-            Ajouter un block
+            Ajouter un bloc
+        </button>
+        <button ng-show="!modeEdition" ng-click="spCtrl.save()" class="btn btn-default">
+            <span class="glyphicon glyphicon-floppy-save"></span>
+            Enregistrer
         </button>
     </div>
 </div>

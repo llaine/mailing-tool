@@ -21,7 +21,7 @@ angular.module('newsletterEditorApp')
        * @param $scope
        * @param $element
        */
-      controller: function() {
+      controller: function($scope) {
         var vm = this;
 
         vm.params = GlobalStyles.getDefaultParams();
@@ -32,6 +32,7 @@ angular.module('newsletterEditorApp')
         vm.marginSize = GlobalStyles.getMarginSize();
 
 
+        $scope.isBlockFileTwice = false;
         vm.currentRowEdited = false;
         vm.displayGlobalStyles = false;
 
@@ -39,6 +40,9 @@ angular.module('newsletterEditorApp')
         EventEmiter.on('edition:toggled', function(event, opts) {
           vm.currentRowEdited = $(opts.tr).parents('tr:first');
           vm.displayGlobalStyles = true;
+          if (opts.block.type === 'double') {
+            $scope.isBlockFileTwice = opts.block.cells[0].type === 'file' && opts.block.cells[1].type === 'file';
+          }
 
           vm.layoutDouble = GlobalStyles.getLayoutForBlockDouble(opts.block.type === 'double');
         });
@@ -47,6 +51,7 @@ angular.module('newsletterEditorApp')
           vm.currentRowEdited = false;
           vm.displayGlobalStyles = false;
           vm.block = undefined;
+          $scope.isBlockFileTwice = false;
         });
 
 
@@ -211,7 +216,8 @@ angular.module('newsletterEditorApp')
           applyStyle(paragraphs, {
             'font-size': vm.params.paragraph.fontSize,
             'font-family': vm.params.paragraph.fontFamily,
-            color: vm.params.paragraph.color
+            color: vm.params.paragraph.color,
+            'line-height': vm.params.paragraph.lineHeight
           });
 
           applyStyle(links, {

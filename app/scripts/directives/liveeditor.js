@@ -7,7 +7,7 @@
  * # liveEditor
  */
 angular.module('newsletterEditorApp')
-  .directive('liveEditor', function($rootScope, $log, $modal, BlocksManager, EventEmiter, DomManipulator) {
+  .directive('liveEditor', function($rootScope, $log, $modal, BlocksManager, EventEmiter, DomManipulator, DraggableHelper) {
     return {
       templateUrl: 'views/directives/liveEditor.html',
       restrict: 'E',
@@ -32,7 +32,20 @@ angular.module('newsletterEditorApp')
         $scope.blocks = BlocksManager.getAll();
 
         $scope.sortableOptions = {
-          handle: 'a.handleDrag'
+          handle: 'a.handleDrag',
+          helper: 'original',
+          scroll: true,
+          start: function(event, ui) {
+            ui.item.data('start_pos', ui.item.index());
+          },
+          change: function(event, ui) {
+            var positionOnHover = ui.placeholder.index() - 1;
+            var startPosition = ui.item.data('start_pos');
+
+            if (positionOnHover < startPosition) {
+              DraggableHelper.changeEditorPosition();
+            }
+          }
         };
 
         /**

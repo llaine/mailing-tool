@@ -109,6 +109,7 @@ table.mailResult {
     background:#DDD;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
+    height: 700px;
 }
 #mailOutils2 .btn {
     margin-bottom: 5px;
@@ -146,8 +147,8 @@ table.mailResult {
     background:#555;
     padding-top:15px;
     padding-bottom:15px;
-    padding-right: 9px;
-    height: 500px;
+    padding-right: 22px;
+    height: 700px;
 }
 table.emailCompo {
     width:600px;

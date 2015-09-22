@@ -29,7 +29,7 @@ angular.module('newsletterEditorApp')
         } else {
           opts = {
             helper:'clone',
-            zIndex:10000
+            zIndex:100000
           };
         }
 
